@@ -1,3 +1,5 @@
+import React, {useEffect, useState} from "react";
+import axios from "axios"
 import {
   CalendarToday,
   LocationSearching,
@@ -6,10 +8,65 @@ import {
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 import "./user.css";
 
 export default function User() {
+
+  const params = useParams();
+  console.log(params.userId)
+  useEffect(() => {
+    getUserById()
+  },[]);
+  const [email, setEmail] = useState('')
+  const [prenom, setPrenom] = useState('')
+  const [nom, setNom] = useState('')
+  const [password, setPassword] = useState('')
+
+  const getUserById = async () => {
+    const result = await axios.get("http://localhost:8082/api/user/"+params.userId)
+    const data = result.data
+    setEmail(data.email)
+    setNom(data.nom)
+    setPrenom(data.prenom)
+  }
+
+
+
+  const emailChangeHandler = (event) => {
+    setEmail(event.target.value)
+  }
+  const nomChangeHandler = (event) => {
+    setNom(event.target.value)
+  }
+  const prenomChangeHandler = (event) => {
+    setPrenom(event.target.value)
+  }
+  const passwordChangeHandler = (event) => {
+    setPassword(event.target.value)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const post = {
+      nom: nom,
+      prenom: prenom,
+      email: email,
+      password: password,
+    }
+
+    fetch('http://localhost:8082/api/user/'+params.userId, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(post)
+    })
+  }
+
   return (
     <div className="user">
       <div className="userTitleContainer">
@@ -27,7 +84,7 @@ export default function User() {
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">Anna Becker</span>
+              <span className="userShowUsername">{nom + prenom}</span>
               <span className="userShowUserTitle">Software Engineer</span>
             </div>
           </div>
@@ -35,7 +92,7 @@ export default function User() {
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">{prenom}</span>
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
@@ -48,7 +105,7 @@ export default function User() {
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99@gmail.com</span>
+              <span className="userShowInfoTitle">{email}</span>
             </div>
             <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
@@ -58,46 +115,39 @@ export default function User() {
         </div>
         <div className="userUpdate">
           <span className="userUpdateTitle">Edit</span>
-          <form className="userUpdateForm">
+          <form onSubmit={handleSubmit} className="userUpdateForm">
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
                 <label>Username</label>
                 <input
+                  name={"nom"}
                   type="text"
-                  placeholder="annabeck99"
+                  placeholder=""
                   className="userUpdateInput"
+                  value={nom}
+                  onChange={nomChangeHandler}
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Full Name</label>
+                <label>Prénom</label>
                 <input
                   type="text"
-                  placeholder="Anna Becker"
+                  placeholder=""
                   className="userUpdateInput"
+                  name={"prenom"}
+                  value={prenom}
+                  onChange={prenomChangeHandler}
                 />
               </div>
               <div className="userUpdateItem">
                 <label>Email</label>
                 <input
                   type="text"
-                  placeholder="annabeck99@gmail.com"
+                  placeholder=""
                   className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Phone</label>
-                <input
-                  type="text"
-                  placeholder="+1 123 456 67"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Address</label>
-                <input
-                  type="text"
-                  placeholder="New York | USA"
-                  className="userUpdateInput"
+                  name={"email"}
+                  value={email}
+                  onChange={emailChangeHandler}
                 />
               </div>
             </div>
@@ -113,7 +163,7 @@ export default function User() {
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} />
               </div>
-              <button className="userUpdateButton">Update</button>
+              <button type="submit" className="userUpdateButton">Update</button>
             </div>
           </form>
         </div>
