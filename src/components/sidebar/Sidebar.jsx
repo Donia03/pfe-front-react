@@ -47,6 +47,18 @@ export default function Sidebar() {
                 Users
               </li>
             </Link>
+            <Link to="/clients" className="link">
+              <li className="sidebarListItem">
+               <PermIdentity className="sidebarIcon" />
+                   Clients
+               </li>
+            </Link>
+            <Link to="/reclamations" className="link">
+              <li className="sidebarListItem">
+               <PermIdentity className="sidebarIcon" />
+                  Reclamations
+                </li>
+            </Link>
             <Link to="/products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />

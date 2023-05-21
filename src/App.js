@@ -9,6 +9,9 @@ import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
+import ReclamationList from "./pages/reclamationList/ReclamationList";
+import ClientList from "./pages/client/clientList/ClientList";
+import Client from "./pages/client/singleClient/Client"
 
 function App() {
   return (
@@ -28,6 +31,15 @@ function App() {
           </Route>
           <Route path="/newUser">
             <NewUser />
+          </Route>
+          <Route path="/clients">
+            <ClientList />
+          </Route>
+          <Route path="/client/:userId">
+            <Client />
+          </Route>
+          <Route path="/reclamations">
+             <ReclamationList />
           </Route>
           <Route path="/products">
             <ProductList />

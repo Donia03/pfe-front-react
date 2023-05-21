@@ -9,7 +9,7 @@ import {
   Publish,
 } from "@material-ui/icons";
 import { Link, useParams} from "react-router-dom";
-import "./user.css";
+import "./client.css";
 
 export default function User() {
 
