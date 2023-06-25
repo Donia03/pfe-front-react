@@ -1,0 +1,58 @@
+.radioList {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 50px;
+    margin-top: 12px;
+}
+
+.radioList li {
+    margin-right: 26px;
+    font-size: 19px;
+    color: darkblue;
+}
+
+.emailInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.emailTextarea {
+    width: 100%;
+    height: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #00008b;
+    color: #fffefe;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.deleteIcon {
+    cursor: pointer;
+    margin-left: 4px;
+    color: #888;
+}
+svg.MuiSvgIcon-root.deleteIcon {
+    color: white;
+}

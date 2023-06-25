@@ -1,4 +1,4 @@
-import "./newUser.css";
+import "./NewProspect.css";
 import {useEffect, useState} from "react";
 import axios from "axios"
 
@@ -10,6 +10,9 @@ export default function NewUser() {
   const [prenom, setPrenom] = useState("")
   const [nom, setNom] = useState("")
   const [password, setPassword] = useState("")
+   const [cin, setCin] = useState("")
+    const [telephone, setTelephone] = useState("")
+    const [role, setRole] = useState("")
 
 
   const emailChangeHandler = (event) => {
@@ -24,7 +27,16 @@ export default function NewUser() {
   const passwordChangeHandler = (event) => {
     setPassword(event.target.value)
   }
-
+const cinChangeHandler = (event) => {
+    setCin(event.target.value)
+  }
+ const telephoneChangeHandler = (event) => {
+     setTelephone(event.target.value)
+   }
+ const selectHandler = (event) => {
+    setRole(event.target.value)
+    console.log(role)
+ }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,6 +45,9 @@ export default function NewUser() {
       prenom: prenom,
       email: email,
       password: password,
+      cin: cin,
+      telephone: telephone,
+      role: role
     }
 
     fetch('http://localhost:8082/api/user', {
@@ -48,10 +63,13 @@ export default function NewUser() {
     setPassword("")
     setPrenom("")
     setNom("")
+    setCin("")
+    setTelephone("")
+    setRole("")
   }
   return (
     <div className="newUser">
-      <h1 className="newUserTitle">New User</h1>
+      <h1 className="newUserTitle">New Prospect</h1>
       <form onSubmit={handleSubmit} className="newUserForm">
         <div className="newUserItem">
           <label>Nom</label>
@@ -73,6 +91,26 @@ export default function NewUser() {
               value={prenom}
           />
         </div>
+         <div className="newUserItem">
+                  <label>Cin</label>
+                  <input
+                      type="text"
+                      placeholder="Cin"
+                      name="cin"
+                      onChange={cinChangeHandler}
+                      value={cin}
+                  />
+                  </div>
+                   <div className="newUserItem">
+                            <label>Telephone</label>
+                            <input
+                                type="text"
+                                placeholder="Telephone"
+                                name="telephone"
+                                onChange={telephoneChangeHandler}
+                                value={telephone}
+                            />
+                            </div>
         <div className="newUserItem">
           <label>Email</label>
           <input
@@ -92,20 +130,19 @@ export default function NewUser() {
               onChange={passwordChangeHandler}
               value={password}
           />
+          </div>
           <div className="newUserItem">
             <label> Role </label>
-            <select name="roles" id="role-select">
-                <option value="">--Please choose an option--</option>
-                <option value="Admin">Admin</option>
-                <option value="cat">Cat</option>
-                <option value="hamster">Hamster</option>
-                <option value="parrot">Parrot</option>
-                <option value="spider">Spider</option>
-                <option value="goldfish">Goldfish</option>
-            </select>
 
+            <select name="roles"  id="role-select" onChange={selectHandler}>
+                <option value="">--Please choose an option--</option>
+                <option value="employe">Employe</option>
+                <option value="client">Client</option>
+                <option value="prospect">Prospect</option>
+
+            </select>
           </div>
-        </div>
+
         <button type="submit" className="newUserButton">Create</button>
       </form>
     </div>

@@ -53,6 +53,12 @@ export default function Sidebar() {
                    Clients
                </li>
             </Link>
+             <Link to="/prospects" className="link">
+                          <li className="sidebarListItem">
+                           <PermIdentity className="sidebarIcon" />
+                               Prospect
+                           </li>
+                        </Link>
             <Link to="/reclamations" className="link">
               <li className="sidebarListItem">
                <PermIdentity className="sidebarIcon" />
@@ -78,10 +84,12 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
-              Mail
-            </li>
+            <Link to="/email" className="link">
+           <li className="sidebarListItem">
+             <MailOutline className="sidebarIcon" />
+                  Mail
+              </li>
+            </Link>
             <li className="sidebarListItem">
               <DynamicFeed className="sidebarIcon" />
               Feedback

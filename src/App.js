@@ -10,9 +10,13 @@ import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import ReclamationList from "./pages/reclamationList/ReclamationList";
+import Detail from "./pages/reclamationDetail/Detail";
 import ClientList from "./pages/client/clientList/ClientList";
-import Client from "./pages/client/singleClient/Client"
-
+import Client from "./pages/client/singleClient/Client";
+import NewClient from "./pages/client/newClient/NewClient"
+import ProspectList from "./pages/prospect/prospectList/ProspectList";
+import NewProspect from "./pages/prospect/newProspect/NewProspect";
+import EmailSender from "./pages/email/EmailSender"
 function App() {
   return (
     <Router>
@@ -31,16 +35,31 @@ function App() {
           </Route>
           <Route path="/newUser">
             <NewUser />
-          </Route>
+            </Route>
+
           <Route path="/clients">
             <ClientList />
           </Route>
+          <Route path="/prospects">
+                      <ProspectList />
+                    </Route>
+            <Route path="/newProspect">
+                            <NewProspect />
+                             </Route>
           <Route path="/client/:userId">
             <Client />
           </Route>
+           <Route path="/newClient">
+                  <NewClient />
+                   </Route>
+
           <Route path="/reclamations">
              <ReclamationList />
           </Route>
+           <Route path="/detail/">
+                       <Detail />
+                    </Route>
+
           <Route path="/products">
             <ProductList />
           </Route>
@@ -50,6 +69,9 @@ function App() {
           <Route path="/newproduct">
             <NewProduct />
           </Route>
+          <Route path="/email">
+               <EmailSender />
+           </Route>
         </Switch>
       </div>
     </Router>

@@ -9,7 +9,7 @@ import {
   Publish,
 } from "@material-ui/icons";
 import { Link, useParams} from "react-router-dom";
-import "./client.css";
+import "./Detail.css";
 
 export default function User() {
 
@@ -78,10 +78,8 @@ export default function User() {
   return (
     <div className="user">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Edit Client</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
+        <h1 className="userTitle">Detail Reclamation</h1>
+
       </div>
       <div className="userContainer">
         <div className="userShow">
@@ -125,71 +123,7 @@ export default function User() {
             </div>
           </div>
         </div>
-        <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
-          <form onSubmit={handleSubmit} className="userUpdateForm">
-            <div className="userUpdateLeft">
-              <div className="userUpdateItem">
-                <label>Username</label>
-                <input
-                  name={"nom"}
-                  type="text"
-                  placeholder=""
-                  className="userUpdateInput"
-                  value={nom}
-                  onChange={nomChangeHandler}
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Prénom</label>
-                <input
-                  type="text"
-                  placeholder=""
-                  className="userUpdateInput"
-                  name={"prenom"}
-                  value={prenom}
-                  onChange={prenomChangeHandler}
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Email</label>
-                <input
-                  type="text"
-                  placeholder=""
-                  className="userUpdateInput"
-                  name={"email"}
-                  value={email}
-                  onChange={emailChangeHandler}
-                />
-              </div>
-               <div className="userUpdateItem">
-                              <label>Cin</label>
-                              <input
-                                type="text"
-                                placeholder=""
-                                className="userUpdateInput"
-                                name={"cin"}
-                                value={cin}
-                                onChange={cinChangeHandler}
-                              />
-                            </div>
-            </div>
-            <div className="userUpdateRight">
-              <div className="userUpdateUpload">
-                <img
-                  className="userUpdateImg"
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
-                />
-                <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
-                </label>
-                <input type="file" id="file" style={{ display: "none" }} />
-              </div>
-              <button type="submit" className="userUpdateButton">Update</button>
-            </div>
-          </form>
-        </div>
+
       </div>
     </div>
   );

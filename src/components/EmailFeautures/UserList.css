@@ -1,0 +1,67 @@
+.userSelect{
+    width: 100%;
+    padding: 6px;
+    color: black;
+    background-color: white;
+}
+.tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #00008b;
+    color: #fffefe;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.deleteIcon {
+    cursor: pointer;
+    margin-left: 4px;
+    color: #888;
+}
+svg.MuiSvgIcon-root.deleteIcon {
+    color: white;
+}
+
+.saveButton {
+    width: 100%;
+    padding: 7px;
+    border-radius: 11px;
+    font-size: 16px;
+    color: darkblue;
+    border: 3px solid darkblue;
+}
+.saveButton:hover {
+    width: 100%;
+    padding: 7px;
+    border-radius: 11px;
+    font-size: 16px;
+    color: white;
+    border: 3px solid white;
+    background-color: darkblue;
+}
+.save{
+    background-color: white;
+    color: darkblue;
+    padding: 6px;
+    width: 30%;
+    border: 2px solid darkblue;
+    border-radius: 7px;
+}
+.save:hover{
+    background-color: darkblue;
+    color: white;
+    padding: 6px;
+    width: 30%;
+    border: 2px solid darkblue;
+    border-radius: 7px;
+}
+

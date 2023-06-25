@@ -1,6 +1,6 @@
 import React, { useEffect} from "react";
 import axios from "axios"
-import "./clientList.css";
+import "./ProspectList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../../dummyData";
@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function ClientList() {
   const [data, setData] = useState([]);
-  const  userType = "Client";
+  const  userType = "Prospect";
 
   useEffect( () => {
     loadUsers();
@@ -58,7 +58,7 @@ export default function ClientList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/client/" + params.row.id}>
+            <Link to={"/prospect/" + params.row.id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -73,8 +73,8 @@ export default function ClientList() {
 
          field:
 
-           <Link to="/newClient">
-                                <button className="userAdButton">Create Client</button>
+           <Link to="newProspect">
+                                <button className="userAdButton">Create Prospect</button>
                               </Link>,
 
           width: 250,
