@@ -32,8 +32,6 @@ export default function UserList() {
 
 
   const columns = [
-
-    { field: "id", headerName: "ID", width: 70 },
     {
       field: "nom",
       headerName: "Nom",
@@ -43,17 +41,17 @@ export default function UserList() {
     {
       field: "email",
       headerName: "Email",
-      width: 180,
+      width: 230,
     },
-      { field: "cin", headerName: "Identity", width: 160 },
+      { field: "cin", headerName: "Identity", width: 100 },
 
-      { field: "telephone", headerName: "Tel", width: 160 },
+      { field: "telephone", headerName: "Tel", width: 100 },
 
 
         {
       field: "action",
       headerName: "Action",
-      width: 180,
+      width: 120,
       renderCell: (params) => {
         return (
           <>

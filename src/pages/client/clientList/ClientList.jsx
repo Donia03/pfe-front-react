@@ -33,8 +33,6 @@ export default function ClientList() {
 
 
   const columns = [
-
-    { field: "id", headerName: "ID", width: 70 },
     {
       field: "nom",
       headerName: "Nom",

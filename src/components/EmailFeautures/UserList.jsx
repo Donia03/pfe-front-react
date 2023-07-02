@@ -37,14 +37,14 @@ const UserList = () => {
     const handleUserSelect = (event) => {
         const selectedOptions = Array.from(
             event.target.selectedOptions,
-            (option) => option.value
+            (option) => users.find((user) => user.id === parseInt(option.value))
         );
         setSelectedUsers(selectedOptions);
     };
 
     const handleTagDelete = (user) => {
         const updatedUsers = selectedUsers.filter(
-            (selectedUser) => selectedUser !== user
+            (selectedUser) => selectedUser.id !== user.id
         );
         setSelectedUsers(updatedUsers);
     };
@@ -62,6 +62,20 @@ const UserList = () => {
         console.log('Saving selected users:', selectedUsers);
         console.log('List name:', listName);
 
+        const difusionList = {
+            nom: listName,
+            users : selectedUsers
+        }
+
+         axios
+           .post('http://localhost:8082/api/diffusionList',difusionList)
+           .then((response) => {
+             console.log(response.data);
+                 })
+           .catch((error) => {
+              console.error('Error fetching users:', error);
+           });
+
         // Clear the input field and hide the save list elements
         setListName('');
         setSaveListVisible(false);
@@ -74,14 +88,14 @@ const UserList = () => {
             <select
                 className="userSelect"
                 multiple
-                value={selectedUsers}
+                value={selectedUsers.map((user) => user.id)}
                 onChange={handleUserSelect}
             >
                 <option value="">Select users</option>
                 {users.map((user) => (
                     <option
                         key={user.id}
-                        value={user.prenom + ' ' + user.nom}
+                        value={user.id}
                     >
                         {user.prenom + ' ' + user.nom}
                     </option>
@@ -93,7 +107,7 @@ const UserList = () => {
                     <div className="tagList">
                         {selectedUsers.map((user, index) => (
                             <div className="tag" key={index}>
-                                {user}
+                                {user.prenom} {user.nom}
                                 <DeleteIcon
                                     className="deleteIcon"
                                     onClick={() => handleTagDelete(user)}

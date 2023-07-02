@@ -69,9 +69,34 @@ const SelectedUserList = () => {
 
     const handleDelete = (index) => {
         const updatedList = [...selectedDiffusionList];
-        updatedList.splice(index, 1);
+        const deletedUser = updatedList.splice(index, 1)[0];
         setSelectedDiffusionList(updatedList);
+
+        // If selectedDiffusionList is empty, send a DELETE request to delete the entire diffusion list
+        if (selectedDiffusionList.length === 0) {
+            axios
+                .delete(`http://localhost:8082/api/diffusionList/${selectedUser}`)
+                .then((response) => {
+                    console.log('Deleted entire diffusion list');
+                    setSelectedUser(''); // Clear selectedUser since the list is deleted
+                    setSelectedDiffusionList([]); // Clear the selected diffusion list
+                })
+                .catch((error) => {
+                    console.error('Error deleting diffusion list:', error);
+                });
+        } else {
+            // Send a DELETE request to delete the user from the diffusion list
+            axios
+                .delete(`http://localhost:8082/api/diffusionList/user/${selectedUser}/${deletedUser.id}`)
+                .then((response) => {
+                    console.log('Deleted user from diffusion list:', deletedUser.id);
+                })
+                .catch((error) => {
+                    console.error('Error deleting user from diffusion list:', error);
+                });
+        }
     };
+
 
     const handleSendEmail = () => {
         const emailData = {
