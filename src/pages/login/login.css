@@ -1,0 +1,8 @@
+/* Add your custom CSS styles for the Login component here */
+.login-paper {
+  /* Customize the styling for the login form */
+  padding: 24px;
+  max-width: 400px;
+}
+
+/* Add any other custom styles as needed */

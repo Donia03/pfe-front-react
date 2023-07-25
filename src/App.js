@@ -1,8 +1,9 @@
+import React, { useState, useEffect, useContext } from "react";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
@@ -17,14 +18,27 @@ import NewClient from "./pages/client/newClient/NewClient"
 import ProspectList from "./pages/prospect/prospectList/ProspectList";
 import NewProspect from "./pages/prospect/newProspect/NewProspect";
 import EmailSender from "./pages/email/EmailSender"
+import Login from "./pages/login/Login"
+import {AuthContext} from "./context/AuthContext";
 function App() {
+    // State to simulate authentication status (true if authenticated, false otherwise)
+    		const { authenticated } = useContext(AuthContext);
+
+
   return (
     <Router>
       <Topbar />
       <div className="container">
-        <Sidebar />
+        {authenticated && <Sidebar />}
         <Switch>
           <Route exact path="/">
+            {/* If authenticated, redirect to home; otherwise, redirect to login */}
+            {authenticated ? <Redirect to="/home" /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/login">
+             <Login />
+          </Route>
+          <Route path="/home">
             <Home />
           </Route>
           <Route path="/users">
