@@ -30,7 +30,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setAuthenticated } = useContext(AuthContext);
+  const {authenticated, setAuthenticated } = useContext(AuthContext);
   const history = useHistory();
 
   const handleEmailChange = (event) => {
@@ -54,6 +54,9 @@ const Login = () => {
       const token = response.data.token;
       // For now, we will just log the token in the console
       console.log("Authentication successful. Token:", token);
+
+      //Save the token to lacal storage
+      localStorage.setItem('token',token);
 
 
       setAuthenticated(true);

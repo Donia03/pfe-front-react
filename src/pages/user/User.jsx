@@ -15,26 +15,62 @@ export default function User() {
 
   const params = useParams();
   console.log(params.userId)
-  useEffect(() => {
-    getUserById()
-  },[]);
+
   const [email, setEmail] = useState('')
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')
   const [password, setPassword] = useState('')
   const [cin, setCin] = useState('')
+  const[image, setImage] = useState('')
+  const[imageUrl, setImageUrl] = useState('')
 
-  const getUserById = async () => {
-    const result = await axios.get("http://localhost:8082/api/user/"+params.userId)
+   useEffect(() => {
+      getUserById()
+    },[]);
+
+    useEffect(() => {
+        if (image) {
+          getUserImage();
+        }
+      }, [image]);
+
+
+
+const token = localStorage.getItem('token');
+
+ const getUserById = async () => {
+    const result = await axios.get("http://localhost:8082/api/user/"+params.userId,{
+        headers: {
+        "Authorization": `Bearer ${token}`,
+        },
+    })
     console.log("hetha l obket jibneh mel api",result)
     const data = result.data
     setEmail(data.email)
     setNom(data.nom)
     setPrenom(data.prenom)
     setCin(data.cin)
+    setImage(data.imagePath)
   }
 
+  const getUserImage = async () => {
+      const result = await axios.get("http://localhost:8082/api/images/" + image, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+        responseType: "blob", // Tell Axios to handle the response as a blob (binary data)
+      });
 
+      const blob = result.data;
+
+      // Convert the blob to a base64-encoded URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        setImageUrl(base64data);
+      };
+      reader.readAsDataURL(blob);
+    };
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value)
@@ -87,7 +123,7 @@ export default function User() {
         <div className="userShow">
           <div className="userShowTop">
             <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={imageUrl}
               alt=""
               className="userShowImg"
             />
@@ -178,7 +214,7 @@ export default function User() {
               <div className="userUpdateUpload">
                 <img
                   className="userUpdateImg"
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                  src={imageUrl}
                   alt=""
                 />
                 <label htmlFor="file">
