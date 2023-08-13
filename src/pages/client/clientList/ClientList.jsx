@@ -14,9 +14,14 @@ export default function ClientList() {
   useEffect( () => {
     loadUsers();
   }, [])
-
+    const token = localStorage.getItem('token');
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8082/api/usersByRole/"+userType);
+    const result = await axios.get("http://localhost:8082/api/usersByRole/"+userType,
+    {
+      headers: {
+       "Authorization": `Bearer ${token}`,
+      }
+    });
     setData(result.data)
   }
 
@@ -24,7 +29,12 @@ export default function ClientList() {
 
   const handleDelete = (id) => {
     //setData(data.filter((item) => item.id !== id));
-    axios.delete("http://localhost:8082/api/user/" + id).then(r  => console.log("element deleted"));
+    axios.delete("http://localhost:8082/api/user/" + id,
+    {
+          headers: {
+           "Authorization": `Bearer ${token}`,
+          }
+        }).then(r  => console.log("element deleted"));
 
     const posts = data.filter(item => item.id !== id);
     setData( posts );

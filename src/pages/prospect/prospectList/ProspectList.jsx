@@ -10,13 +10,18 @@ import { useState } from "react";
 export default function ClientList() {
   const [data, setData] = useState([]);
   const  userType = "Prospect";
+  const token = localStorage.getItem('token')
 
   useEffect( () => {
     loadUsers();
   }, [])
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8082/api/usersByRole/"+userType);
+    const result = await axios.get("http://localhost:8082/api/usersByRole/"+userType,{
+        headers: {
+               "Authorization": `Bearer ${token}`,
+              }
+    });
     setData(result.data)
   }
 
@@ -33,8 +38,6 @@ export default function ClientList() {
 
 
   const columns = [
-
-    { field: "id", headerName: "ID", width: 70 },
     {
       field: "nom",
       headerName: "Nom",

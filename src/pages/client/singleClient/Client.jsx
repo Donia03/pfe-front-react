@@ -23,9 +23,14 @@ export default function User() {
   const [nom, setNom] = useState('')
   const [password, setPassword] = useState('')
   const [cin, setCin] = useState('')
-
+  const token = localStorage.getItem('token');
   const getUserById = async () => {
-    const result = await axios.get("http://localhost:8082/api/user/"+params.userId)
+    const result = await axios.get("http://localhost:8082/api/user/"+params.userId,
+    {
+          headers: {
+           "Authorization": `Bearer ${token}`,
+          }
+    });
     console.log("hetha l obket jibneh mel api",result)
     const data = result.data
     setEmail(data.email)

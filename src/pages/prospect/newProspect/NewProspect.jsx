@@ -2,10 +2,7 @@ import "./NewProspect.css";
 import {useEffect, useState} from "react";
 import axios from "axios"
 
-
-
-export default function NewUser() {
-
+export default function NewProspect() {
   const [email, setEmail] = useState("")
   const [prenom, setPrenom] = useState("")
   const [nom, setNom] = useState("")
@@ -13,9 +10,9 @@ export default function NewUser() {
    const [cin, setCin] = useState("")
     const [telephone, setTelephone] = useState("")
     const [role, setRole] = useState("")
+    const [image, setImage] = useState(null);
 
-
-  const emailChangeHandler = (event) => {
+const emailChangeHandler = (event) => {
     setEmail(event.target.value)
   }
   const nomChangeHandler = (event) => {
@@ -37,36 +34,52 @@ const cinChangeHandler = (event) => {
     setRole(event.target.value)
     console.log(role)
  }
+
+ const imageChangeHandler = (event) => {
+         setImage(event.target.files[0]); // Store the selected image in the state
+     };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+          e.preventDefault();
 
-    const newUser = {
-      nom: nom,
-      prenom: prenom,
-      email: email,
-      password: password,
-      cin: cin,
-      telephone: telephone,
-      role: role
-    }
+          const formData = new FormData();
+          formData.append("nom", nom);
+          formData.append("prenom", prenom);
+          formData.append("email", email);
+          formData.append("password", password);
+          formData.append("cin", cin);
+          formData.append("telephone", telephone);
+          formData.append("role", role);
+          formData.append("image", image); // Append the image to the FormData
 
-    fetch('http://localhost:8082/api/user', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newUser)
-    })
-    setEmail("")
-    setPassword("")
-    setPrenom("")
-    setNom("")
-    setCin("")
-    setTelephone("")
-    setRole("")
-  }
+          try {
+              // Retrieve the token from local storage
+              const token = localStorage.getItem('token');
+
+              const response = await axios.post("http://localhost:8082/api/user", formData, {
+                  headers: {
+                      "Content-Type": "multipart/form-data", // Set content type to multipart/form-data for image upload
+                      "Authorization": `Bearer ${token}`, // Include the token in the Authorization header
+                  },
+              });
+
+              // Handle the response, e.g., show success message, redirect, etc.
+              console.log("User created:", response.data);
+
+              // Reset the form fields and selected image after successful submission
+              setEmail("");
+              setPassword("");
+              setPrenom("");
+              setNom("");
+              setCin("");
+              setTelephone("");
+              setRole("");
+              setImage(null);
+          } catch (error) {
+              // Handle error, e.g., show error message
+              console.error("Error creating user:", error);
+          }
+      };
   return (
     <div className="newUser">
       <h1 className="newUserTitle">New Prospect</h1>
@@ -141,6 +154,10 @@ const cinChangeHandler = (event) => {
                 <option value="prospect">Prospect</option>
 
             </select>
+          </div>
+          <div className="newUserItem">
+             <label>Image</label>
+             <input type="file" accept="image/*" onChange={imageChangeHandler} />
           </div>
 
         <button type="submit" className="newUserButton">Create</button>

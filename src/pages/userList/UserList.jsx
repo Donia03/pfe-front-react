@@ -9,13 +9,18 @@ import { useState } from "react";
 
 export default function UserList() {
   const [data, setData] = useState([]);
+  const token = localStorage.getItem('token');
 
   useEffect( () => {
     loadUsers();
   }, [])
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8082/api/users")
+    const result = await axios.get("http://localhost:8082/api/users",{
+    headers: {
+           "Authorization": `Bearer ${token}`,
+          }
+    })
     setData(result.data)
   }
 

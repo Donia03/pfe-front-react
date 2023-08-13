@@ -52,11 +52,13 @@ const Login = () => {
 
       // If the API call is successful and returns a token, you can handle it as per your requirement
       const token = response.data.token;
+      const role = response.data.role;
       // For now, we will just log the token in the console
       console.log("Authentication successful. Token:", token);
 
       //Save the token to lacal storage
       localStorage.setItem('token',token);
+      localStorage.setItem('role',role);
 
 
       setAuthenticated(true);
