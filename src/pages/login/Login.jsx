@@ -5,14 +5,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import "./login.css"; // Import the CSS file for styling
 import { AuthContext } from "../../context/AuthContext";
-
+import loginImage from '../images/login.jpg'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "100vh",
+    height: "90vh",
+    
   },
   paper: {
     padding: theme.spacing(3),
@@ -70,6 +71,16 @@ const Login = () => {
   };
 
   return (
+    
+    <div className="container">
+    <div className="chart">
+      <img
+        className="loginUpdateImg"
+        src={loginImage}
+        alt="login"
+      />
+  </div>
+
     <Container className={classes.root}>
       <Paper className={`${classes.paper} login-paper`} elevation={3}>
         <Typography variant="h5" gutterBottom>
@@ -93,9 +104,12 @@ const Login = () => {
           <Button type="submit" variant="contained" color="primary">
             Login
           </Button>
-        </form>
+        
+            </form>
+        
       </Paper>
     </Container>
+    </div>
   );
 };
 

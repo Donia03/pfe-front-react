@@ -69,12 +69,30 @@ export default function Sidebar() {
                     Reclamations
                   </li>
                 </Link>
+                <Link to="/reclamationClient" className="link">
+                  <li className="sidebarListItem">
+                    <PermIdentity className="sidebarIcon" />
+                    Fiche Reclamation
+                  </li>
+                </Link>
+                <Link to="/demandeClient" className="link">
+                  <li className="sidebarListItem">
+                    <PermIdentity className="sidebarIcon" />
+                   Fiche de demande :
+                  </li>
+                </Link>
                 <Link to="/products" className="link">
                   <li className="sidebarListItem">
                     <Storefront className="sidebarIcon" />
                     Products
                   </li>
                 </Link>
+                <Link to="/note" className="link">
+                                  <li className="sidebarListItem">
+                                    <Storefront className="sidebarIcon" />
+                                    Notes
+                                  </li>
+                                </Link>
                 <li className="sidebarListItem">
                   <AttachMoney className="sidebarIcon" />
                   Transactions

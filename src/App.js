@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./App.css";
@@ -17,10 +18,14 @@ import Client from "./pages/client/singleClient/Client";
 import NewClient from "./pages/client/newClient/NewClient"
 import ProspectList from "./pages/prospect/prospectList/ProspectList";
 import NewProspect from "./pages/prospect/newProspect/NewProspect";
-import Prospect from "./pages/prospect/singleProspect/SingleProspect"
+import Prospect from "./pages/prospect/singleProspect/SingleProspect";
+import Note from "./pages/note/noteList/Note"
 import EmailSender from "./pages/email/EmailSender"
 import Login from "./pages/login/Login"
 import {AuthContext} from "./context/AuthContext";
+import ReclamationClient from "./pages/reclamationClient/ReclamationClient";
+import DemandeClient from "./pages/demandeClient/DemandeClient.jsx"
+
 function App() {
     // State to simulate authentication status (true if authenticated, false otherwise)
     		const { authenticated } = useContext(AuthContext);
@@ -77,7 +82,12 @@ function App() {
            <Route path="/detail/">
                        <Detail />
                     </Route>
-
+          <Route path="/reclamationClient">
+               <ReclamationClient/>
+          </Route>
+          <Route path="/demandeClient">
+               <DemandeClient/>
+          </Route>
           <Route path="/products">
             <ProductList />
           </Route>
@@ -90,6 +100,9 @@ function App() {
           <Route path="/email">
                <EmailSender />
            </Route>
+           <Route path="/note">
+                          <Note />
+                      </Route>
         </Switch>
       </div>
     </Router>

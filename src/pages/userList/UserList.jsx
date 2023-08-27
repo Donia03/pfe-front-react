@@ -3,7 +3,7 @@ import axios from "axios"
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
+/*import { userRows } from "../../dummyData";*/
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -13,7 +13,7 @@ export default function UserList() {
 
   useEffect( () => {
     loadUsers();
-  }, [])
+  }, )
 
   const loadUsers = async () => {
     const result = await axios.get("http://localhost:8082/api/users",{

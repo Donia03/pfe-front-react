@@ -1,0 +1,150 @@
+.demande {
+    flex: 4;
+    padding: 20px;
+  }
+  /*.reclamationTitle{
+    text-align: center;
+  }*/
+  /*.reclamationTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }*/
+  
+  .reclamationAddButton {
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: teal;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+  }
+  
+  /*.reclamationContainer {
+    display: flex;
+    margin-top: 20px;
+  }*/
+  
+  /*.reclamationShow {
+    flex: 1;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  }*/
+  
+  .demandeUpdate {
+    flex: 2px;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75); /* arriere gris*/
+    margin-left: 20px;
+  }
+  
+  .reclamationShowTop {
+    display: flex;
+    align-items: center;
+  }
+  
+ /* .reclamationShowImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }*/
+  
+  /*.reclamationShowTopTitle {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }*/
+  
+  /*.reclamationShowUsername {
+    font-weight: 600;
+  }
+  
+  .reclamationShowUserTitle {
+    font-weight: 300;
+  }
+  
+  .reclamationShowBottom{
+      margin-top: 20px;
+  }
+  
+  .reclamationShowTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(175, 170, 170);
+  }
+  
+  .reclamationShowInfo{
+      display: flex;
+      align-items: center;
+      margin: 20px 0px;
+      color: #444;
+  }
+  
+  .reclamationShowIcon{
+      font-size: 16px !important;
+  }
+  
+  .reclamationShowInfoTitle{
+      margin-left: 10px;
+  }
+  
+  .reclamationUpdateTitle{
+      font-size: 24px;
+      font-weight: 600;
+  }*/
+  
+  .demandeUpdateForm{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+  }
+  
+  /*.reclamationUpdateItem{
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+  }*/
+  
+  /*.reclamationUpdateItem>label{
+      margin-bottom: 5px;
+      font-size: 14px;
+  }*/
+  
+  .form-control{
+    
+      width: 600px;
+   
+     
+  }
+
+  
+
+  
+  .demandeUpdateImg{
+      width: 300px;
+      height: 400px;
+      border-radius: 50px;
+      
+      margin-right: 10px;
+     
+  }
+  
+ /* .reclamationUpdateIcon{
+      cursor: pointer;
+  }*/
+  
+  .demandeUpdateButton{
+      border-radius: 5px;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+      background-color: darkblue;
+      color: white;
+      font-weight: 600;
+      margin-left: 250px;
+  }
