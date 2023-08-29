@@ -24,7 +24,9 @@ import EmailSender from "./pages/email/EmailSender"
 import Login from "./pages/login/Login"
 import {AuthContext} from "./context/AuthContext";
 import ReclamationClient from "./pages/reclamationClient/ReclamationClient";
-import DemandeClient from "./pages/demandeClient/DemandeClient.jsx"
+import DemandeClient from "./pages/demande/newDemande/DemandeClient.jsx"
+import DemandeList from "./pages/demande/demandeList/DemandeList"
+import Demande from "./pages/demande/singleDemande/Demande"
 
 function App() {
     // State to simulate authentication status (true if authenticated, false otherwise)
@@ -85,9 +87,15 @@ function App() {
           <Route path="/reclamationClient">
                <ReclamationClient/>
           </Route>
+          <Route path="/demandeList">
+                         <DemandeList/>
+                    </Route>
           <Route path="/demandeClient">
                <DemandeClient/>
           </Route>
+          <Route path="/demande/:demandeId">
+                      <Demande />
+                    </Route>
           <Route path="/products">
             <ProductList />
           </Route>
