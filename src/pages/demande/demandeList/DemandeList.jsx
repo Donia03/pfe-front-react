@@ -7,13 +7,27 @@ import { Link } from "react-router-dom";
 
 export default function DemandeList() {
   const [data, setData] = useState([]);
+  const [clientData, setClientData] = useState([]);
   const userType = "Client";
 
   useEffect(() => {
     loadUsers();
   }, []);
+  useEffect(() => {
+      loadUserDemande();
+    }, []);
 
   const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('id');
+  const role = localStorage.getItem('role');
+  const loadUserDemande = async () => {
+      const result = await axios.get(`http://localhost:8082/api/demande/user/${userId}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        }
+      });
+      setClientData(result.data);
+    }
 
   const loadUsers = async () => {
     const result = await axios.get("http://localhost:8082/api/demande", {
@@ -105,13 +119,55 @@ export default function DemandeList() {
       width: 210,
     },
   ];
+  const clientColumns = [
+      {
+        field: "titre",
+        headerName: "Titre",
+        width: 200,
+      },
+      { field: "reference", headerName: "Reference", width: 200 },
+      {
+        field: "description",
+        headerName: "Description",
+        width: 230,
+      },
+      {
+        field: "status",
+        headerName: "Status",
+        width: 150,
+        renderCell: (params) => {
+          let statusText = "";
+          if (params.value === 0) {
+            statusText = "En Cours";
+          } else if (params.value === 1) {
+            statusText = "Valider";
+          } else if (params.value === 2) {
+            statusText = "Refuser";
+          }
+          return (
+                    <span className={getStatusClassName(params.value)}>
+                      {statusText}
+                    </span>
+                  );
+        },
+      },
+
+      {
+        field: (
+          <Link to="/demandeClient">
+            <button className="userAdButton">Create Demande</button>
+          </Link>
+        ),
+        width: 210,
+      },
+    ];
 
   return (
     <div className="userList">
       <DataGrid
-        rows={data}
+        rows={role === "Client" ? clientData:data}
         disableSelectionOnClick
-        columns={columns}
+        columns={role === "Client" ? clientColumns:columns}
         pageSize={8}
         checkboxSelection
       />

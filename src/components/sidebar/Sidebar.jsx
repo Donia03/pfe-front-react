@@ -13,12 +13,24 @@ export default function Sidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Quick Menu</h3>
             <ul className="sidebarList">
+            <Link to="/historiques" className="link">
+                                            <li className="sidebarListItem">
+                                              <Timeline className="sidebarIcon" />
+                                              Historiques
+                                            </li>
+                                          </Link>
               <Link to="/reclamations" className="link">
                 <li className="sidebarListItem">
                   <PermIdentity className="sidebarIcon" />
                   Reclamations
                 </li>
               </Link>
+              <Link to="/demandeList" className="link">
+                                                <li className="sidebarListItem">
+                                                  <Report className="sidebarIcon" />
+                                                 demandes
+                                                </li>
+                                              </Link>
             </ul>
           </div>
         ) : (
@@ -45,6 +57,12 @@ export default function Sidebar() {
             <div className="sidebarMenu">
               <h3 className="sidebarTitle">Quick Menu</h3>
               <ul className="sidebarList">
+              <Link to="/historiques" className="link">
+                                <li className="sidebarListItem">
+                                  <Timeline className="sidebarIcon" />
+                                  Historiques
+                                </li>
+                              </Link>
                 <Link to="/users" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />

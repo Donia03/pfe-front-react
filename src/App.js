@@ -27,6 +27,7 @@ import ReclamationClient from "./pages/reclamationClient/ReclamationClient";
 import DemandeClient from "./pages/demande/newDemande/DemandeClient.jsx"
 import DemandeList from "./pages/demande/demandeList/DemandeList"
 import Demande from "./pages/demande/singleDemande/Demande"
+import HistoriqueList from "./pages/historique/HistoriqueList"
 
 function App() {
     // State to simulate authentication status (true if authenticated, false otherwise)
@@ -49,6 +50,9 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
+          <Route path="/historiques">
+                      <HistoriqueList />
+                    </Route>
           <Route path="/users">
             <UserList />
           </Route>

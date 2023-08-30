@@ -8,13 +8,17 @@ import { Link } from "react-router-dom";
 
 export default function ReclamationList() {
   const [data, setData] = useState([]);
+  const [clientData, setClientData] = useState([]);
   const userType = "Client";
 
   useEffect(() => {
     loadReclamations();
+    loadReclamationsUser();
   }, []);
 
   const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('id');
+  const role = localStorage.getItem('role');
 
   const loadReclamations = async () => {
     const result = await axios.get("http://localhost:8082/api/reclamations", {
@@ -24,6 +28,14 @@ export default function ReclamationList() {
     });
     setData(result.data);
   }
+  const loadReclamationsUser = async () => {
+      const result = await axios.get(`http://localhost:8082/api/reclamations/user/${userId}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        }
+      });
+      setClientData(result.data);
+    }
 
   const handleDelete = (id) => {
     axios.delete("http://localhost:8082/api/reclamation/" + id, {
@@ -111,13 +123,59 @@ export default function ReclamationList() {
       width: 210,
     },
   ];
+  const clientColumns = [
+      {
+        field: "ref",
+        headerName: "Référence",
+        width: 200,
+      },
+      {
+        field: "objet",
+        headerName: "Objet de réclamation",
+        width: 230,
+      },
+      {
+        field: "preciser",
+        headerName: "Précision",
+        width: 200,
+      },
+      {
+        field: "status",
+        headerName: "Statut",
+        width: 150,
+        renderCell: (params) => {
+          let statusText = "";
+          if (params.value === 0) {
+            statusText = "En Cours";
+          } else if (params.value === 1) {
+            statusText = "Validé";
+          } else if (params.value === 2) {
+            statusText = "Refusé";
+          }
+          return (
+            <span className={getStatusClassName(params.value)}>
+              {statusText}
+            </span>
+          );
+        },
+      },
+
+      {
+        field: (
+          <Link to="/reclamationClient">
+            <button className="userAdButton">Créer une réclamation</button>
+          </Link>
+        ),
+        width: 210,
+      },
+    ];
 
   return (
     <div className="productList">
       <DataGrid
-        rows={data}
+        rows={role === "Client" ? clientData:data}
         disableSelectionOnClick
-        columns={columns}
+        columns={role === "Client" ? clientColumns:columns}
         pageSize={8}
         checkboxSelection
       />

@@ -13,6 +13,7 @@ export default function SingleDemande() {
   const [status, setStatus] = useState(0); // Default status is "En Cours"
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
+  const userId = localStorage.getItem('id'); // Retrieve the token from local storage
 
   useEffect(() => {
     fetchDemandeData();
@@ -67,7 +68,7 @@ export default function SingleDemande() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8082/api/demande/${params.demandeId}`,
+        `http://localhost:8082/api/demande/${params.demandeId}/${userId}`,
         updatedDemande,
         {
           headers: {

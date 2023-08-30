@@ -10,6 +10,7 @@ export default function DemandeClient() {
   const [description, setDescription] = useState("");
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
+  const userId = localStorage.getItem('id'); // Retrieve the token from local storage
 
   const titreChangeHandler = (event) => {
     setTitre(event.target.value);
@@ -33,7 +34,8 @@ export default function DemandeClient() {
     };
 
     try {
-      const response = await axios.post("http://localhost:8082/api/demande", newDemande, {
+      const response = await axios.post(`http://localhost:8082/api/demande/${userId}`
+      , newDemande, {
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",
