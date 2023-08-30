@@ -11,6 +11,7 @@ export default function ReclamationClient() {
   const [preciser, setPreciser] = useState("");
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
+  const userId = localStorage.getItem('id');
 
   const referenceChangeHandler = (event) => {
     setReference(event.target.value);
@@ -45,7 +46,7 @@ export default function ReclamationClient() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8082/api/reclamation",
+        `http://localhost:8082/api/reclamation/${userId}`,
         reclamationData,
         {
           headers: {
