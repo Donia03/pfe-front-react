@@ -7,15 +7,15 @@
   align-items: center;
 }
 .userAdButton {
-  width: 150px;
+  width: 100%;
   border: none;
-  padding: 15px;
+  padding: 3px;
   background-color: teal;
 
   border-radius: 8px;
   cursor: pointer;
   color: white;
-  font-size: 15px;
+  font-size: 14px;
 }
 .userListImg {
   width: 32px;

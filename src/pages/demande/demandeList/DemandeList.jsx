@@ -61,7 +61,7 @@ export default function DemandeList() {
     {
       field: "status",
       headerName: "Status",
-      width: 180,
+      width: 150,
       renderCell: (params) => {
         let statusText = "";
         if (params.value === 0) {
@@ -102,7 +102,7 @@ export default function DemandeList() {
           <button className="userAdButton">Create Demande</button>
         </Link>
       ),
-      width: 250,
+      width: 210,
     },
   ];
 

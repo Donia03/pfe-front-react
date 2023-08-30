@@ -52,7 +52,7 @@ export default function ReclamationList() {
     {
       field: "ref",
       headerName: "Référence",
-      width: 140,
+      width: 125,
     },
     {
       field: "objet",
@@ -67,7 +67,7 @@ export default function ReclamationList() {
     {
       field: "status",
       headerName: "Statut",
-      width: 180,
+      width: 150,
       renderCell: (params) => {
         let statusText = "";
         if (params.value === 0) {
@@ -108,7 +108,7 @@ export default function ReclamationList() {
           <button className="userAdButton">Créer une réclamation</button>
         </Link>
       ),
-      width: 250,
+      width: 210,
     },
   ];
 

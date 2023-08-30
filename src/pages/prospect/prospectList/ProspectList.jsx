@@ -80,7 +80,7 @@ export default function ClientList() {
                                 <button className="userAdButton">Create Prospect</button>
                               </Link>,
 
-          width: 250,
+          width: 170,
         },
 
   ];
