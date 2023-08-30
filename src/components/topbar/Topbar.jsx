@@ -63,27 +63,27 @@ const getUserImage = async () => {
           history.push("/login");
         };
 
-  return (
-    <div className="topbar">
-      <div className="topbarWrapper">
-        <div className="topLeft">
-          <span className="logo">CRM</span>
-        </div>
-        <div className="topRight">
-          <div className="topbarIconContainer">
-            <NotificationsNone />
-            <span className="topIconBadge">2</span>
+  return authenticated ? (
+      <div className="topbar">
+        <div className="topbarWrapper">
+          <div className="topLeft">
+            <span className="logo">CRM</span>
           </div>
-          <div className="topbarIconContainer">
-            <Language />
-            <span className="topIconBadge">2</span>
+          <div className="topRight">
+            <div className="topbarIconContainer">
+              <NotificationsNone />
+              <span className="topIconBadge">2</span>
+            </div>
+            <div className="topbarIconContainer">
+              <Language />
+              <span className="topIconBadge">2</span>
+            </div>
+            <div className="topbarIconContainer" onClick={handleSettingsClick}>
+              <Settings />
+            </div>
+            <img src={imageUrl} alt="" className="topAvatar" />
           </div>
-          <div className="topbarIconContainer" onClick={handleSettingsClick}>
-            <Settings />
-          </div>
-          <img src={imageUrl} alt="" className="topAvatar" />
         </div>
       </div>
-    </div>
-  );
+    ) : null;
 }
