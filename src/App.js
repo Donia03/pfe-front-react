@@ -19,6 +19,7 @@ import NewClient from "./pages/client/newClient/NewClient"
 import ProspectList from "./pages/prospect/prospectList/ProspectList";
 import NewProspect from "./pages/prospect/newProspect/NewProspect";
 import Prospect from "./pages/prospect/singleProspect/SingleProspect";
+import EmployeList from "./pages/employe/employeList/EmployeList"
 import Note from "./pages/note/noteList/Note"
 import EmailSender from "./pages/email/EmailSender"
 import Login from "./pages/login/Login"
@@ -72,6 +73,12 @@ function App() {
             <Route path="/newProspect">
                             <NewProspect />
                              </Route>
+            <Route path="/employes">
+              <EmployeList />
+                  </Route>
+        
+
+                    
            <Route path="/prospect/:userId">
                        <Prospect />
                      </Route>
