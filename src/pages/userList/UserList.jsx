@@ -4,7 +4,7 @@ import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import SuiviPopup from "./SuiviPopup"; // Import the SuiviPopup component
+import SuiviPopup from "./SuiviPopup";
 
 export default function UserList() {
   const [data, setData] = useState([]);
@@ -32,16 +32,32 @@ export default function UserList() {
     setData(posts);
   };
 
-  const handleSuiviClick = (id) => {
+
+  const handleSuiviClick = (id, suivi) => {
     setSelectedUserId(id);
+    setSuiviText(suivi); // Set the initial suivi text
     setShowSuiviPopup(true);
   };
 
+
   const handleSaveSuivi = () => {
-    // Implement the logic to save suivi text
-    console.log(`Suivi for user ${selectedUserId}: ${suiviText}`);
-    setShowSuiviPopup(false);
-    setSuiviText("");
+    axios.post(`http://localhost:8082/api/userSuivi/${selectedUserId}`,
+
+       suiviText,
+    {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      }
+    })
+    .then(response => {
+      console.log("Suivi text saved:", response.data);
+      setShowSuiviPopup(false);
+      setSuiviText("");
+      loadUsers();
+    })
+    .catch(error => {
+      console.error("Error saving suivi text:", error);
+    });
   };
 
   const handleCancelSuivi = () => {
@@ -88,23 +104,14 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <button className="userListEdit" onClick={() => handleSuiviClick(params.row.id)}>
+            <button className="userListEdit" onClick={() => handleSuiviClick(params.row.id,params.row.suivi)}>
               Suivi
             </button>
           </>
         );
       },
     },
-    {
-
-             field:
-
-               <Link to="/newUser">
-                                    <button className="userAdButton">Create User</button>
-                                  </Link>,
-
-              width: 170,
-            },
+    { field: <Link to="/newUser"> <button className="userAdButton">Create User</button> </Link>, width: 170, },
   ];
 
   return (
