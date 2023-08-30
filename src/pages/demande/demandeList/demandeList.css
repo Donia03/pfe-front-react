@@ -39,3 +39,26 @@
     color: red;
     cursor: pointer;
 }
+
+.status-cell {
+  padding: 4px 12px;
+      border-radius: 17px;
+      font-weight: 500;
+      width: 47%;
+      text-align: center;
+}
+
+.status-pending {
+  background-color: yellow;
+  color: white;
+}
+
+.status-approved {
+  background-color: green;
+  color: white; /* To make the text readable on a green background */
+}
+
+.status-rejected {
+  background-color: red;
+  color: white; /* To make the text readable on a red background */
+}

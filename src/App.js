@@ -81,7 +81,7 @@ function App() {
           <Route path="/reclamations">
              <ReclamationList />
           </Route>
-           <Route path="/detail/">
+           <Route path="/detail/:reclamationId">
                        <Detail />
                     </Route>
           <Route path="/reclamationClient">

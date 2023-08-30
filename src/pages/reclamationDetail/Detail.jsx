@@ -1,129 +1,200 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios"
-import {
-  CalendarToday,
-  LocationSearching,
-  MailOutline,
-  PermIdentity,
-  PhoneAndroid,
-  Publish,
-} from "@material-ui/icons";
-import { Link, useParams} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import clainImage from '../images/clain.png';
 import "./Detail.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useParams } from "react-router-dom";
 
-export default function User() {
-
+export default function Detail() {
   const params = useParams();
-  console.log(params.userId)
+  const [reference, setReference] = useState("");
+  const [objet, setObjet] = useState("");
+  const [autreObjet, setAutreObjet] = useState("");
+  const [preciser, setPreciser] = useState("");
+  const [status, setStatus] = useState(0); // Default status is "En Cours"
+
+  const token = localStorage.getItem('token'); // Retrieve the token from local storage
+
   useEffect(() => {
-    getUserById()
-  },[]);
-  const [email, setEmail] = useState('')
-  const [prenom, setPrenom] = useState('')
-  const [nom, setNom] = useState('')
-  const [password, setPassword] = useState('')
-  const [cin, setCin] = useState('')
+    fetchReclamationData();
+  }, []);
 
-  const getUserById = async () => {
-    const result = await axios.get("http://localhost:8082/api/user/"+params.userId)
-    console.log("hetha l obket jibneh mel api",result)
-    const data = result.data
-    setEmail(data.email)
-    setNom(data.nom)
-    setPrenom(data.prenom)
-    setCin(data.cin)
-  }
+  const fetchReclamationData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8082/api/reclamation/${params.reclamationId}`,
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          }
+        }
+      );
 
-
-
-  const emailChangeHandler = (event) => {
-    setEmail(event.target.value)
-  }
-  const nomChangeHandler = (event) => {
-  console.log("hetha l objet event mta3 changehandler ",event)
-    setNom(event.target.value)
-  }
-  const prenomChangeHandler = (event) => {
-    setPrenom(event.target.value)
-  }
-  const passwordChangeHandler = (event) => {
-    setPassword(event.target.value)
-  }
-  const cinChangeHandler = (event) => {
-      setCin(event.target.value)
+      const data = response.data;
+      setReference(data.ref);
+      setObjet(data.objet);
+      setPreciser(data.preciser);
+      setStatus(data.status);
+    } catch (error) {
+      console.error("Error fetching reclamation data:", error);
     }
+  };
+
+  const referenceChangeHandler = (event) => {
+    setReference(event.target.value);
+  };
+
+  const objetChangeHandler = (event) => {
+    setObjet(event.target.value);
+  };
+
+  const autreObjetChangeHandler = (event) => {
+    setAutreObjet(event.target.value);
+  };
+
+  const preciserChangeHandler = (event) => {
+    setPreciser(event.target.value);
+  };
+
+  const statusChangeHandler = (event) => {
+    setStatus(parseInt(event.target.value));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedUser = {
-      nom: nom,
-      prenom: prenom,
-      email: email,
-      password: password,
-      cin: cin,
-    }
+    const updatedReclamation = {
+      ref: reference,
+      objet: objet,
+      preciser: preciser,
+      status: status,
+    };
 
-    fetch('http://localhost:8082/api/user/'+params.userId, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedUser)
-    })
-  }
+    try {
+      const response = await axios.put(
+        `http://localhost:8082/api/reclamation/${params.reclamationId}`,
+        updatedReclamation,
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+
+      // Handle the response, e.g., show success message, redirect, etc.
+      console.log("Reclamation updated:", response.data);
+    } catch (error) {
+      // Handle error, e.g., show error message
+      console.error("Error updating reclamation:", error);
+    }
+  };
 
   return (
-    <div className="user">
-      <div className="userTitleContainer">
-        <h1 className="userTitle">Detail Reclamation</h1>
-
+    <div className="reclamation">
+      <div className="home">
+        <h1 className="">Modifier une réclamation</h1>
       </div>
-      <div className="userContainer">
-        <div className="userShow">
-          <div className="userShowTop">
-            <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="userShowImg"
-            />
-            <div className="userShowTopTitle">
-              <span className="userShowUsername">{nom + prenom}</span>
-              <span className="userShowUserTitle">Software Engineer</span>
+      <div className="reclamationContainer">
+        <div className="reclamationUpdate">
+          <form onSubmit={handleSubmit} className="reclamationUpdateForm">
+            <div className="">
+              <label className='form-label'>Référence :</label>
+              <input
+                type="text"
+                placeholder=""
+                className="form-control"
+                value={reference}
+                onChange={referenceChangeHandler}
+              />
+              <br/>
+              <label className='form-label'>Objet de la réclamation :</label>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  value="Problème de service"
+                  id="objetProbleme"
+                  checked={objet === "Problème de service"}
+                  onChange={objetChangeHandler}
+                />
+                <label className="form-check-label" htmlFor="objetProbleme">
+                  Problème de service
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  value="Facture non reçue"
+                  id="objetFacture"
+                  checked={objet === "Facture non reçue"}
+                  onChange={objetChangeHandler}
+                />
+                <label className="form-check-label" htmlFor="objetFacture">
+                  Facture non reçue
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  value="Autres"
+                  id="objetAutres"
+                  checked={objet === "Autres"}
+                  onChange={objetChangeHandler}
+                />
+                <label className="form-check-label" htmlFor="objetAutres">
+                  Autres
+                </label>
+                {objet === "Autres" && (
+                  <input
+                    type="text"
+                    placeholder="Précisez l'objet"
+                    className="form-control"
+                    value={autreObjet}
+                    onChange={autreObjetChangeHandler}
+                  />
+                )}
+              </div>
+              <br/>
+              <div className="">
+                <label className='form-label'>Préciser :</label>
+                <textarea
+                  rows={10}
+                  placeholder=""
+                  className="form-control"
+                  value={preciser}
+                  onChange={preciserChangeHandler}
+                />
+                <br/>
+                <label className='form-label'>Statut :</label>
+                <select
+                  className="form-control"
+                  value={status}
+                  onChange={statusChangeHandler}
+                >
+                  <option value={0}>En Cours</option>
+                  <option value={1}>Valider</option>
+                  <option value={2}>Refuser</option>
+                </select>
+                <br/>
+                <button type="submit" className="reclamationUpdateButton">
+                  Modifier
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
-            <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{prenom}</span>
+            <div className="reclamationUpdateRight">
+              <div className="reclamationUpdateUpload">
+                <img
+                  className="reclamationUpdateImg"
+                  src={clainImage}
+                  alt="Clain"
+                />
+              </div>
             </div>
-             <div className="userShowInfo">
-                          <PermIdentity className="userShowIcon" />
-                          <span className="userShowInfoTitle">{cin}</span>
-                        </div>
-            <div className="userShowInfo">
-              <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
-            </div>
-            <span className="userShowTitle">Contact Details</span>
-            <div className="userShowInfo">
-              <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 123 456 67</span>
-            </div>
-            <div className="userShowInfo">
-              <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">{email}</span>
-            </div>
-            <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">New York | USA</span>
-            </div>
-          </div>
+          </form>
         </div>
-
       </div>
     </div>
   );

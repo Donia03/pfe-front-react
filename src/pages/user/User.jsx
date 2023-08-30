@@ -23,6 +23,7 @@ export default function User() {
   const [cin, setCin] = useState('')
   const[image, setImage] = useState('')
   const[imageUrl, setImageUrl] = useState('')
+  const[telephone, setTelephone] = useState('')
 
    useEffect(() => {
       getUserById()
@@ -51,6 +52,7 @@ const token = localStorage.getItem('token');
     setPrenom(data.prenom)
     setCin(data.cin)
     setImage(data.imagePath)
+    setTelephone(data.telephone)
   }
 
   const getUserImage = async () => {
@@ -75,6 +77,9 @@ const token = localStorage.getItem('token');
   const emailChangeHandler = (event) => {
     setEmail(event.target.value)
   }
+  const telephoneChangeHandler = (event) => {
+    setTelephone(event.target.value)
+  }
   const nomChangeHandler = (event) => {
   console.log("hetha l objet event mta3 changehandler ",event)
     setNom(event.target.value)
@@ -89,26 +94,48 @@ const token = localStorage.getItem('token');
       setCin(event.target.value)
     }
 
+   const handleImageChange = (file) => {
+     if (file) {
+       setImage(file);
+       const reader = new FileReader();
+       reader.onload = () => {
+         setImageUrl(reader.result);
+       };
+       reader.readAsDataURL(file);
+     }
+   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedUser = {
-      nom: nom,
-      prenom: prenom,
-      email: email,
-      password: password,
-      cin: cin,
-    }
+    const formData = new FormData();
+      formData.append("nom", nom);
+      formData.append("prenom", prenom);
+      formData.append("email", email);
+      formData.append("cin", cin);
+      formData.append("telephone", telephone);
+      if (image) {
+        formData.append("image", image);
+      }
 
-    fetch('http://localhost:8082/api/user/'+params.userId, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedUser)
-    })
+      try {
+        const response = await axios.put(
+          `http://localhost:8082/api/user/${params.userId}`,
+          formData,
+          {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        // Handle the response, e.g., show success message, redirect, etc.
+        console.log("User updated:", response.data);
+      } catch (error) {
+        // Handle error, e.g., show error message
+        console.error("Error updating user:", error);
+      }
   }
 
   return (
@@ -128,7 +155,7 @@ const token = localStorage.getItem('token');
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">{nom + prenom}</span>
+              <span className="userShowUsername">{nom +' '+ prenom}</span>
               <span className="userShowUserTitle">Software Engineer</span>
             </div>
           </div>
@@ -142,23 +169,17 @@ const token = localStorage.getItem('token');
                           <PermIdentity className="userShowIcon" />
                           <span className="userShowInfoTitle">{cin}</span>
                         </div>
-            <div className="userShowInfo">
-              <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
-            </div>
+
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
               <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 123 456 67</span>
+              <span className="userShowInfoTitle">{telephone}</span>
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
               <span className="userShowInfoTitle">{email}</span>
             </div>
-            <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">New York | USA</span>
-            </div>
+
           </div>
         </div>
         <div className="userUpdate">
@@ -209,6 +230,17 @@ const token = localStorage.getItem('token');
                                 onChange={cinChangeHandler}
                               />
                             </div>
+             <div className="userUpdateItem">
+                                           <label>Telephone</label>
+                                           <input
+                                             type="text"
+                                             placeholder=""
+                                             className="userUpdateInput"
+                                             name={"telephone"}
+                                             value={telephone}
+                                             onChange={telephoneChangeHandler}
+                                           />
+                                         </div>
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
@@ -220,7 +252,7 @@ const token = localStorage.getItem('token');
                 <label htmlFor="file">
                   <Publish className="userUpdateIcon" />
                 </label>
-                <input type="file" id="file" style={{ display: "none" }} />
+                <input type="file" id="file" style={{ display: "none" }} onChange={(e) => handleImageChange(e.target.files[0])}/>
               </div>
               <button type="submit" className="userUpdateButton">Update</button>
             </div>

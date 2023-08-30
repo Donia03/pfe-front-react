@@ -34,6 +34,17 @@ export default function DemandeList() {
       setData(data.filter(item => item.id !== id));
     });
   };
+  const getStatusClassName = (status) => {
+      let className = "status-cell";
+      if (status === 0) {
+        className += " status-pending";
+      } else if (status === 1) {
+        className += " status-approved";
+      } else if (status === 2) {
+        className += " status-rejected";
+      }
+      return className;
+    };
 
   const columns = [
     {
@@ -60,7 +71,11 @@ export default function DemandeList() {
         } else if (params.value === 2) {
           statusText = "Refuser";
         }
-        return <span>{statusText}</span>;
+        return (
+                  <span className={getStatusClassName(params.value)}>
+                    {statusText}
+                  </span>
+                );
       },
     },
     {

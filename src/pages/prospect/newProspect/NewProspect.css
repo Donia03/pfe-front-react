@@ -23,14 +23,14 @@
 }
 
 .newUserItem > input {
-  height: 20px;
-  padding: 10px;
+  height: 39px;
+  padding: 2px;
   border: 1px solid gray;
   border-radius: 5px;
 }
 .newUserItem > select {
-  height: 20px;
-  padding: 20px;
+  height: 39px;
+  padding: 2px;
   border: 1px solid gray;
   border-radius: 5px;
 }
