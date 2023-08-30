@@ -9,7 +9,7 @@ export default function NewProspect() {
   const [password, setPassword] = useState("")
    const [cin, setCin] = useState("")
     const [telephone, setTelephone] = useState("")
-    const [role, setRole] = useState("")
+    const [role, setRole] = useState("Prospect")
     const [image, setImage] = useState(null);
 
 const emailChangeHandler = (event) => {
@@ -144,17 +144,7 @@ const cinChangeHandler = (event) => {
               value={password}
           />
           </div>
-          <div className="newUserItem">
-            <label> Role </label>
 
-            <select name="roles"  id="role-select" onChange={selectHandler}>
-                <option value="">--Please choose an option--</option>
-                <option value="employe">Employe</option>
-                <option value="client">Client</option>
-                <option value="prospect">Prospect</option>
-
-            </select>
-          </div>
           <div className="newUserItem">
              <label>Image</label>
              <input type="file" accept="image/*" onChange={imageChangeHandler} />
