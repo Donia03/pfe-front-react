@@ -5,12 +5,15 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import SuiviPopup from "./SuiviPopup";
+import DeleteConfirmation from "./DeleteConfirmation"; // Correct the import path
 
 export default function UserList() {
   const [data, setData] = useState([]);
   const [showSuiviPopup, setShowSuiviPopup] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [suiviText, setSuiviText] = useState("");
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [userToDelete, setUserToDelete] = useState(null);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -26,11 +29,27 @@ export default function UserList() {
     setData(result.data);
   }
 
-  const handleDelete = (id) => {
-    axios.delete("http://localhost:8082/api/user/" + id).then(r => console.log("element deleted"));
-    const posts = data.filter(item => item.id !== id);
-    setData(posts);
-  };
+   const handleDelete = (id) => {
+      setUserToDelete(id);
+      setShowDeleteConfirmation(true);
+    };
+    const confirmDelete = () => {
+        axios.delete("http://localhost:8082/api/user/" + userToDelete)
+          .then(() => {
+            console.log("User deleted:", userToDelete);
+            setShowDeleteConfirmation(false);
+            setUserToDelete(null);
+            loadUsers();
+          })
+          .catch(error => {
+            console.error("Error deleting user:", error);
+          });
+      };
+
+      const handleCancelDelete = () => {
+        setUserToDelete(null);
+        setShowDeleteConfirmation(false);
+      };
 
 
   const handleSuiviClick = (id, suivi) => {
@@ -132,6 +151,15 @@ export default function UserList() {
           onCancel={handleCancelSuivi}
         />
       )}
-    </div>
+     {showDeleteConfirmation && (
+       <DeleteConfirmation
+         showDeleteConfirmation={showDeleteConfirmation}
+         confirmDelete={confirmDelete}
+         handleCancelDelete={handleCancelDelete}
+         userToDeleteData={data.find(user => user.id === userToDelete)} // Assuming each user has an 'id' field
+       />
+     )}
+
+     </div>
   );
 }
