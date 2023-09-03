@@ -135,13 +135,10 @@ export default function User() {
   return (
     <div className="user">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Edit Client</h1>
-        <Link to="/newClient">
-          <button className="userAddButton">Create</button>
-        </Link>
+        <h1 className="userTitle">Modifier Client</h1>
       </div>
       <div className="userContainer">
-        <div className="userShow">
+        <div className="userShow"> 
           <div className="userShowTop">
             <img
               src={imageUrl}

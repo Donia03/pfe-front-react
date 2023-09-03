@@ -5,6 +5,7 @@ import "./sidebar.css"; // Import the CSS file
 
 export default function Sidebar() {
   const role = localStorage.getItem("role");
+  const userId = localStorage.getItem("id");
 
   return (
     <div className="sidebar">
@@ -13,15 +14,22 @@ export default function Sidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Quick Menu</h3>
             <ul className="sidebarList">
-            <Link to="/historiques" className="link">
+            <Link to={`/compte/${userId}`}  className="link">
                                             <li className="sidebarListItem">
-                                              <Timeline className="sidebarIcon" />
-                                              Historiques
+                                              <PermIdentity className="sidebarIcon" />
+                                              Mon Profil
                                             </li>
                                           </Link>
+            <Link to="/historiques" className="link">
+               <li className="sidebarListItem">
+               <Timeline className="sidebarIcon" />
+                Historiques
+            </li>
+            </Link> 
+            
               <Link to="/reclamations" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <Report className="sidebarIcon" />
                   Reclamations
                 </li>
               </Link>
@@ -31,6 +39,12 @@ export default function Sidebar() {
                                                  demandes
                                                 </li>
                                               </Link>
+          <Link to="/contactSociete" className="link">
+             <li className="sidebarListItem">
+            <MailOutline className="sidebarIcon" />
+                Contacter Societe
+              </li>
+             </Link>
             </ul>
           </div>
         ) : (
@@ -46,17 +60,21 @@ export default function Sidebar() {
                 </Link>
                 <li className="sidebarListItem">
                   <Timeline className="sidebarIcon" />
-                  Analytics
+                  Analyse
                 </li>
-                <li className="sidebarListItem">
-                  <TrendingUp className="sidebarIcon" />
-                  Sales
-                </li>
+                
               </ul>
             </div>
             <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Quick Menu</h3>
+              <h3 className="sidebarTitle"> Menu</h3>
               <ul className="sidebarList">
+          
+            <Link to={`/compte/${userId}`} className="link">
+                                            <li className="sidebarListItem">
+                                              <PermIdentity className="sidebarIcon" />
+                                              Mon Profil
+                                            </li>
+                                            </Link>
               <Link to="/historiques" className="link">
                                 <li className="sidebarListItem">
                                   <Timeline className="sidebarIcon" />
@@ -90,37 +108,25 @@ export default function Sidebar() {
                 <Link to="/reclamations" className="link">
                   <li className="sidebarListItem">
                     <Report className="sidebarIcon" />
-                    Reclamations
+                   Reclamations
                   </li>
                 </Link>
 
                 <Link to="/demandeList" className="link">
                                   <li className="sidebarListItem">
                                     <Report className="sidebarIcon" />
-                                   demandes
+                                   Demandes
                                   </li>
                                 </Link>
 
-                <Link to="/products" className="link">
-                  <li className="sidebarListItem">
-                    <Storefront className="sidebarIcon" />
-                    Products
-                  </li>
-                </Link>
+              
                 <Link to="/note" className="link">
                                   <li className="sidebarListItem">
                                     <Storefront className="sidebarIcon" />
                                     Notes
                                   </li>
                                 </Link>
-                <li className="sidebarListItem">
-                  <AttachMoney className="sidebarIcon" />
-                  Transactions
-                </li>
-                <li className="sidebarListItem">
-                  <BarChart className="sidebarIcon" />
-                  Reports
-                </li>
+                              
               </ul>
             </div>
             <div className="sidebarMenu">
@@ -132,33 +138,10 @@ export default function Sidebar() {
                     Mail
                   </li>
                 </Link>
-                <li className="sidebarListItem">
-                  <DynamicFeed className="sidebarIcon" />
-                  Feedback
-                </li>
-                <li className="sidebarListItem">
-                  <ChatBubbleOutline className="sidebarIcon" />
-                  Messages
-                </li>
+              
               </ul>
             </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Staff</h3>
-              <ul className="sidebarList">
-                <li className="sidebarListItem">
-                  <WorkOutline className="sidebarIcon" />
-                  Manage
-                </li>
-                <li className="sidebarListItem">
-                  <Timeline className="sidebarIcon" />
-                  Analytics
-                </li>
-                <li className="sidebarListItem">
-                  <Report className="sidebarIcon" />
-                  Reports
-                </li>
-              </ul>
-            </div>
+          
           </>
         )}
       </div>

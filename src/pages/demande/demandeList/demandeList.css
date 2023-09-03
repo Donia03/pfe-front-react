@@ -6,59 +6,73 @@
   display: flex;
   align-items: center;
 }
-.userAdButton {
-  width: 100%;
-  border: none;
-  padding: 3px;
-  background-color: teal;
-
-  border-radius: 8px;
-  cursor: pointer;
-  color: white;
-  font-size: 14px;
+.ClientAddButton {
+  margin-left: 17px;
+  padding: 5px 10px;
+   background-color: #3498db;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+  /* transition: background-color 0.3s ease;*/
+   border-radius: 8px;
+   line-height: 30px;
 }
-.userListImg {
+/*userListImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
-}
+}*/
 
-.userListEdit{
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: #3bb077;
-    color: white;
+.ListdemandEdit{
+  color: rgb(47, 7, 157); 
     cursor: pointer;
-    margin-right: 20px;
+
 }
 
-.userListDelete{
-    color: red;
+.ListdemandDelete{
+    color: rgb(47, 7, 157); 
     cursor: pointer;
 }
 
-.status-cell {
-  padding: 4px 12px;
-      border-radius: 17px;
-      font-weight: 500;
-      width: 47%;
+.statusCell {
+  padding: 1px 5px;
+      border-radius: 100px;
+      font-weight: 700;
+      width: 80%;
       text-align: center;
+      height: 30px;
 }
 
-.status-pending {
-  background-color: yellow;
+.statusPending {
+  background-color: #f0ad4e; /* Orange pour en cours */
   color: white;
+  line-height: 30px;
+  text-align: center;
 }
 
-.status-approved {
+.statusApproved {
   background-color: green;
   color: white; /* To make the text readable on a green background */
+  line-height: 30px;
+  text-align: center;
 }
 
-.status-rejected {
+.statusRejected {
   background-color: red;
   color: white; /* To make the text readable on a red background */
+  line-height: 30px;
+  text-align: center;
+}
+.titreDemande{
+  text-align: center;
+}
+
+.titre {
+font-size: 35px;
+font-weight: bold;
+color: #333;
+border-bottom: 2px solid #007bff;
+padding-bottom: 3px;
 }

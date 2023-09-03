@@ -6,7 +6,10 @@
 .userTitleContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+   
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .userAddButton {
@@ -58,13 +61,13 @@
   margin-left: 20px;
 }
 
-.userShowUsername {
+.userShowUsername {  
   font-weight: 600;
 }
 
 .userShowUserTitle {
   font-weight: 300;
-}
+}  
 
 .userShowBottom{
     margin-top: 20px;
@@ -144,11 +147,21 @@
 }
 
 .userUpdateButton{
+
     border-radius: 5px;
     border: none;
     padding: 5px;
     cursor: pointer;
-    background-color: darkblue;
-    color: white;
+    background-color: #007bff;
+    color: white;  
     font-weight: 600;
+
+}
+.userTitle{
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333; 
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 2px;
 }

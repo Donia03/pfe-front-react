@@ -62,3 +62,14 @@
   background-color: red;
   color: white; /* To make the text readable on a red background */
 }
+.titreHistorique{
+  text-align: center;
+}
+
+.titre {
+font-size: 35px;
+font-weight: bold;
+color: #333;
+border-bottom: 2px solid #007bff; 
+padding-bottom: 3px;
+}

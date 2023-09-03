@@ -3,6 +3,7 @@ import axios from "axios";
 import "./demandeList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
 export default function DemandeList() {
@@ -20,6 +21,7 @@ export default function DemandeList() {
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('id');
   const role = localStorage.getItem('role');
+
   const loadUserDemande = async () => {
       const result = await axios.get(`http://localhost:8082/api/demande/user/${userId}`, {
         headers: {
@@ -49,33 +51,38 @@ export default function DemandeList() {
     });
   };
   const getStatusClassName = (status) => {
-      let className = "status-cell";
+      let className = "statusCell";
       if (status === 0) {
-        className += " status-pending";
+        className += " statusPending";
       } else if (status === 1) {
-        className += " status-approved";
+        className += " statusApproved";
       } else if (status === 2) {
-        className += " status-rejected";
+        className += " statusRejected";
       }
       return className;
     };
 
   const columns = [
     {
+      field: "nom",
+      headerName: "Nom de Client",
+      width: 180,
+    },
+    {
       field: "titre",
       headerName: "Titre",
-      width: 140,
+      width: 180,
     },
     { field: "reference", headerName: "Reference", width: 140 },
     {
       field: "description",
       headerName: "Description",
-      width: 180,
+      width: 240,
     },
     {
       field: "status",
       headerName: "Status",
-      width: 150,
+      width: 160,
       renderCell: (params) => {
         let statusText = "";
         if (params.value === 0) {
@@ -93,33 +100,50 @@ export default function DemandeList() {
       },
     },
     {
-      field: "action",
-      headerName: "Action",
-      width: 180,
-      renderCell: (params) => {
+      field: " Statu",
+      headerName: "Traiter Status",
+      width: 160,
+      renderCell: (params) => { 
         return (
           <>
             <Link to={"/demande/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
+              <Edit className="ListdemandEdit"/>
             </Link>
+         
+          </>
+        );
+      },
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 120,
+      renderCell: (params) => { 
+        return (
+          <>
             <DeleteOutline
-              className="userListDelete"
+              className="ListdemandDelete"
               onClick={() => handleDelete(params.row.id)}
             />
           </>
         );
       },
     },
-    {
+  /* {
       field: (
         <Link to="/demandeClient">
-          <button className="userAdButton">Create Demande</button>
+          <button className="userAdButton">Crèer Demande</button>
         </Link>
       ),
       width: 210,
-    },
+    },*/
   ];
   const clientColumns = [
+    {
+      field: "nom",
+      headerName: "Nom",
+      width: 180,
+    },
       {
         field: "titre",
         headerName: "Titre",
@@ -133,7 +157,7 @@ export default function DemandeList() {
       },
       {
         field: "status",
-        headerName: "Status",
+        headerName: "Status",  
         width: 150,
         renderCell: (params) => {
           let statusText = "";
@@ -155,7 +179,7 @@ export default function DemandeList() {
       {
         field: (
           <Link to="/demandeClient">
-            <button className="userAdButton">Create Demande</button>
+            <button className="ClientAddButton">Créer Demande</button>
           </Link>
         ),
         width: 210,
@@ -164,12 +188,16 @@ export default function DemandeList() {
 
   return (
     <div className="userList">
+       <div className="titreDemande">
+      <h1 className="titre">Liste Des Demandes</h1>
+      </div>
+     <br/><br/>
       <DataGrid
         rows={role === "Client" ? clientData:data}
         disableSelectionOnClick
         columns={role === "Client" ? clientColumns:columns}
         pageSize={8}
-        checkboxSelection
+       /* checkboxSelection*/
       />
     </div>
   );

@@ -6,17 +6,19 @@
   display: flex;
   align-items: center;
 }
-.userAdButton {
-  width: 150px;
-  border: none;
-  padding: 15px;
-  background-color: teal;
 
-  border-radius: 8px;
+  .userAddButton {
+    margin-left: 1050px;
+    
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+  border-radius: 10px;
   cursor: pointer;
-  color: white;
-  font-size: 15px;
-}
+  transition: background-color 0.3s ease;
+   }
+
 .userListImg {
   width: 32px;
   height: 32px;
@@ -25,17 +27,62 @@
   margin-right: 10px;
 }
 
-.userListEdit{
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: #3bb077;
-    color: white;
-    cursor: pointer;
-    margin-right: 20px;
+.clientListEdit{
+  color: rgb(47, 7, 157); 
+  cursor: pointer;
+  margin-right: 20px;
 }
 
-.userListDelete{
-    color: red;
-    cursor: pointer;
+.clientListDelete{
+  color: rgb(47, 7, 157); 
+  cursor: pointer;
 }
+.clientButton{
+    
+    
+  margin-left: 1020px;
+  padding: 5px 10px;
+   background-color: #3498db;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+   border-radius: 5px;
+ }
+ .titreClient{
+   text-align: center;
+ }
+ 
+.titre {
+ font-size: 35px;
+ font-weight: bold;
+ color: #333;
+ border-bottom: 2px solid #007bff;
+ padding-bottom: 3px;
+}
+/*.suivieButton{
+    
+    
+  margin-left: 25px;
+  padding: 5px 10px;
+   background-color:rgb(47, 7, 157); 
+   color: #fff;
+   border: none;
+   cursor: pointer;
+  transition: background-color 0.3s ease;
+   border-radius: 8px;
+   line-height: 25px;
+ }*/
+ .material-icons{
+    
+    
+  margin-left: 35px;
+  padding: 5px 10px;
+  
+   color:rgb(47, 7, 157); ;
+   border: none;
+   cursor: pointer;
+  transition: background-color 0.3s ease;
+   border-radius: 8px;
+   line-height: 15px;
+ }

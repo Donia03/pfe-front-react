@@ -89,7 +89,7 @@ export default function SingleDemande() {
   return (
     <div className="demande">
       <div className="home">
-        <h1 className="">Modifier une demande</h1>
+        <h1 className="">Traiter la demande</h1>
       </div>
       <div className="">
         <div className="demandeUpdate">
@@ -97,6 +97,7 @@ export default function SingleDemande() {
             <div className="">
               <label className='form-label'>Titre de demande :</label>
               <input
+              disabled 
                 type="text"
                 placeholder=""
                 className="form-control"
@@ -107,6 +108,7 @@ export default function SingleDemande() {
               <br/>
               <label className='form-label'>Référence :</label>
               <input
+              disabled /*pour bloque le curseur */
                 type="text"
                 placeholder=""
                 className="form-control"
@@ -118,11 +120,12 @@ export default function SingleDemande() {
               <div className="">
                 <label className='form-label'>Préciser :</label>
                 <textarea
-                  rows={10}
+                disabled 
+                  rows={8}
                   placeholder=""
                   className="form-control"
                   value={description}
-                  onChange={descriptionChangeHandler}
+                onChange={descriptionChangeHandler}
                 />
 
                 <br/>
@@ -139,7 +142,7 @@ export default function SingleDemande() {
 
                 <br/>
                 <button type="submit" className="demandeUpdateButton">
-                  Modifier Demande
+                  Enregistrer 
                 </button>
               </div>
             </div>

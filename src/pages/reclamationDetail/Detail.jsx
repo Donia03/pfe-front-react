@@ -14,6 +14,7 @@ export default function Detail() {
   const [status, setStatus] = useState(0); // Default status is "En Cours"
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
+  const userId = localStorage.getItem('id'); // Retrieve the token from local storage
 
   useEffect(() => {
     fetchReclamationData();
@@ -72,7 +73,7 @@ export default function Detail() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8082/api/reclamation/${params.reclamationId}`,
+        `http://localhost:8082/api/reclamation/${params.reclamationId}/${userId}`,
         updatedReclamation,
         {
           headers: {
@@ -93,7 +94,7 @@ export default function Detail() {
   return (
     <div className="reclamation">
       <div className="home">
-        <h1 className="">Modifier une réclamation</h1>
+        <h1 className="">Traiter une réclamation</h1>
       </div>
       <div className="reclamationContainer">
         <div className="reclamationUpdate">
@@ -101,7 +102,8 @@ export default function Detail() {
             <div className="">
               <label className='form-label'>Référence :</label>
               <input
-                type="text"
+              disabled 
+                type="text"  
                 placeholder=""
                 className="form-control"
                 value={reference}
@@ -111,6 +113,7 @@ export default function Detail() {
               <label className='form-label'>Objet de la réclamation :</label>
               <div className="form-check">
                 <input
+                disabled 
                   className="form-check-input"
                   type="radio"
                   value="Problème de service"
@@ -123,7 +126,9 @@ export default function Detail() {
                 </label>
               </div>
               <div className="form-check">
+              
                 <input
+                disabled 
                   className="form-check-input"
                   type="radio"
                   value="Facture non reçue"
@@ -137,6 +142,7 @@ export default function Detail() {
               </div>
               <div className="form-check">
                 <input
+                disabled 
                   className="form-check-input"
                   type="radio"
                   value="Autres"
@@ -149,6 +155,7 @@ export default function Detail() {
                 </label>
                 {objet === "Autres" && (
                   <input
+                  disabled 
                     type="text"
                     placeholder="Précisez l'objet"
                     className="form-control"
@@ -161,7 +168,8 @@ export default function Detail() {
               <div className="">
                 <label className='form-label'>Préciser :</label>
                 <textarea
-                  rows={10}
+                disabled 
+                  rows={6}
                   placeholder=""
                   className="form-control"
                   value={preciser}

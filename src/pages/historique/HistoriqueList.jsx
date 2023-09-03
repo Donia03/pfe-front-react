@@ -63,12 +63,16 @@ export default function HistoriqueList() {
 
       return (
         <div className="userList">
+       <div className="titreHistorique">
+      <h1 className="titre">Liste Des Historiques</h1>
+      </div>
+     <br/><br/>
           <DataGrid
             rows={role === "Client" ? clientdata : data}
             disableSelectionOnClick
             columns={columns}
-            pageSize={8}
-            checkboxSelection
+            pageSize={20}
+            /*checkboxSelection*/
           />
         </div>
       );

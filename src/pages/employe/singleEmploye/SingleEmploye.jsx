@@ -9,10 +9,10 @@ import {
   Publish,
 } from "@material-ui/icons";
 import { Link, useParams} from "react-router-dom";
-import "./SingleProspect.css";
+import "./SingleEmploye.css";
 
-export default function SingleProspect() {
-
+export default function SingleEmploye() {
+ 
   const params = useParams();
   console.log(params.userId)
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function SingleProspect() {
            "Authorization": `Bearer ${token}`,
           }
     });
-    console.log("hetha l obket jibneh mel api",result)
+    console.log("hetha l objet jibneh mel api",result)
     const data = result.data
     setEmail(data.email)
     setNom(data.nom)
@@ -136,36 +136,36 @@ export default function SingleProspect() {
   return (
     <div className="user">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Modifier Prospect</h1>
+        <h1 className="userTitle">Modifier Employe</h1>
+       
       </div>
       <div className="userContainer">
         <div className="userShow">
-          <div className="userShowTop">
+          <div className="userShowTop">  
             <img
               src={imageUrl}
-              alt=""
+              alt="" 
               className="userShowImg"
             />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{nom +' '+ prenom}</span>
-              <span className="userShowUserTitle">Prospect</span>
+              <span className="userShowUserTitle">Employe </span>
             </div>
           </div>
           <div className="userShowBottom">
-            <span className="userShowTitle">details compte</span>
+            <span className="userShowTitle">compte détaille</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
               <span className="userShowInfoTitle">{prenom}</span>
             </div>
-            <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{nom}</span>
-            </div>
              <div className="userShowInfo">
+                          <PermIdentity className="userShowIcon" />
+                          <span className="userShowInfoTitle">{nom}</span>
+                        </div>
+                        <div className="userShowInfo">
                           <PermIdentity className="userShowIcon" />
                           <span className="userShowInfoTitle">{cin}</span>
                         </div>
-
             <span className="userShowTitle">Contact </span>
             <div className="userShowInfo">
               <PhoneAndroid className="userShowIcon" />
@@ -250,7 +250,7 @@ export default function SingleProspect() {
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} onChange={(e) => handleImageChange(e.target.files[0])} />
               </div>
-              <button type="submit" className="userUpdateButton">Enregistrer</button>
+              <button type="submit" className="userUpdateButton">Modifier</button>
             </div>
           </form>
         </div>

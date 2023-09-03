@@ -25,17 +25,24 @@
   margin-right: 10px;
 }
 
-.userListEdit{
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: #3bb077;
-    color: white;
-    cursor: pointer;
-    margin-right: 20px;
+.prospectListEdit{
+  color: rgb(47, 7, 157); 
+  cursor: pointer;
+  margin-right: 20px;
 }
 
-.userListDelete{
-    color: red;
-    cursor: pointer;
+.prospectListDelete{
+  color: rgb(47, 7, 157); 
+  cursor: pointer;
+}
+.titreProspect{
+  text-align: center;
+}
+
+.titre {
+font-size: 35px;
+font-weight: bold;
+color: #333;
+border-bottom: 2px solid #007bff;
+padding-bottom: 3px;
 }

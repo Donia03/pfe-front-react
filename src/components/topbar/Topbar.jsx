@@ -74,10 +74,7 @@ const getUserImage = async () => {
               <NotificationsNone />
               <span className="topIconBadge">2</span>
             </div>
-            <div className="topbarIconContainer">
-              <Language />
-              <span className="topIconBadge">2</span>
-            </div>
+          
             <div className="topbarIconContainer" onClick={handleSettingsClick}>
               <Settings />
             </div>

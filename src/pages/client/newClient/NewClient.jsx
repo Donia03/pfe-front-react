@@ -14,7 +14,7 @@ export default function NewUser() {
 
 const emailChangeHandler = (event) => {
     setEmail(event.target.value)
-  }
+  }  
   const nomChangeHandler = (event) => {
     setNom(event.target.value)
   }
@@ -82,8 +82,8 @@ const cinChangeHandler = (event) => {
       };
   return (
     <div className="newUser">
-      <h1 className="newUserTitle">New Client</h1>
-      <form onSubmit={handleSubmit} className="newUserForm">
+      <h1 className="newClientTitle">Nouveau Client</h1>
+      <form onSubmit={handleSubmit} className="newClientForm">
         <div className="newUserItem">
           <label>Nom</label>
           <input
@@ -135,7 +135,7 @@ const cinChangeHandler = (event) => {
           />
         </div>
         <div className="newUserItem">
-          <label>Password</label>
+          <label>Mot de passe</label>
           <input
               type="password"
               placeholder="password"
@@ -146,11 +146,11 @@ const cinChangeHandler = (event) => {
           </div>
 
           <div className="newUserItem">
-             <label>Image</label>
+             <label>Photo de profil</label>
              <input type="file" accept="image/*" onChange={imageChangeHandler} />
           </div>
 
-        <button type="submit" className="newUserButton">Create</button>
+        <button type="submit" className="newUserButton">Enregistrer</button>
       </form>
     </div>
   );

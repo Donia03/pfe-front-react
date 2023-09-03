@@ -1,0 +1,60 @@
+.userList {
+    flex: 4;
+  }
+  
+  .userListUser {
+    display: flex;
+    align-items: center;
+  }
+
+  .userListImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  } 
+  
+  .employeListEdit{
+    color: rgb(47, 7, 157); 
+      cursor: pointer;
+      margin-right: 20px;
+  }
+  
+  .employeListDelete{
+      color: rgb(47, 7, 157); 
+      cursor: pointer;
+  }
+  .userAddButton {
+   margin-left: 1050px;
+    
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  }
+  .employeButton{
+    
+   margin-left: 1030px;
+   padding: 5px 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+  }
+  .titreEmploye{
+    text-align: center;
+  }
+  
+.titre {
+  font-size: 35px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 3px;
+}

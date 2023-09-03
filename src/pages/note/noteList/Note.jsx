@@ -53,8 +53,8 @@ if (arr){
     
         <div className="home ">
     <div className = "header text-center">
-                <h1 className= "titre">To  Do List</h1>
-               <button className= "btncenter" onClick = {() => setModal(true)} >create Task </button>
+                <h1 className= "titree">Mes Activites</h1>
+               <button className= "btncenter" onClick = {() => setModal(true)} >Ajouter Activiter </button>
           
                </div>     
                <div className="task-container ">

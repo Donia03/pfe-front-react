@@ -20,6 +20,8 @@ import ProspectList from "./pages/prospect/prospectList/ProspectList";
 import NewProspect from "./pages/prospect/newProspect/NewProspect";
 import Prospect from "./pages/prospect/singleProspect/SingleProspect";
 import EmployeList from "./pages/employe/employeList/EmployeList"
+import SingleEmploye from "./pages/employe/singleEmploye/SingleEmploye"
+import NewEmploye from "./pages/employe/newEmploye/NewEmploye.jsx"
 import Note from "./pages/note/noteList/Note"
 import EmailSender from "./pages/email/EmailSender"
 import Login from "./pages/login/Login"
@@ -29,7 +31,8 @@ import DemandeClient from "./pages/demande/newDemande/DemandeClient.jsx"
 import DemandeList from "./pages/demande/demandeList/DemandeList"
 import Demande from "./pages/demande/singleDemande/Demande"
 import HistoriqueList from "./pages/historique/HistoriqueList"
-
+import Profil from "./pages/profil/Profil.jsx"
+import Contact from "./pages/contactSociete/ContactSociete.jsx"
 function App() {
     // State to simulate authentication status (true if authenticated, false otherwise)
     		const { authenticated } = useContext(AuthContext);
@@ -50,6 +53,13 @@ function App() {
           </Route>
           <Route path="/home">
             <Home />
+          </Route>
+
+          <Route path="/compte/:userId">
+            <Profil />
+          </Route>
+          <Route path="/contactSociete">
+            <Contact />
           </Route>
           <Route path="/historiques">
                       <HistoriqueList />
@@ -76,7 +86,13 @@ function App() {
             <Route path="/employes">
               <EmployeList />
                   </Route>
-        
+
+             <Route path="/singleEmploye/:userId">
+             <SingleEmploye/>
+             </Route>
+             <Route path="/newEmploye">
+             <NewEmploye/>
+             </Route>
 
                     
            <Route path="/prospect/:userId">

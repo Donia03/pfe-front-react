@@ -30,7 +30,7 @@ const SearchUser = () => {
 
     return (
         <div>
-            <h1>User Search</h1>
+             Rechercher utilisateur
 
             <form>
                 <input

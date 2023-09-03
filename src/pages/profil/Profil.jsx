@@ -9,36 +9,42 @@ import {
   Publish,
 } from "@material-ui/icons";
 import { Link, useParams} from "react-router-dom";
-import "./SingleProspect.css";
+import "./Profil.css";
 
-export default function SingleProspect() {
+export default function Profil() {
 
   const params = useParams();
   console.log(params.userId)
-  useEffect(() => {
-    getUserById()
-  },[]);
+
   const [email, setEmail] = useState('')
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')
   const [password, setPassword] = useState('')
   const [cin, setCin] = useState('')
   const[image, setImage] = useState('')
-      const[imageUrl, setImageUrl] = useState('')
-      const[telephone, setTelephone] = useState('')
-  const token = localStorage.getItem('token');
-  useEffect(() => {
-            if (image) {
-              getUserImage();
-            }
-          }, [image]);
-  const getUserById = async () => {
-    const result = await axios.get("http://localhost:8082/api/user/"+params.userId,
-    {
-          headers: {
-           "Authorization": `Bearer ${token}`,
-          }
-    });
+  const[imageUrl, setImageUrl] = useState('')
+  const[telephone, setTelephone] = useState('')
+
+   useEffect(() => {
+      getUserById()
+    },[]);
+
+    useEffect(() => {
+        if (image) {
+          getUserImage();
+        }
+      }, [image]);
+
+
+
+const token = localStorage.getItem('token');
+
+ const getUserById = async () => {
+    const result = await axios.get("http://localhost:8082/api/user/"+params.userId,{
+        headers: {
+        "Authorization": `Bearer ${token}`,
+        },
+    })
     console.log("hetha l obket jibneh mel api",result)
     const data = result.data
     setEmail(data.email)
@@ -49,32 +55,31 @@ export default function SingleProspect() {
     setTelephone(data.telephone)
   }
 
-   const getUserImage = async () => {
-           const result = await axios.get("http://localhost:8082/api/images/" + image, {
-             headers: {
-               "Authorization": `Bearer ${token}`,
-             },
-             responseType: "blob", // Tell Axios to handle the response as a blob (binary data)
-           });
+  const getUserImage = async () => {
+      const result = await axios.get("http://localhost:8082/api/images/" + image, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+        responseType: "blob", // Tell Axios to handle the response as a blob (binary data)
+      });
 
-           const blob = result.data;
+      const blob = result.data;
 
-           // Convert the blob to a base64-encoded URL
-           const reader = new FileReader();
-           reader.onloadend = () => {
-             const base64data = reader.result;
-             setImageUrl(base64data);
-           };
-           reader.readAsDataURL(blob);
-         };
-
+      // Convert the blob to a base64-encoded URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        setImageUrl(base64data);
+      };
+      reader.readAsDataURL(blob);
+    };
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value)
   }
   const telephoneChangeHandler = (event) => {
-      setTelephone(event.target.value)
-    }
+    setTelephone(event.target.value)
+  }
   const nomChangeHandler = (event) => {
   console.log("hetha l objet event mta3 changehandler ",event)
     setNom(event.target.value)
@@ -90,53 +95,53 @@ export default function SingleProspect() {
     }
 
    const handleImageChange = (file) => {
-          if (file) {
-            setImage(file);
-            const reader = new FileReader();
-            reader.onload = () => {
-              setImageUrl(reader.result);
-            };
-            reader.readAsDataURL(file);
-          }
-        };
+     if (file) {
+       setImage(file);
+       const reader = new FileReader();
+       reader.onload = () => {
+         setImageUrl(reader.result);
+       };
+       reader.readAsDataURL(file);
+     }
+   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   const formData = new FormData();
-             formData.append("nom", nom);
-             formData.append("prenom", prenom);
-             formData.append("email", email);
-             formData.append("cin", cin);
-             formData.append("telephone", telephone);
-             if (image) {
-               formData.append("image", image);
-             }
+    const formData = new FormData();
+      formData.append("nom", nom);
+      formData.append("prenom", prenom);
+      formData.append("email", email);
+      formData.append("cin", cin);
+      formData.append("telephone", telephone);
+      if (image) {
+        formData.append("image", image);
+      }
 
-             try {
-               const response = await axios.put(
-                 `http://localhost:8082/api/user/${params.userId}`,
-                 formData,
-                 {
-                   headers: {
-                     "Authorization": `Bearer ${token}`,
-                     "Content-Type": "multipart/form-data",
-                   },
-                 }
-               );
+      try {
+        const response = await axios.put(
+          `http://localhost:8082/api/user/${params.userId}`,
+          formData,
+          {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
 
-               // Handle the response, e.g., show success message, redirect, etc.
-               console.log("User updated:", response.data);
-             } catch (error) {
-               // Handle error, e.g., show error message
-               console.error("Error updating user:", error);
-             }
+        // Handle the response, e.g., show success message, redirect, etc.
+        console.log("User updated:", response.data);
+      } catch (error) {
+        // Handle error, e.g., show error message
+        console.error("Error updating user:", error);
+      }
   }
 
   return (
     <div className="user">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Modifier Prospect</h1>
+        <h1 className="userTitle">Mon Compte</h1>
       </div>
       <div className="userContainer">
         <div className="userShow">
@@ -148,7 +153,7 @@ export default function SingleProspect() {
             />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{nom +' '+ prenom}</span>
-              <span className="userShowUserTitle">Prospect</span>
+              <span className="userShowUserTitle">Welcome</span>
             </div>
           </div>
           <div className="userShowBottom">

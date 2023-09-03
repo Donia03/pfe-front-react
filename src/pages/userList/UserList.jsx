@@ -136,12 +136,12 @@ export default function UserList() {
   return (
     <div className="userList">
       <DataGrid
-        rows={data}
+        rows={data}    
         disableSelectionOnClick
-        columns={columns}
+        columns={columns} 
         pageSize={8}
         checkboxSelection
-      />
+      />  
 
       {showSuiviPopup && (
         <SuiviPopup

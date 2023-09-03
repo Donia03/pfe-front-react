@@ -111,6 +111,8 @@ const SelectedUserList = () => {
             .then((response) => {
                 // Handle success response
                 console.log('Email sent successfully!');
+                setLabel('')
+                 setBody('')
             })
             .catch((error) => {
                 // Handle error response
@@ -120,7 +122,7 @@ const SelectedUserList = () => {
 
     return (
         <div>
-            <h2>Selected Users</h2>
+            <h2>Liste defussion</h2>
             <ul className="radioList">
                 {users.map((user) => (
                     <li key={user.id}>
@@ -138,8 +140,8 @@ const SelectedUserList = () => {
             </ul>
             {selectedUser && (
                 <div className="emailDetails">
-                    <h3>Email Details</h3>
-                    <label htmlFor="labelInput">Label:</label>
+                    <h3>Email detailles :</h3>
+                    <label htmlFor="labelInput">Sujet:</label>
                     <input
                         type="text"
                         id="labelInput"
@@ -148,7 +150,7 @@ const SelectedUserList = () => {
                         onChange={handleLabelChange}
                     />
                     <br />
-                    <label htmlFor="bodyTextarea">Body:</label>
+                    <label htmlFor="bodyTextarea">Objet:</label>
                     <textarea
                         id="bodyTextarea"
                         className="emailTextarea"
@@ -157,7 +159,7 @@ const SelectedUserList = () => {
                     />
                 </div>
             )}
-            {selectedUser && <p>Selected list diffusion: {selectedUser}</p>}
+            {selectedUser && <p> liste Selectionnée : {selectedUser}</p>}
             {selectedDiffusionList && (
                 <div className="tagList">
                     {selectedDiffusionList.map((user, index) => (
@@ -172,7 +174,7 @@ const SelectedUserList = () => {
                 </div>
             )}
             <button className="sendButton" onClick={handleSendEmail}>
-                Send Mail
+                envoye  Email
             </button>
         </div>
     );

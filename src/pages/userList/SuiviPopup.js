@@ -24,4 +24,4 @@ export default function SuiviPopup({ suiviText, setSuiviText, onSave, onCancel }
       </div>
     </div>
   );
-}
+}  

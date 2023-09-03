@@ -2,18 +2,21 @@
   flex: 4;
 }
 
-.newUserForm {
+.newClientForm {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  margin-top: 20px;
 }
-
 .newUserItem {
   width: 400px;
   display: flex;
   flex-direction: column;
   margin-top: 10px;
   margin-right: 20px;
-}
+}  
 
 .newUserItem > label {
   margin-bottom: 10px;
@@ -60,4 +63,12 @@
     border-radius: 10px;
     margin-top: 40px;
     cursor: pointer;
+}
+.newClientTitle{
+  text-align: center;
+font-size: 35px;
+font-weight: bold;
+color: #333;
+border-bottom: 2px solid #007bff;
+padding-bottom: 3px;
 }

@@ -1,18 +1,18 @@
-import "./NewProspect.css";
+import "./NewEmploye.css";
 import {useEffect, useState} from "react";
 import axios from "axios"
 
-export default function NewProspect() {
+export default function NewEmploye() {
   const [email, setEmail] = useState("")
   const [prenom, setPrenom] = useState("")
   const [nom, setNom] = useState("")
   const [password, setPassword] = useState("")
-   const [cin, setCin] = useState("")    
-    const [telephone, setTelephone] = useState("")
-    const [role, setRole] = useState("Prospect")
-    const [image, setImage] = useState(null);
+ const [cin, setCin] = useState("")
+const [telephone, setTelephone] = useState("")
+ const [role, setRole] = useState("Employe")
+const [image, setImage] = useState(null);  
 
-const emailChangeHandler = (event) => {
+const emailChangeHandler = (event) => {   
     setEmail(event.target.value)
   }
   const nomChangeHandler = (event) => {
@@ -82,8 +82,9 @@ const cinChangeHandler = (event) => {
       };
   return (
     <div className="newUser">
-      <h1 className="newProspectTitle">Nouveau Prospect</h1>
-      <form onSubmit={handleSubmit} className="newProspectForm">
+      <h1 className="newemployeTitle">Nouveau Employe </h1>
+      <br/>
+      <form onSubmit={handleSubmit} className="newEmployeForm">
         <div className="newUserItem">
           <label>Nom</label>
           <input
@@ -135,10 +136,10 @@ const cinChangeHandler = (event) => {
           />
         </div>
         <div className="newUserItem">
-          <label>Password</label>
+          <label>Mot de passe</label>
           <input
               type="password"
-              placeholder="password"
+              placeholder="entrer mot de passe"
               name="password"
               onChange={passwordChangeHandler}
               value={password}
@@ -146,12 +147,13 @@ const cinChangeHandler = (event) => {
           </div>
 
           <div className="newUserItem">
-             <label>Image</label>
+             <label>Photo de profil</label>
              <input type="file" accept="image/*" onChange={imageChangeHandler} />
           </div>
 
         <button type="submit" className="newUserButton">Enregistrer</button>
-      </form>
+      </form>  
     </div>
   );
 }
+  

@@ -3,6 +3,7 @@ import axios from "axios";
 import "./reclamationList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 
@@ -49,37 +50,42 @@ export default function ReclamationList() {
   };
 
   const getStatusClassName = (status) => {
-    let className = "status-cell";
+    let className = "statusCell";
     if (status === 0) {
-      className += " status-pending";
+      className += " statusPending";
     } else if (status === 1) {
-      className += " status-approved";
+      className += " statusApproved";
     } else if (status === 2) {
-      className += " status-rejected";
+      className += " statusRejected";
     }
     return className;
   };
 
   const columns = [
     {
+      field: "client",
+      headerName: "Non de client",
+      width: 180,
+    },
+    {
       field: "ref",
       headerName: "Référence",
-      width: 125,
+      width: 180,
     },
     {
       field: "objet",
       headerName: "Objet de réclamation",
-      width: 200,
+      width: 180,
     },
     {
       field: "preciser",
       headerName: "Précision",
-      width: 140,
+      width: 240,
     },
     {
       field: "status",
       headerName: "Statut",
-      width: 150,
+      width: 140,
       renderCell: (params) => {
         let statusText = "";
         if (params.value === 0) {
@@ -97,33 +103,51 @@ export default function ReclamationList() {
       },
     },
     {
-      field: "action",
-      headerName: "Action",
-      width: 150,
+      field: "traiter status",
+      headerName: "Traiter status", 
+      width: 160,
       renderCell: (params) => {
         return (
           <>
             <Link to={"/detail/" + params.row.id}>
-              <button className="productListEdit">Modifier</button>
+              <Edit className="ListreclaEdit"/>
             </Link>
+          
+          </>
+        );
+      },
+    },
+    {
+      field: "action",
+      headerName: "Action", 
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <>
+         
             <DeleteOutline
-              className="productListDelete"
+              className="ListreclaDelet"
               onClick={() => handleDelete(params.row.id)}
             />
           </>
         );
       },
     },
-    {
+  /*  {
       field: (
         <Link to="/reclamationClient">
           <button className="userAdButton">Créer une réclamation</button>
         </Link>
       ),
       width: 210,
-    },
+    },*/
   ];
   const clientColumns = [
+    {
+      field: "nom",
+      headerName: "Nom de Client",
+      width: 180,
+    },
       {
         field: "ref",
         headerName: "Référence",
@@ -137,7 +161,7 @@ export default function ReclamationList() {
       {
         field: "preciser",
         headerName: "Précision",
-        width: 200,
+        width: 230,
       },
       {
         field: "status",
@@ -163,21 +187,25 @@ export default function ReclamationList() {
       {
         field: (
           <Link to="/reclamationClient">
-            <button className="userAdButton">Créer une réclamation</button>
+            <button className="reclatButton">Créer réclamation</button>
           </Link>
         ),
         width: 210,
       },
-    ];
-
-  return (
-    <div className="productList">
+    ]; 
+ 
+  return ( 
+    <div className="userList">
+       <div className="titreReclamation">
+      <h1 className="titre">Liste Des Reclamations</h1>
+      </div>
+     <br/><br/>
       <DataGrid
         rows={role === "Client" ? clientData:data}
         disableSelectionOnClick
         columns={role === "Client" ? clientColumns:columns}
         pageSize={8}
-        checkboxSelection
+       /* checkboxSelection*/
       />
     </div>
   );

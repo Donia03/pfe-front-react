@@ -11,7 +11,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: cover; 
     margin-right: 10px;
   }
 
@@ -30,25 +30,57 @@
     cursor: pointer;
 }
 /* reclamationList.css */
-.status-cell {
-  padding: 4px 12px;
-      border-radius: 17px;
-      font-weight: 500;
-      width: 47%;
-      text-align: center;
-}
-
-.status-pending {
-  background-color: yellow;
+.statusPending {
+  background-color: #f0ad4e; /* Orange pour en cours */
   color: white;
+  line-height: 30px;
+  text-align: center;
 }
 
-.status-approved {
+.statusApproved {
   background-color: green;
   color: white; /* To make the text readable on a green background */
+  line-height: 30px;
+  text-align: center;
 }
 
-.status-rejected {
+.statusRejected {
   background-color: red;
   color: white; /* To make the text readable on a red background */
+  line-height: 30px;
+  text-align: center;
 }
+.titreReclamation{
+  text-align: center;
+}
+
+.titre {
+font-size: 35px;
+font-weight: bold;
+color: #333;
+border-bottom: 2px solid #007bff; 
+padding-bottom: 3px;
+}
+.reclatButton {
+ 
+  margin-left: 12px;
+  padding: 5px 10px;
+   background-color: #3498db;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+  transition: background-color 0.3s ease;
+   border-radius: 8px;
+   line-height: 33px;
+}
+.ListreclaEdit{
+  color: rgb(47, 7, 157); 
+    cursor: pointer;
+    align-items: center;
+    padding-bottom: 1px;
+   
+ 
+}
+.ListreclaDelet{
+color: rgb(47, 7, 157); 
+cursor: pointer;}

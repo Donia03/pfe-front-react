@@ -3,14 +3,18 @@ import axios from "axios"
 import "./ProspectList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
+import { PersonAdd } from "@material-ui/icons";
 import { userRows } from "../../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import DeleteConfirmation from "../../userList/DeleteConfirmation"; // Correct the import path
 export default function ClientList() {
   const [data, setData] = useState([]);
   const  userType = "Prospect";
   const token = localStorage.getItem('token')
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   useEffect( () => {
     loadUsers();
@@ -27,14 +31,38 @@ export default function ClientList() {
 
   console.log("on a setter data avec seData => ",data)
 
-  const handleDelete = (id) => {
+  /*const handleDelete = (id) => {
     //setData(data.filter((item) => item.id !== id));
     axios.delete("http://localhost:8082/api/user/" + id).then(r  => console.log("element deleted"));
 
     const posts = data.filter(item => item.id !== id);
     setData( posts );
 
+  };*/
+  
+  
+
+  const handleDelete = (id) => {
+    setUserToDelete(id);
+    setShowDeleteConfirmation(true);
   };
+  const confirmDelete = () => {
+      axios.delete("http://localhost:8082/api/user/" + userToDelete)
+        .then(() => {
+          console.log("User deleted:", userToDelete);
+          setShowDeleteConfirmation(false);
+          setUserToDelete(null);
+          loadUsers();
+        })
+        .catch(error => {
+          console.error("Error deleting user:", error);
+        });
+    };
+
+    const handleCancelDelete = () => {
+      setUserToDelete(null);
+      setShowDeleteConfirmation(false);
+    };
 
 
   const columns = [
@@ -49,9 +77,9 @@ export default function ClientList() {
       headerName: "Email",
       width: 230,
     },
-      { field: "cin", headerName: "Identity", width: 100 },
+      { field: "cin", headerName: "Cin", width: 140 },
 
-      { field: "telephone", headerName: "Tel", width: 100 },
+      { field: "telephone", headerName: "Numéro de Telephone", width: 200 },
 
 
         {
@@ -62,38 +90,45 @@ export default function ClientList() {
         return (
           <>
             <Link to={"/prospect/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
+              <Edit className="prospectListEdit"/>
             </Link>
             <DeleteOutline
-              className="userListDelete"
+              className="prospectListDelete"
               onClick={() => handleDelete(params.row.id)}
             />
           </>
         );
       },
     },
-      {
-
-         field:
-
-           <Link to="newProspect">
-                                <button className="userAdButton">Create Prospect</button>
-                              </Link>,
-
-          width: 170,
-        },
+      
 
   ];
 
   return (
     <div className="userList">
+      <div className="titreProspect">
+      <h1 className="titre">Liste Des Prospect</h1>
+     <br/>
+      <Link to="newProspect">
+     <button className="employeButton"> <PersonAdd></PersonAdd> Ajouter Prospect </button> 
+     </Link>
+     </div>
+      <br></br>
       <DataGrid
         rows={data}
         disableSelectionOnClick
-        columns={columns}
+        columns={columns}  
         pageSize={8}
-        checkboxSelection
+        /*checkboxSelection*/
       />
+        {showDeleteConfirmation && (
+       <DeleteConfirmation
+         showDeleteConfirmation={showDeleteConfirmation}
+         confirmDelete={confirmDelete}
+         handleCancelDelete={handleCancelDelete}
+         userToDeleteData={data.find(user => user.id === userToDelete)} // Assuming each user has an 'id' field
+       />
+     )}
     </div>
   );
 }
