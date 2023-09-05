@@ -10,7 +10,8 @@ export default function NewEmploye() {
  const [cin, setCin] = useState("")
 const [telephone, setTelephone] = useState("")
  const [role, setRole] = useState("Employe")
-const [image, setImage] = useState(null);  
+const [image, setImage] = useState(null);
+const userId = localStorage.getItem('id');
 
 const emailChangeHandler = (event) => {   
     setEmail(event.target.value)
@@ -56,7 +57,7 @@ const cinChangeHandler = (event) => {
               // Retrieve the token from local storage
               const token = localStorage.getItem('token');
 
-              const response = await axios.post("http://localhost:8082/api/user", formData, {
+              const response = await axios.post(`http://localhost:8082/api/user/${userId}`, formData, {
                   headers: {
                       "Content-Type": "multipart/form-data", // Set content type to multipart/form-data for image upload
                       "Authorization": `Bearer ${token}`, // Include the token in the Authorization header

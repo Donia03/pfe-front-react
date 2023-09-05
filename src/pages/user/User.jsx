@@ -38,6 +38,7 @@ export default function User() {
 
 
 const token = localStorage.getItem('token');
+const userId = localStorage.getItem('id');
 
  const getUserById = async () => {
     const result = await axios.get("http://localhost:8082/api/user/"+params.userId,{
@@ -120,7 +121,7 @@ const token = localStorage.getItem('token');
 
       try {
         const response = await axios.put(
-          `http://localhost:8082/api/user/${params.userId}`,
+          `http://localhost:8082/api/user/${params.userId}/${userId}`,
           formData,
           {
             headers: {

@@ -27,6 +27,7 @@ export default function User() {
     const[imageUrl, setImageUrl] = useState('')
     const[telephone, setTelephone] = useState('')
   const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('id');
   useEffect(() => {
           if (image) {
             getUserImage();
@@ -114,7 +115,7 @@ export default function User() {
 
           try {
             const response = await axios.put(
-              `http://localhost:8082/api/user/${params.userId}`,
+              `http://localhost:8082/api/user/${params.userId}/${userId}`,
               formData,
               {
                 headers: {

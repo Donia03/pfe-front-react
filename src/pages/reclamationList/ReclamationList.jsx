@@ -63,7 +63,7 @@ export default function ReclamationList() {
 
   const columns = [
     {
-      field: "client",
+      field: "nom",
       headerName: "Non de client",
       width: 180,
     },
