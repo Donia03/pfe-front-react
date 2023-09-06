@@ -8,7 +8,7 @@ import { PersonAdd } from "@material-ui/icons";
 import { userRows } from "../../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import EmployeDelete from "./EmployeDelete"
+import DeleteConfirmation from "../../userList/DeleteConfirmation";
 export default function ClientList() {
   const [data, setData] = useState([]);
   const  userType = "Employe";
@@ -30,35 +30,21 @@ export default function ClientList() {
   }
 
   console.log("on a setter data avec seData => ",data)
-
- /* const handleDelete = (id) => {
-    //setData(data.filter((item) => item.id !== id));
-    axios.delete("http://localhost:8082/api/user/" + id).then(r  => console.log("element deleted"));
-
-    const posts = data.filter(item => item.id !== id);
-    setData( posts );
-
-  };*/
   const handleDelete = (id) => {
-
-  
     setUserToDelete(id);
     setShowDeleteConfirmation(true);
   };
-  const confirmDelete = (id) => {
-    axios.delete("http://localhost:8082/api/user/" + id).then(r => {
+  const confirmDelete = () => {
+      axios.delete("http://localhost:8082/api/user/" + userToDelete)
+        .then(() => {
           console.log("User deleted:", userToDelete);
-          const posts = data.filter(item => item.id !== id);
-    setData( posts );
           setShowDeleteConfirmation(false);
           setUserToDelete(null);
           loadUsers();
-          
         })
         .catch(error => {
           console.error("Error deleting user:", error);
         });
-       
     };
 
     const handleCancelDelete = () => {
@@ -126,7 +112,7 @@ export default function ClientList() {
         pageSize={8}
         /*checkboxSelection*/
       />
-       <EmployeDelete
+       <DeleteConfirmation 
          showDeleteConfirmation={showDeleteConfirmation}
          confirmDelete={confirmDelete}
          handleCancelDelete={handleCancelDelete}

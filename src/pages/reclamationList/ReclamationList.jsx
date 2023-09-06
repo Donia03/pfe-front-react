@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./reclamationList.css";
+import "./ReclamationList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Edit } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-
+import DeleteReclamation from "./DeleteReclamation";
 export default function ReclamationList() {
   const [data, setData] = useState([]);
   const [clientData, setClientData] = useState([]);
   const userType = "Client";
-
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
   useEffect(() => {
     loadReclamations();
     loadReclamationsUser();
@@ -38,7 +39,7 @@ export default function ReclamationList() {
       setClientData(result.data);
     }
 
-  const handleDelete = (id) => {
+ /* const handleDelete = (id) => {
     axios.delete("http://localhost:8082/api/reclamation/" + id, {
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -47,7 +48,31 @@ export default function ReclamationList() {
       console.log("Element deleted");
       setData(data.filter(item => item.id !== id));
     });
+  };*/
+
+  
+  const handleDelete = (id) => {
+    setUserToDelete(id);
+    setShowDeleteConfirmation(true);
   };
+  const confirmDelete = () => {
+      axios.delete("http://localhost:8082/api/reclamation/" + userToDelete)
+        .then(() => {
+          console.log("User deleted:", userToDelete);
+          setShowDeleteConfirmation(false);
+          setUserToDelete(null);
+          loadReclamations();
+        })
+        .catch(error => {
+          console.error("Error deleting user:", error);
+        });
+    };
+
+    const handleCancelDelete = () => {
+      setUserToDelete(null);
+      setShowDeleteConfirmation(false);
+    };
+
 
   const getStatusClassName = (status) => {
     let className = "statusCell";
@@ -182,7 +207,7 @@ export default function ReclamationList() {
             </span>
           );
         },
-      },
+      }, 
 
       {
         field: (
@@ -207,6 +232,14 @@ export default function ReclamationList() {
         pageSize={8}
        /* checkboxSelection*/
       />
+       {showDeleteConfirmation && (
+       <DeleteReclamation
+         showDeleteConfirmation={showDeleteConfirmation}
+         confirmDelete={confirmDelete}
+         handleCancelDelete={handleCancelDelete}
+         userToDeleteData={data.find(user => user.id === userToDelete)} // Assuming each user has an 'id' field
+       />
+     )}
     </div>
   );
 }

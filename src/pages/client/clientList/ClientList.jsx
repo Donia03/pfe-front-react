@@ -9,11 +9,14 @@ import { PersonAdd } from "@material-ui/icons";
 import { userRows } from "../../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import DeleteClient from "./DeleteClient"
-
+import DeleteConfirmation from "../../userList/DeleteConfirmation";
+import SuiviPopup from "../../userList/SuiviPopup";
 export default function ClientList() {
   const [data, setData] = useState([]);
   const  userType = "Client";
+  const [showSuiviPopup, setShowSuiviPopup] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [suiviText, setSuiviText] = useState("");
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
 
@@ -36,51 +39,60 @@ export default function ClientList() {
 
   console.log("on a setter data avec seData => ",data)
 
-
-
-  
-
-
-
-
-
- /* const handleDelete = (id) => {
-    //setData(data.filter((item) => item.id !== id));
-    axios.delete("http://localhost:8082/api/user/" + id,
-    {
-          headers: {
-           "Authorization": `Bearer ${token}`,
-          }
-        }).then(r  => console.log("element deleted"));
-
-    const posts = data.filter(item => item.id !== id);
-    setData( posts );
-
-  };*/
-
   const handleDelete = (id) => {
-  
     setUserToDelete(id);
     setShowDeleteConfirmation(true);
   };
-  const confirmDelete = (id) => {
-    axios.delete("http://localhost:8082/api/user/" + id).then(r => {
-      console.log("User deleted:", userToDelete);
-      setShowDeleteConfirmation(false);
-      setUserToDelete(null);
-      loadUsers();
-      
-    })
-    .catch(error => {
-      console.error("Error deleting user:", error);
-    });
-   
-};
+  const confirmDelete = () => {
+      axios.delete("http://localhost:8082/api/user/" + userToDelete)
+        .then(() => {
+          console.log("User deleted:", userToDelete);
+          setShowDeleteConfirmation(false);
+          setUserToDelete(null);
+          loadUsers();
+        })
+        .catch(error => {
+          console.error("Error deleting user:", error);
+        });
+    };
 
     const handleCancelDelete = () => {
       setUserToDelete(null);
       setShowDeleteConfirmation(false);
     };
+
+    const handleSuiviClick = (id, suivi) => {
+      setSelectedUserId(id);
+      setSuiviText(suivi); // Set the initial suivi text
+      setShowSuiviPopup(true);
+    };
+  
+  
+    const handleSaveSuivi = () => {
+      axios.post(`http://localhost:8082/api/userSuivi/${selectedUserId}`,
+  
+         suiviText,
+      {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        }
+      })
+      .then(response => {
+        console.log("Suivi text saved:", response.data);
+        setShowSuiviPopup(false);
+        setSuiviText("");
+        loadUsers();
+      })
+      .catch(error => {
+        console.error("Error saving suivi text:", error);
+      });
+    };
+  
+    const handleCancelSuivi = () => {
+      setShowSuiviPopup(false);
+      setSuiviText("");
+    };
+  
   const columns = [
 
 
@@ -108,7 +120,7 @@ export default function ClientList() {
           <>
          
            
-            <i className="material-icons"  /*onClick={() => handleSuiviClick(params.row.id,params.row.suivi)}*/>event</i>  
+            <i className="material-icons"  onClick={() => handleSuiviClick(params.row.id,params.row.suivi)}>event</i>  
             
           </>
         );
@@ -153,8 +165,17 @@ export default function ClientList() {
         pageSize={8}
         /*checkboxSelection*/
       />
+          {showSuiviPopup && (
+        <SuiviPopup
+          suiviText={suiviText}
+          setSuiviText={setSuiviText}
+          onSave={handleSaveSuivi}
+          onCancel={handleCancelSuivi}
+        />
+      )}
+
         {showDeleteConfirmation && (
-       <DeleteClient
+       <DeleteConfirmation
          showDeleteConfirmation={showDeleteConfirmation}
          confirmDelete={confirmDelete}
          handleCancelDelete={handleCancelDelete}

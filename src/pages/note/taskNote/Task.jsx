@@ -41,7 +41,7 @@ const handleSave = () => {
            <div className ="form">
            <label>Description :</label>
            <textarea rows="4" className="custom-textarea" placeholder="Zone de texte" value={description} onChange = {handleChange} name="description"/>
-           </div>
+           </div> 
            </form>
          </ModalBody>
          <ModalFooter>

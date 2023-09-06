@@ -1,5 +1,4 @@
 import React from "react";
-import './DeleteClient.css'
 
 const DeleteConfirmation = ({
   showDeleteConfirmation,
@@ -15,17 +14,17 @@ const DeleteConfirmation = ({
     <div className="deleteConfirmationPopup">
       <div className="deleteConfirmationPopupContent">
         <p className="deleteConfirmationSentence">
-        Êtes-vous sûr de vouloir supprimer {" "}
+        Êtes-vous sûr de vouloir supprimer cette reclamation de :
           <span className="userToDelete">
-            {userToDeleteData ? `${userToDeleteData.prenom} ${userToDeleteData.nom}` : ""}
+            {userToDeleteData ? ` ${userToDeleteData.nom}` : ""}
           </span>
           ?
         </p>
         <div className="deleteConfirmationButtons">
-          <button className="deleteButton " onClick={confirmDelete}>
-            Confirmer
+          <button className="btn btn-primary" onClick={confirmDelete}>
+            Supprimer
           </button>
-          <button className="deleteButton " onClick={handleCancelDelete}>
+          <button className="btn btn-secondary" onClick={handleCancelDelete}>
             Annuler
           </button>
         </div>

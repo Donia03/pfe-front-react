@@ -9,15 +9,19 @@ import { userRows } from "../../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import DeleteConfirmation from "../../userList/DeleteConfirmation"; // Correct the import path
+import SuiviPopup from "../../userList/SuiviPopup";
 export default function ClientList() {
   const [data, setData] = useState([]);
   const  userType = "Prospect";
+  const [showSuiviPopup, setShowSuiviPopup] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [suiviText, setSuiviText] = useState("");
   const token = localStorage.getItem('token')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
 
   useEffect( () => {
-    loadUsers();
+    loadUsers(); 
   }, [])
 
   const loadUsers = async () => {
@@ -30,17 +34,6 @@ export default function ClientList() {
   }
 
   console.log("on a setter data avec seData => ",data)
-
-  /*const handleDelete = (id) => {
-    //setData(data.filter((item) => item.id !== id));
-    axios.delete("http://localhost:8082/api/user/" + id).then(r  => console.log("element deleted"));
-
-    const posts = data.filter(item => item.id !== id);
-    setData( posts );
-
-  };*/
-  
-  
 
   const handleDelete = (id) => {
     setUserToDelete(id);
@@ -64,7 +57,37 @@ export default function ClientList() {
       setShowDeleteConfirmation(false);
     };
 
-
+    const handleSuiviClick = (id, suivi) => {
+      setSelectedUserId(id);
+      setSuiviText(suivi); // Set the initial suivi text
+      setShowSuiviPopup(true);
+    };
+  
+  
+    const handleSaveSuivi = () => {
+      axios.post(`http://localhost:8082/api/userSuivi/${selectedUserId}`,
+  
+         suiviText,
+      {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        }
+      })
+      .then(response => {
+        console.log("Suivi text saved:", response.data);
+        setShowSuiviPopup(false);
+        setSuiviText("");
+        loadUsers();
+      })
+      .catch(error => {
+        console.error("Error saving suivi text:", error);
+      });
+    };
+  
+    const handleCancelSuivi = () => {
+      setShowSuiviPopup(false);
+      setSuiviText("");
+    };
   const columns = [
     {
       field: "nom",
@@ -80,7 +103,21 @@ export default function ClientList() {
       { field: "cin", headerName: "Cin", width: 140 },
 
       { field: "telephone", headerName: "Numéro de Telephone", width: 200 },
-
+      {
+        field: "suivi",
+        headerName: "Fiche de suivie",
+        width: 190,
+        renderCell: (params) => {
+          return (
+            <>
+           
+             
+              <i className="material-icons"  onClick={() => handleSuiviClick(params.row.id,params.row.suivi)}>event</i>  
+              
+            </>
+          );
+        },
+      },
 
         {
       field: "action",
@@ -121,6 +158,14 @@ export default function ClientList() {
         pageSize={8}
         /*checkboxSelection*/
       />
+         {showSuiviPopup && (
+        <SuiviPopup
+          suiviText={suiviText}
+          setSuiviText={setSuiviText}
+          onSave={handleSaveSuivi}
+          onCancel={handleCancelSuivi}
+        />
+      )}
         {showDeleteConfirmation && (
        <DeleteConfirmation
          showDeleteConfirmation={showDeleteConfirmation}

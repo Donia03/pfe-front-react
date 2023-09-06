@@ -43,6 +43,7 @@ export default function HistoriqueList() {
 
 
       const columns = [
+        
         {
               field: "nom",
               headerName: "Nom",

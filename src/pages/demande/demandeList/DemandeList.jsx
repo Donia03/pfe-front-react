@@ -5,10 +5,13 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Edit } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import DeleteDemande from "./DeleteDemande";
 
 export default function DemandeList() {
   const [data, setData] = useState([]);
   const [clientData, setClientData] = useState([]);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [reclamationToDelete, setReclamationToDelete] = useState(null);
   const userType = "Client";
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export default function DemandeList() {
     setData(result.data);
   }
 
-  const handleDelete = (id) => {
+  /*const handleDelete = (id) => {
     axios.delete("http://localhost:8082/api/demande/" + id, {
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -49,7 +52,30 @@ export default function DemandeList() {
       console.log("element deleted");
       setData(data.filter(item => item.id !== id));
     });
+  };*/
+
+  const handleDelete = (id) => {
+    setReclamationToDelete(id);
+    setShowDeleteConfirmation(true);
   };
+  const confirmDelete = () => {
+      axios.delete("http://localhost:8082/api/demande/" + reclamationToDelete)
+        .then(() => {
+          console.log("User deleted:", reclamationToDelete);
+          setShowDeleteConfirmation(false);
+          setReclamationToDelete(null);
+          loadUsers();
+        })
+        .catch(error => {
+          console.error("Error deleting user:", error);
+        });
+    };
+
+    const handleCancelDelete = () => {
+      setReclamationToDelete(null);
+      setShowDeleteConfirmation(false);
+    };
+
   const getStatusClassName = (status) => {
       let className = "statusCell";
       if (status === 0) {
@@ -199,6 +225,14 @@ export default function DemandeList() {
         pageSize={8}
        /* checkboxSelection*/
       />
+          {showDeleteConfirmation && (
+       <DeleteDemande
+         showDeleteConfirmation={showDeleteConfirmation}
+         confirmDelete={confirmDelete}
+         handleCancelDelete={handleCancelDelete}
+         reclamationToDeleteData={data.find(user => user.id === reclamationToDelete)} // Assuming each user has an 'id' field
+       />
+     )}
     </div>
   );
 }

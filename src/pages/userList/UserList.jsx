@@ -86,6 +86,11 @@ export default function UserList() {
 
   const columns = [
     {
+      field: "role",
+      headerName: "Role",
+      width: 125,
+    },
+    {
       field: "nom",
       headerName: "Nom",
       width: 125,
