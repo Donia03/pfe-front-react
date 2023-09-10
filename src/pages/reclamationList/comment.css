@@ -1,0 +1,49 @@
+/* Comment.css */
+.comment {
+  margin-bottom: 22px; /* Add some margin between comments */
+}
+
+.comment .rating {
+  color: gray; /* Default color for stars */
+}
+
+.comment .rating span {
+  font-size: 24px; /* Adjust the size of the stars */
+  margin-right: 5px; /* Add margin between stars */
+  cursor: pointer;
+}
+.starsBlock{
+
+}
+p.commnetBlock{
+margin-bottom: -8px;
+}
+
+.comment .rating span:hover,
+.comment .rating span.active {
+  color: yellow; /* Change star color to yellow on hover and when active */
+}
+
+.comment-text{
+    margin-bottom: -6px;
+}
+
+.userShowTop {
+  display: flex;
+  align-items: center;
+}
+.userShowImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.userShowTopTitle {
+    display: flex;
+    flex-direction: column;
+    margin-left: 6px !important;
+}
+
+.userShowUsername {
+  font-weight: 600;
+}

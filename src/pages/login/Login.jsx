@@ -55,13 +55,17 @@ const Login = () => {
       const token = response.data.token;
       const role = response.data.role;
       const id = response.data.id;
+      const image = response.data.image;
+      const nom = response.data.prenom + " " + response.data.nom;
       // For now, we will just log the token in the console
-      console.log("Authentication successful. Token:", token);
+      console.log("Authentication successful. Token:", response.data);
 
       //Save the token to lacal storage
       localStorage.setItem('token',token);
       localStorage.setItem('role',role);
       localStorage.setItem('id',id);
+      localStorage.setItem('image',image);
+      localStorage.setItem('nom',nom);
 
 
       setAuthenticated(true);
