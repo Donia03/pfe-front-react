@@ -1,6 +1,26 @@
-/* Comment.css */
+/* comment.css */
 .comment {
+  position: relative;
   margin-bottom: 22px; /* Add some margin between comments */
+  padding-right: 30px; /* Add space for the delete icon */
+}
+
+.comment:hover {
+  /* Add styles to change the appearance of the comment on hover */
+  background-color: #f5f5f5; /* Change background color on hover */
+}
+
+.delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  color: red; /* Change delete icon color */
+  display: none; /* Initially hide the delete icon */
+}
+
+.comment:hover .delete-icon {
+  display: block; /* Show the delete icon on hover */
 }
 
 .comment .rating {
@@ -12,20 +32,14 @@
   margin-right: 5px; /* Add margin between stars */
   cursor: pointer;
 }
-.starsBlock{
-
-}
-p.commnetBlock{
-margin-bottom: -8px;
-}
 
 .comment .rating span:hover,
 .comment .rating span.active {
   color: yellow; /* Change star color to yellow on hover and when active */
 }
 
-.comment-text{
-    margin-bottom: -6px;
+.comment-text {
+  margin-bottom: -6px;
 }
 
 .userShowTop {
@@ -39,9 +53,9 @@ margin-bottom: -8px;
   object-fit: cover;
 }
 .userShowTopTitle {
-    display: flex;
-    flex-direction: column;
-    margin-left: 6px !important;
+  display: flex;
+  flex-direction: column;
+  margin-left: 6px !important;
 }
 
 .userShowUsername {

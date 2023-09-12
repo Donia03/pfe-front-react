@@ -76,6 +76,15 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
       }
     }
   };
+  const handleDeleteComment = async (commentId) => {
+
+        // Remove the deleted comment from the comments list
+        const updatedComments = comments.filter(
+          (comment) => comment.id !== commentId
+        );
+        setComments(updatedComments);
+
+    };
 
   const generateUniqueId = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -97,6 +106,8 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
             onRate={handleRateComment}
             nom={comment.nom} // Pass the user's name to the Comment component
             image={comment.image} // Pass the user's image URL to the Comment component
+            onDelete={handleDeleteComment}
+            id={comment.id}
           />
         ))}
       </div>

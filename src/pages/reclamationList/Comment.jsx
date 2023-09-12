@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios"
 import "./comment.css"
+import { DeleteOutline } from "@material-ui/icons";
 
-const Comment = ({ comment, onRate, nom, image }) => {
+const Comment = ({ comment, onRate, nom, image, onDelete,id }) => {
   const [rating, setRating] = useState(comment.rating);
   const [userRating, setUserRating] = useState(0);
   const[imageUrl, setImageUrl] = useState('')
   const token = localStorage.getItem('token');
+  const [showDeleteIcon, setShowDeleteIcon] = useState(false);
+
+  console.log("Comment id",id)
 
    useEffect(() => {
             if (image) {
@@ -32,6 +36,20 @@ const Comment = ({ comment, onRate, nom, image }) => {
            };
            reader.readAsDataURL(blob);
          };
+   const handleDeleteClick = async () => {
+     try {
+       await axios.delete(`http://localhost:8082/api/comment/${id}`, {
+         headers: {
+           Authorization: `Bearer ${token}`,
+         },
+       });
+       onDelete(id); // Pass the correct commentId to onDelete
+     } catch (error) {
+       console.error("Error deleting comment:", error);
+       // Handle error as needed
+     }
+   };
+
 
   const handleRate = (star) => {
     setUserRating(star);
@@ -40,7 +58,16 @@ const Comment = ({ comment, onRate, nom, image }) => {
   };
 
   return (
-    <div className="comment">
+    <div className="comment"
+        onMouseEnter={() => setShowDeleteIcon(true)} // Show delete icon on hover
+        onMouseLeave={() => setShowDeleteIcon(false)} // Hide delete icon on mouse leave
+    >
+    {showDeleteIcon && (
+            <DeleteOutline
+              className="delete-icon"
+              onClick={handleDeleteClick}
+            />
+          )}
       <div className="userShowTop">
                   <img
                     src={imageUrl}
