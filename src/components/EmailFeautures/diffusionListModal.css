@@ -1,0 +1,23 @@
+/* Modal.css */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999; /* Ensure the modal appears above other content */
+  display: block; /* Make sure it's visible */
+  width:50%;
+  hieght:50%;
+  /* Add more styling as needed */
+}
+
+.modal h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Add more CSS styling for buttons, lists, etc. */

@@ -1,81 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Modal from './diffusionListModal'; // You need to create the Modal component
+
+import './SearchUser.css'; // Add your CSS file path here
 
 const SearchUser = () => {
-    const [users, setUsers] = useState([
-        { name: 'John Doe', sex: 'Male', age: 25, profession: 'Engineer', address: '123 Main St', province: 'ABC' },
-        { name: 'Jane Smith', sex: 'Female', age: 30, profession: 'Teacher', address: '456 Elm St', province: 'DEF' },
-        { name: 'Alice Johnson', sex: 'Female', age: 35, profession: 'Doctor', address: '789 Oak St', province: 'GHI' },
-        { name: 'Bob Thompson', sex: 'Male', age: 40, profession: 'Artist', address: '321 Pine St', province: 'JKL' },
-        { name: 'Emily Wilson', sex: 'Female', age: 27, profession: 'Writer', address: '654 Maple St', province: 'MNO' },
-        // Add more user objects as needed
-    ]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [diffusionLists, setDiffusionLists] = useState([]);
 
-    const [searchResults, setSearchResults] = useState([]);
-    const [selectedSex, setSelectedSex] = useState('');
-
-    const handleInputChange = (event) => {
-        const searchTerm = event.target.value.toLowerCase();
-
-        const filteredResults = users.filter((user) =>
-            user.name.toLowerCase().includes(searchTerm) && user.sex === selectedSex
+  useEffect(() => {
+    // Implement your search logic here
+    const fetchSearchResults = async () => {
+      try {
+        const response = await axios.post(
+          'http://localhost:8082/api/search',
+          { elementOfSearch: searchQuery },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
         );
 
-        setSearchResults(filteredResults);
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }
     };
 
-    const handleSexChange = (event) => {
-        const selectedValue = event.target.value;
-        setSelectedSex(selectedValue);
-    };
+    if (searchQuery) {
+      fetchSearchResults();
+    } else {
+      // Clear the search results if the search query is empty
+      setSearchResults([]);
+    }
+  }, [searchQuery]);
 
-    return (
-        <div>
-             Rechercher utilisateur
+  const handleUserClick = async (user) => {
+    setSelectedUser(user);
+    setShowModal(true);
 
-            <form>
-                <input
-                    type="text"
-                    placeholder="Search by name"
-                    onChange={handleInputChange}
-                />
+    // Fetch diffusion lists for the selected user
+    try {
+      const response = await axios.get('http://localhost:8082/api/diffusionList', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-                <div>
-                    <input
-                        type="radio"
-                        id="male"
-                        name="sex"
-                        value="Male"
-                        checked={selectedSex === 'Male'}
-                        onChange={handleSexChange}
-                    />
-                    <label htmlFor="male">Male</label>
-                </div>
+      setDiffusionLists(response.data);
+    } catch (error) {
+      console.error('Error fetching diffusion lists:', error);
+    }
+  };
 
-                <div>
-                    <input
-                        type="radio"
-                        id="female"
-                        name="sex"
-                        value="Female"
-                        checked={selectedSex === 'Female'}
-                        onChange={handleSexChange}
-                    />
-                    <label htmlFor="female">Female</label>
-                </div>
-            </form>
-
-            <h2>Search Results</h2>
-            {searchResults.length === 0 ? (
-                <p>No results found.</p>
-            ) : (
-                <ul>
-                    {searchResults.map((user, index) => (
-                        <li key={index}>{user.name}</li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
+  return (
+    <div className="search-user">
+      <h1>Rechercher utilisateur</h1>
+      <form>
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </form>
+      <ul>
+        {searchResults.map((user) => (
+          <li key={user.id}>
+            {user.prenom + " " + user.nom + " " + "("+ user.email+")"}
+            <button className="plus-icon-button" onClick={() => handleUserClick(user)}>
+              <AddCircleOutlineIcon className="plus-icon" />
+            </button>
+          </li>
+        ))}
+      </ul>
+      {showModal && (
+        <Modal
+          user={selectedUser}
+          diffusionLists={diffusionLists}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default SearchUser;

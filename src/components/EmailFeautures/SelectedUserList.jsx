@@ -3,13 +3,14 @@ import axios from 'axios';
 import './SelectedUserList.css';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import { EmailContext } from '../../context/EmailContext';
+import { SelectedDiffusionListContext } from '../../context/SelectedDiffusionListContext'; // Import the context
 
 
 const SelectedUserList = () => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState('');
-    const [selectedDiffusionList, setSelectedDiffusionList] = useState([]);
     const { label, body, setLabel, setBody } = useContext(EmailContext);
+    const { selectedDiffusionList, setSelectedDiffusionList } = useContext(SelectedDiffusionListContext); // Get selectedDiffusionList from context
 
     useEffect(() => {
         // Fetch the list of users from the API
@@ -33,24 +34,23 @@ const SelectedUserList = () => {
 
     useEffect(() => {
         if (selectedUser) {
-            // Fetch data from the second API with selectedUser as a parameter
-            axios
-                .get(`http://localhost:8082/api/diffusionList/${selectedUser}`)
-                .then((response) => {
-                    setSelectedDiffusionList(
-                        response.data.users.map((user) => ({
-                            id: user.id,
-                            nom: user.nom,
-                            prenom: user.prenom,
-                            email: user.email,
-                        }))
-                    );
-                })
-                .catch((error) => {
-                    console.error('Error fetching data from second API:', error);
-                });
+          axios
+            .get(`http://localhost:8082/api/diffusionList/${selectedUser}`)
+            .then((response) => {
+              setSelectedDiffusionList(
+                response.data.users.map((user) => ({
+                  id: user.id,
+                  nom: user.nom,
+                  prenom: user.prenom,
+                  email: user.email,
+                }))
+              );
+            })
+            .catch((error) => {
+              console.error('Error fetching data from second API:', error);
+            });
         }
-    }, [selectedUser]);
+      }, [selectedUser, setSelectedDiffusionList]);
 
     const handleUserSelect = (event) => {
         const selectedValue = event.target.value;

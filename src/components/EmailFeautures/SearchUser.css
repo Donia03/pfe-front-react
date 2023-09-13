@@ -1,0 +1,51 @@
+/* SearchUser.css */
+
+.search-user {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.search-user h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.search-user form {
+  margin-bottom: 20px;
+}
+
+.search-user input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-user ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.search-user ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.plus-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.plus-icon-button .plus-icon {
+  font-size: 24px;
+  color: #007bff;
+}
+
+/* Add your additional styles here */
