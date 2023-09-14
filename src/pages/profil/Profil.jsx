@@ -38,6 +38,7 @@ export default function Profil() {
   }, [image]);
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem('id');
 
   const getUserById = async () => {
     const result = await axios.get(
@@ -131,7 +132,7 @@ export default function Profil() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8082/api/user/${params.userId}`,
+        `http://localhost:8082/api/user/${params.userId}/${userId}`,
         formData,
         {
           headers: {
