@@ -28,7 +28,7 @@ const DiffusionListModal = ({ user, diffusionLists, onClose }) => {
   };
 
   return (
-    <div className="modal">
+    <div className="modalDiffusionList">
       <h2>Select a Diffusion List</h2>
       <ul>
         {diffusionLists.map((list) => (
