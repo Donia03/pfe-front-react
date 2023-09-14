@@ -15,9 +15,7 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
 
 
 
-  useEffect(() => {
-    // Fetch comments from the API when the component mounts
-    const fetchComments = async () => {
+  const fetchComments = async () => {
       try {
         const response = await axios.get(`http://localhost:8082/api/comments/${id}`, {
           headers: {
@@ -25,14 +23,17 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
           },
         });
         setComments(response.data);
-        console.log("comments api response",comments)
+        console.log("comments api response", comments);
       } catch (error) {
         console.error('Error fetching comments:', error);
         // Handle error as needed
       }
     };
-    fetchComments();
-  }, [id, token]);
+
+    useEffect(() => {
+      // Fetch comments from the API when the component mounts
+      fetchComments();
+    }, [id, token]);
 
   const handleRateComment = (commentId, userRating) => {
     const updatedComments = comments.map((comment) => {
@@ -108,6 +109,8 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
             image={comment.image} // Pass the user's image URL to the Comment component
             onDelete={handleDeleteComment}
             id={comment.id}
+            userIdComment={comment.userId}
+            rating={comment.rating}
           />
         ))}
       </div>
