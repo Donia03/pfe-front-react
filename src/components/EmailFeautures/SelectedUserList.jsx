@@ -119,24 +119,51 @@ const SelectedUserList = () => {
                 console.error('Error sending email:', error);
             });
     };
+    const handleDeleteIconClick = (userId) => {
+        axios
+          .delete(`http://localhost:8082/api/diffusionList/user/${userId}`)
+          .then((response) => {
+            console.log('Deleted diffusion list for user with ID:', userId);
+            // Refresh the list of users after successful deletion
+            axios
+              .get('http://localhost:8082/api/diffusionList')
+              .then((response) => {
+                setUsers(response.data);
+                setSelectedDiffusionList([]); // Clear the selected diffusion list
+              })
+              .catch((error) => {
+                console.error('Error refreshing users:', error);
+              });
+          })
+          .catch((error) => {
+            console.error('Error deleting diffusion list:', error);
+          });
+      };
+
 
     return (
         <div>
-            <h2>Liste defussion</h2>
+            <h2>Liste diffusion</h2>
             <ul className="radioList">
-                {users.map((user) => (
-                    <li key={user.id}>
-                        <label>
-                            <input
-                                type="radio"
-                                value={user.nom}
-                                checked={selectedUser === user.nom}
-                                onChange={handleUserSelect}
-                            />
-                            {user.nom}
-                        </label>
-                    </li>
-                ))}
+              {users.map((user) => (
+                <li key={user.id} className="userItem">
+                  <div className="userLabel">
+                    <input
+                      type="radio"
+                      value={user.nom}
+                      checked={selectedUser === user.nom}
+                      onChange={handleUserSelect}
+                    />
+                    {user.nom}
+                  </div>
+                  {selectedDiffusionList && (
+                    <DeleteIcon
+                      className="deleteIcon"
+                      onClick={() => handleDeleteIconClick(user.id)}
+                    />
+                  )}
+                </li>
+              ))}
             </ul>
             {selectedUser && (
                 <div className="emailDetails">
