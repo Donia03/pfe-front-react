@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './Task.css';
 
-const Task = ({ modal, toggle, save }) => {
+const Task = ({ modal, toggle, updateTaskList }) => {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState(null);
@@ -45,6 +45,10 @@ const Task = ({ modal, toggle, save }) => {
         setStartDate(null);
         setEndDate(null);
         toggle(); // Close the modal or perform any other desired action
+        // Call the updateTaskList callback to notify the parent component
+                if (typeof updateTaskList === 'function') {
+                  updateTaskList();
+                }
       }
     } catch (error) {
       // Handle errors here (e.g., display an error message)
