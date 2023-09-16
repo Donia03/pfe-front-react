@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import './UserList.css';
+import { DiffusionsContext } from '../../context/DiffusionsContext';
+import { useDiffusionLists } from '../hooks/useDiffusionLists';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [saveListVisible, setSaveListVisible] = useState(false);
     const [listName, setListName] = useState('');
+    const { diffusionLists, setDiffusionLists } = useDiffusionLists();
+
 
     useEffect(() => {
         // Fetch the list of users from the API
@@ -57,7 +61,7 @@ const UserList = () => {
         setListName(event.target.value);
     };
 
-    const saveSelectedUser = () => {
+    const saveDiffusionList = () => {
         // Execute the saveSelectedUser function with the selectedUsers and listName
         console.log('Saving selected users:', selectedUsers);
         console.log('List name:', listName);
@@ -71,6 +75,11 @@ const UserList = () => {
            .post('http://localhost:8082/api/diffusionList',difusionList)
            .then((response) => {
              console.log(response.data);
+             if (response.status === 200) {
+                                 // Update the diffusions state using context
+                                 setDiffusionLists([...diffusionLists, difusionList]);
+                             }
+
                  })
            .catch((error) => {
               console.error('Error fetching users:', error);
@@ -128,7 +137,7 @@ const UserList = () => {
                                 value={listName}
                                 onChange={handleListNameChange}
                             />
-                            <button className="save" onClick={saveSelectedUser}>
+                            <button className="save" onClick={saveDiffusionList}>
                                 Save
                             </button>
                         </div>

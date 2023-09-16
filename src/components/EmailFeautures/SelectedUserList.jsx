@@ -4,10 +4,12 @@ import './SelectedUserList.css';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import { EmailContext } from '../../context/EmailContext';
 import { SelectedDiffusionListContext } from '../../context/SelectedDiffusionListContext'; // Import the context
+import { DiffusionsContext } from '../../context/DiffusionsContext'; // Import the context
+import { useDiffusionLists } from '../hooks/useDiffusionLists';
 
 
 const SelectedUserList = () => {
-    const [diffusionLists, setDiffusionLists] = useState([]);
+    const { diffusionLists, setDiffusionLists } = useDiffusionLists();
     const [selectedUser, setSelectedUser] = useState('');
     const { label, body, setLabel, setBody } = useContext(EmailContext);
     const { selectedDiffusionList, setSelectedDiffusionList } = useContext(SelectedDiffusionListContext); // Get selectedDiffusionList from context
@@ -191,7 +193,7 @@ const SelectedUserList = () => {
                 <div className="tagList">
                     {selectedDiffusionList.map((user, index) => (
                         <div className="tag" key={index}>
-                            {diffusionLists.prenom + ' ' + user.nom}
+                            {user.prenom + ' ' + user.nom}
                             <DeleteIcon
                                 className="deleteIcon"
                                 onClick={() => handleDelete(index)}
