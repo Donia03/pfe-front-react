@@ -7,7 +7,7 @@ import { SelectedDiffusionListContext } from '../../context/SelectedDiffusionLis
 
 
 const SelectedUserList = () => {
-    const [users, setUsers] = useState([]);
+    const [diffusionLists, setDiffusionLists] = useState([]);
     const [selectedUser, setSelectedUser] = useState('');
     const { label, body, setLabel, setBody } = useContext(EmailContext);
     const { selectedDiffusionList, setSelectedDiffusionList } = useContext(SelectedDiffusionListContext); // Get selectedDiffusionList from context
@@ -17,7 +17,7 @@ const SelectedUserList = () => {
         axios
             .get('http://localhost:8082/api/diffusionList')
             .then((response) => {
-                setUsers(response.data);
+                setDiffusionLists(response.data);
                 // Check if there is a previously selected user in local storage
                 const storedUser = localStorage.getItem('selectedUser');
                 if (storedUser) {
@@ -128,7 +128,7 @@ const SelectedUserList = () => {
             axios
               .get('http://localhost:8082/api/diffusionList')
               .then((response) => {
-                setUsers(response.data);
+                setDiffusionLists(response.data);
                 setSelectedDiffusionList([]); // Clear the selected diffusion list
               })
               .catch((error) => {
@@ -145,7 +145,7 @@ const SelectedUserList = () => {
         <div>
             <h2>Liste diffusion</h2>
             <ul className="radioList">
-              {users.map((user) => (
+              {diffusionLists.map((user) => (
                 <li key={user.id} className="userItem">
                   <div className="userLabel">
                     <input
@@ -191,7 +191,7 @@ const SelectedUserList = () => {
                 <div className="tagList">
                     {selectedDiffusionList.map((user, index) => (
                         <div className="tag" key={index}>
-                            {user.prenom + ' ' + user.nom}
+                            {diffusionLists.prenom + ' ' + user.nom}
                             <DeleteIcon
                                 className="deleteIcon"
                                 onClick={() => handleDelete(index)}
