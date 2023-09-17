@@ -126,6 +126,12 @@ export default function Sidebar() {
                                     Notes
                                   </li>
                                 </Link>
+                <Link to="/import" className="link">
+                    <li className="sidebarListItem">
+                        <BarChart className="sidebarIcon" />
+                          Import
+                           </li>
+                </Link>
                               
               </ul>
             </div>

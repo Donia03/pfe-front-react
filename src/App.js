@@ -33,6 +33,7 @@ import Demande from "./pages/demande/singleDemande/Demande"
 import HistoriqueList from "./pages/historique/HistoriqueList"
 import Profil from "./pages/profil/Profil.jsx"
 import Contact from "./pages/contactSociete/ContactSociete.jsx"
+import Import from "./pages/import/Import.jsx"
 function App() {
     // State to simulate authentication status (true if authenticated, false otherwise)
     		const { authenticated } = useContext(AuthContext);
@@ -138,6 +139,9 @@ function App() {
            <Route path="/note">
                           <Note />
                       </Route>
+           <Route path="/import">
+               <Import />
+           </Route>
         </Switch>
       </div>
     </Router>
