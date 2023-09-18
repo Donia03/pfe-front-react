@@ -75,6 +75,10 @@ const Login = () => {
       setError("Invalid email or password. Please try again.");
     }
   };
+  const handleForgotPasswordClick = () => {
+      // Redirect to the ForgotPassword route
+      history.push("/forgotPassword");
+    };
 
   return (
     
@@ -114,7 +118,15 @@ const Login = () => {
             </form>
         
       </Paper>
+
     </Container>
+    <Typography
+                            variant="subtitle2"
+                            className="forgot-password-link"
+                            onClick={handleForgotPasswordClick}
+                          >
+                            Mot de passe oublié ?
+                          </Typography>
     </div>
   );
 };

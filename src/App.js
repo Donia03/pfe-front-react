@@ -25,6 +25,8 @@ import NewEmploye from "./pages/employe/newEmploye/NewEmploye.jsx"
 import Note from "./pages/note/noteList/Note"
 import EmailSender from "./pages/email/EmailSender"
 import Login from "./pages/login/Login"
+import ForgotPassword from "./pages/login/ForgotPassword"
+import ResetPassword from "./pages/login/ResetPassword";
 import {AuthContext} from "./context/AuthContext";
 import ReclamationClient from "./pages/reclamationClient/ReclamationClient";
 import DemandeClient from "./pages/demande/newDemande/DemandeClient.jsx"
@@ -141,6 +143,13 @@ function App() {
                       </Route>
            <Route path="/import">
                <Import />
+           </Route>
+           <Route path="/forgotPassword">
+             <ForgotPassword />
+           </Route>
+           <Route
+             path="/resetPassword/:token">
+               <ResetPassword/>
            </Route>
         </Switch>
       </div>
