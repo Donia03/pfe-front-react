@@ -3,11 +3,13 @@ import axios from "axios";
 import demandeImage from '../../images/dd.png';
 import './DemandeClient.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNotification } from '../../../context/NotificationContext';
 
 export default function DemandeClient() {
   const [titre, setTitre] = useState("");
   const [reference, setReference] = useState("");
   const [description, setDescription] = useState("");
+  const { notifChange, setNotifChange } = useNotification();
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
   const userId = localStorage.getItem('id'); // Retrieve the token from local storage
@@ -44,6 +46,8 @@ export default function DemandeClient() {
 
       // Handle the response, e.g., show success message, redirect, etc.
       console.log("Demande created:", response.data);
+      setNotifChange(true);
+      console.log("notifChange set to true", notifChange);
 
       // Reset the form fields after successful submission
       setTitre("");

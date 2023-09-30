@@ -10,10 +10,10 @@ import {
 } from "@material-ui/icons";
 import { Link, useParams } from "react-router-dom";
 import "./Profil.css";
+import { useUser } from "../../components/hooks/useUser";
 
 export default function Profil() {
   const params = useParams();
-  console.log(params.userId);
 
   const [email, setEmail] = useState("");
   const [prenom, setPrenom] = useState("");
@@ -25,6 +25,7 @@ export default function Profil() {
   const [telephone, setTelephone] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const { setUser } = useUser();
 
 
   useEffect(() => {
@@ -143,7 +144,13 @@ export default function Profil() {
       );
 
       // Handle the response, e.g., show success message, redirect, etc.
-      console.log("User updated:", response.data);
+      setUser(response.data);
+      // After successfully fetching and updating user data
+      localStorage.setItem('userData', JSON.stringify(response.data));
+
+
+          // Handle the response, e.g., show success message, redirect, etc.
+          console.log('User updated:', response.data);
     } catch (error) {
       // Handle error, e.g., show error message
       console.error("Error updating user:", error);

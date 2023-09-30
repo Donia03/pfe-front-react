@@ -4,6 +4,8 @@ import App from './App';
 import {AuthProvider} from "./context/AuthContext";
 import { SelectedDiffusionListProvider } from './context/SelectedDiffusionListContext'; // Import the context
 import { DiffusionsProvider } from './context/DiffusionsContext'; // Import the context
+import { UserProvider } from './context/UserContext'; // Import the context
+import { NotificationProvider } from './context/NotificationContext';
 import './global.css';
 
 ReactDOM.render(
@@ -11,7 +13,11 @@ ReactDOM.render(
     <AuthProvider>
       <SelectedDiffusionListProvider>
         <DiffusionsProvider>
-          <App />
+          <UserProvider>
+          <NotificationProvider>
+            <App />
+          </NotificationProvider>
+          </UserProvider>
         </DiffusionsProvider>
       </SelectedDiffusionListProvider>
     </AuthProvider>
