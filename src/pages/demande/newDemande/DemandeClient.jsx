@@ -13,6 +13,47 @@ export default function DemandeClient() {
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
   const userId = localStorage.getItem('id'); // Retrieve the token from local storage
+  const [successMessage, setSuccessMessage] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [titreError, setTitreError] = useState("");
+  const [referenceError, setReferenceError] = useState("");
+
+      const closeSuccessMessage = () => {
+        setSuccessMessage("");
+      };
+
+      const [errorMessage, setErrorMessage] = useState("");
+
+      const clearErrorMessage = () => {
+        setErrorMessage("");
+      };
+
+      const validateInputs = () => {
+          let isValid = true;
+
+          if (titre.trim() === "") {
+            setTitreError("Titre is required");
+            isValid = false;
+          } else {
+            setTitreError("");
+          }
+
+          if (reference.trim() === "") {
+            setReferenceError("Reference is required");
+            isValid = false;
+          } else {
+            setReferenceError("");
+          }
+
+          if (description.trim() === "") {
+            setDescriptionError("Description is required");
+            isValid = false;
+          } else {
+            setDescriptionError("");
+          }
+
+          return isValid;
+        };
 
   const titreChangeHandler = (event) => {
     setTitre(event.target.value);
@@ -53,14 +94,32 @@ export default function DemandeClient() {
       setTitre("");
       setReference("");
       setDescription("");
+      setSuccessMessage("New Profil has been saved");
     } catch (error) {
       // Handle error, e.g., show error message
       console.error("Error creating demande:", error);
+      setErrorMessage("An unexpected error occurred");
     }
   };
 
   return (
     <div className="demande">
+    {successMessage && (
+          <div className="success-message">
+            {successMessage}
+            <span className="close-icon" onClick={closeSuccessMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+            <span className="close-icon" onClick={clearErrorMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
       <div className="home">
         <h1 className="">Créer une demande</h1>
       </div>

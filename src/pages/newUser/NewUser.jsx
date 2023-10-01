@@ -1,5 +1,5 @@
 import "./newUser.css";
-import {useEffect, useState} from "react";
+import {useEffect, useState,useRef} from "react";
 import axios from "axios"
 
 
@@ -15,6 +15,92 @@ export default function NewUser() {
       const [role, setRole] = useState("")
       const [image, setImage] = useState(null);
       const userId = localStorage.getItem('id');
+
+      const [emailError, setEmailError] = useState("");
+        const [prenomError, setPrenomError] = useState("");
+        const [nomError, setNomError] = useState("");
+        const [passwordError, setPasswordError] = useState("");
+        const [cinError, setCinError] = useState("");
+        const [telephoneError, setTelephoneError] = useState("");
+        const [roleError, setRoleError] = useState("");
+        const [imageError, setImageError] = useState("");
+
+        const [successMessage, setSuccessMessage] = useState("");
+
+        const closeSuccessMessage = () => {
+          setSuccessMessage("");
+        };
+
+        const [errorMessage, setErrorMessage] = useState("");
+
+        const clearErrorMessage = () => {
+          setErrorMessage("");
+        };
+
+          const fileInputRef = useRef(null);
+
+
+        const validateInputs = () => {
+          let isValid = true;
+
+          if (email.trim() === "") {
+            setEmailError("Email is required");
+            isValid = false;
+          } else if (!email.includes("@")) {
+                 setEmailError("Invalid email format");
+                 isValid = false;
+          }else {
+            setEmailError("");
+          }
+
+          if (prenom.trim() === "") {
+            setPrenomError("Prenom is required");
+            isValid = false;
+          } else {
+            setPrenomError("");
+          }
+
+          if (nom.trim() === "") {
+            setNomError("Nom is required");
+            isValid = false;
+          } else {
+            setNomError("");
+          }
+
+          if (password.trim() === "") {
+            setPasswordError("Password is required");
+            isValid = false;
+          }else if (password.trim().length < 6) {
+                 setPasswordError("Password should be at least 6 characters");
+                 isValid = false;
+               }
+           else {
+            setPasswordError("");
+          }
+
+          if (cin.trim() === "") {
+            setCinError("Cin is required");
+            isValid = false;
+          } else {
+            setCinError("");
+          }
+
+          if (telephone.trim() === "") {
+            setTelephoneError("Telephone is required");
+            isValid = false;
+          } else {
+            setTelephoneError("");
+          }
+
+          if (role.trim() === "") {
+            setRoleError("Role is required");
+            isValid = false;
+          } else {
+            setRoleError("");
+          }
+
+          return isValid;
+        };
 
   const emailChangeHandler = (event) => {
       setEmail(event.target.value)
@@ -45,7 +131,9 @@ export default function NewUser() {
 
     const handleSubmit = async (e) => {
             e.preventDefault();
-
+            if (!validateInputs()) {
+                  return; // Don't proceed if validation fails
+                }
             const formData = new FormData();
             formData.append("nom", nom);
             formData.append("prenom", prenom);
@@ -78,14 +166,35 @@ export default function NewUser() {
                 setCin("");
                 setTelephone("");
                 setRole("");
-                setImage(null);
+                setImage("");
+                if (fileInputRef.current) {
+                        fileInputRef.current.value = ""; // Reset the file input
+                      }
+                setSuccessMessage("New User has been saved");
             } catch (error) {
                 // Handle error, e.g., show error message
                 console.error("Error creating user:", error);
+                setErrorMessage("An unexpected error occurred");
             }
         };
     return (
       <div className="newUser">
+      {successMessage && (
+            <div className="success-message">
+              {successMessage}
+              <span className="close-icon" onClick={closeSuccessMessage}>
+                &#x2715;
+              </span>
+            </div>
+          )}
+          {errorMessage && (
+            <div className="error-message">
+              {errorMessage}
+              <span className="close-icon" onClick={clearErrorMessage}>
+                &#x2715;
+              </span>
+            </div>
+          )}
         <h1 className="newUserTitle">New User</h1>
         <form onSubmit={handleSubmit} className="newUserForm">
           <div className="newUserItem">
@@ -97,6 +206,7 @@ export default function NewUser() {
                 onChange={nomChangeHandler}
                 value={nom}
             />
+            {nomError && <div className="error">{nomError}</div>}
           </div>
           <div className="newUserItem">
             <label>Prenom</label>
@@ -107,6 +217,7 @@ export default function NewUser() {
                 onChange={prenomChangeHandler}
                 value={prenom}
             />
+            {prenomError && <div className="error">{prenomError}</div>}
           </div>
            <div className="newUserItem">
                     <label>Cin</label>
@@ -117,6 +228,7 @@ export default function NewUser() {
                         onChange={cinChangeHandler}
                         value={cin}
                     />
+                    {cinError && <div className="error">{cinError}</div>}
                     </div>
                      <div className="newUserItem">
                               <label>Telephone</label>
@@ -127,6 +239,7 @@ export default function NewUser() {
                                   onChange={telephoneChangeHandler}
                                   value={telephone}
                               />
+                              {telephoneError && <div className="error">{telephoneError}</div>}
                               </div>
           <div className="newUserItem">
             <label>Email</label>
@@ -137,6 +250,7 @@ export default function NewUser() {
                 onChange={emailChangeHandler}
                 value={email}
             />
+            {emailError && <div className="error">{emailError}</div>}
           </div>
           <div className="newUserItem">
             <label>Password</label>
@@ -147,22 +261,24 @@ export default function NewUser() {
                 onChange={passwordChangeHandler}
                 value={password}
             />
+            {passwordError && <div className="error">{passwordError}</div>}
             </div>
             <div className="newUserItem">
               <label> Role </label>
 
               <select name="roles"  id="role-select" onChange={selectHandler}>
                   <option value="">--Please choose an option--</option>
-                  <option value="admin">Admin</option>
-                  <option value="employe">Employe</option>
-                  <option value="client">Client</option>
-                  <option value="prospect">Prospect</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Employee">Employee</option>
+                  <option value="Client">Client</option>
+                  <option value="Prospect">Prospect</option>
 
               </select>
+              {roleError && <div className="error">{roleError}</div>}
             </div>
             <div className="newUserItem">
                <label>Image</label>
-               <input type="file" accept="image/*" onChange={imageChangeHandler} />
+               <input type="file" accept="image/*" onChange={imageChangeHandler} ref={fileInputRef} />
             </div>
 
           <button type="submit" className="newUserButton">Create</button>

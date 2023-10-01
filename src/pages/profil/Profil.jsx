@@ -27,6 +27,27 @@ export default function Profil() {
   const [newPassword, setNewPassword] = useState("");
   const { setUser } = useUser();
 
+   const [emailError, setEmailError] = useState("");
+    const [prenomError, setPrenomError] = useState("");
+    const [nomError, setNomError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [cinError, setCinError] = useState("");
+    const [telephoneError, setTelephoneError] = useState("");
+    const [roleError, setRoleError] = useState("");
+    const [imageError, setImageError] = useState("");
+
+    const [successMessage, setSuccessMessage] = useState("");
+
+    const closeSuccessMessage = () => {
+      setSuccessMessage("");
+    };
+
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const clearErrorMessage = () => {
+      setErrorMessage("");
+    };
+
 
   useEffect(() => {
     getUserById();
@@ -38,6 +59,60 @@ export default function Profil() {
     }
   }, [image]);
 
+  const validateInputs = () => {
+      let isValid = true;
+
+      if (email.trim() === "") {
+        setEmailError("Email is required");
+        isValid = false;
+      } else if (!email.includes("@")) {
+             setEmailError("Invalid email format");
+             isValid = false;
+      }else {
+        setEmailError("");
+      }
+
+      if (prenom.trim() === "") {
+        setPrenomError("Prenom is required");
+        isValid = false;
+      } else {
+        setPrenomError("");
+      }
+
+      if (nom.trim() === "") {
+        setNomError("Nom is required");
+        isValid = false;
+      } else {
+        setNomError("");
+      }
+
+      if (password.trim() === "") {
+        setPasswordError("Password is required");
+        isValid = false;
+      }else if (password.trim().length < 6) {
+             setPasswordError("Password should be at least 6 characters");
+             isValid = false;
+           }
+       else {
+        setPasswordError("");
+      }
+
+      if (cin.trim() === "") {
+        setCinError("Cin is required");
+        isValid = false;
+      } else {
+        setCinError("");
+      }
+
+      if (telephone.trim() === "") {
+        setTelephoneError("Telephone is required");
+        isValid = false;
+      } else {
+        setTelephoneError("");
+      }
+
+      return isValid;
+    };
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem('id');
 
@@ -121,6 +196,7 @@ export default function Profil() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     const formData = new FormData();
     formData.append("nom", nom);
     formData.append("prenom", prenom);
@@ -151,9 +227,11 @@ export default function Profil() {
 
           // Handle the response, e.g., show success message, redirect, etc.
           console.log('User updated:', response.data);
+          setSuccessMessage("Profil has been modified");
     } catch (error) {
       // Handle error, e.g., show error message
       console.error("Error updating user:", error);
+      setErrorMessage("An unexpected error occurred");
     }
   };
   const handleChangePassword = async (e) => {
@@ -189,6 +267,22 @@ export default function Profil() {
 
   return (
     <div className="user">
+    {successMessage && (
+          <div className="success-message">
+            {successMessage}
+            <span className="close-icon" onClick={closeSuccessMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+            <span className="close-icon" onClick={clearErrorMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
       <div className="userTitleContainer">
         <h1 className="userTitle">Mon Compte</h1>
       </div>
@@ -241,6 +335,7 @@ export default function Profil() {
                   value={nom}
                   onChange={nomChangeHandler}
                 />
+                {nomError && <div className="error">{nomError}</div>}
               </div>
               <div className="userUpdateItem">
                 <label>Prénom</label>
@@ -252,6 +347,7 @@ export default function Profil() {
                   value={prenom}
                   onChange={prenomChangeHandler}
                 />
+                {prenomError && <div className="error">{prenomError}</div>}
               </div>
               <div className="userUpdateItem">
                 <label>Email</label>
@@ -263,6 +359,7 @@ export default function Profil() {
                   value={email}
                   onChange={emailChangeHandler}
                 />
+                {emailError && <div className="error">{emailError}</div>}
               </div>
               <div className="userUpdateItem">
                 <label>Cin</label>
@@ -274,6 +371,7 @@ export default function Profil() {
                   value={cin}
                   onChange={cinChangeHandler}
                 />
+                {cinError && <div className="error">{cinError}</div>}
               </div>
               <div className="userUpdateItem">
                 <label>Telephone</label>
@@ -285,6 +383,7 @@ export default function Profil() {
                   value={telephone}
                   onChange={telephoneChangeHandler}
                 />
+                {telephoneError && <div className="error">{telephoneError}</div>}
               </div>
             </div>
             <div className="userUpdateRight">

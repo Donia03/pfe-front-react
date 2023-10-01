@@ -27,3 +27,15 @@
 
  
 }
+.MuiTypography-subtitle2 {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.57;
+    letter-spacing: 0.00714em;
+    margin-top: 10px !important;
+}
+.MuiTypography-subtitle2:hover {
+    cursor: pointer;
+    color: blue;
+}

@@ -1,5 +1,5 @@
 import "./NewEmploye.css";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import axios from "axios"
 
 export default function NewEmploye() {
@@ -9,9 +9,95 @@ export default function NewEmploye() {
   const [password, setPassword] = useState("")
  const [cin, setCin] = useState("")
 const [telephone, setTelephone] = useState("")
- const [role, setRole] = useState("Employe")
+ const [role, setRole] = useState("Employee")
 const [image, setImage] = useState(null);
 const userId = localStorage.getItem('id');
+
+const [emailError, setEmailError] = useState("");
+  const [prenomError, setPrenomError] = useState("");
+  const [nomError, setNomError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [cinError, setCinError] = useState("");
+  const [telephoneError, setTelephoneError] = useState("");
+  const [roleError, setRoleError] = useState("");
+  const [imageError, setImageError] = useState("");
+
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const closeSuccessMessage = () => {
+    setSuccessMessage("");
+  };
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const clearErrorMessage = () => {
+    setErrorMessage("");
+  };
+
+    const fileInputRef = useRef(null);
+
+
+  const validateInputs = () => {
+    let isValid = true;
+
+    if (email.trim() === "") {
+      setEmailError("Email is required");
+      isValid = false;
+    } else if (!email.includes("@")) {
+           setEmailError("Invalid email format");
+           isValid = false;
+    }else {
+      setEmailError("");
+    }
+
+    if (prenom.trim() === "") {
+      setPrenomError("Prenom is required");
+      isValid = false;
+    } else {
+      setPrenomError("");
+    }
+
+    if (nom.trim() === "") {
+      setNomError("Nom is required");
+      isValid = false;
+    } else {
+      setNomError("");
+    }
+
+    if (password.trim() === "") {
+      setPasswordError("Password is required");
+      isValid = false;
+    }else if (password.trim().length < 6) {
+           setPasswordError("Password should be at least 6 characters");
+           isValid = false;
+         }
+     else {
+      setPasswordError("");
+    }
+
+    if (cin.trim() === "") {
+      setCinError("Cin is required");
+      isValid = false;
+    } else {
+      setCinError("");
+    }
+
+    if (telephone.trim() === "") {
+      setTelephoneError("Telephone is required");
+      isValid = false;
+    } else {
+      setTelephoneError("");
+    }
+
+    if (role.trim() === "") {
+      setRoleError("Role is required");
+      isValid = false;
+    } else {
+      setRoleError("");
+    }
+
+    return isValid;
+  };
 
 const emailChangeHandler = (event) => {   
     setEmail(event.target.value)
@@ -42,6 +128,10 @@ const cinChangeHandler = (event) => {
 
   const handleSubmit = async (e) => {
           e.preventDefault();
+
+          if (!validateInputs()) {
+                return; // Don't proceed if validation fails
+          }
 
           const formData = new FormData();
           formData.append("nom", nom);
@@ -75,14 +165,35 @@ const cinChangeHandler = (event) => {
               setCin("");
               setTelephone("");
               setRole("");
-              setImage(null);
+              setImage("null");
+              if (fileInputRef.current) {
+                      fileInputRef.current.value = ""; // Reset the file input
+                    }
+                    setSuccessMessage("New Employee has been saved");
           } catch (error) {
               // Handle error, e.g., show error message
               console.error("Error creating user:", error);
+              setErrorMessage("An unexpected error occurred");
           }
       };
   return (
     <div className="newUser">
+    {successMessage && (
+          <div className="success-message">
+            {successMessage}
+            <span className="close-icon" onClick={closeSuccessMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+            <span className="close-icon" onClick={clearErrorMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
       <h1 className="newemployeTitle">Nouveau Employe </h1>
       <br/>
       <form onSubmit={handleSubmit} className="newEmployeForm">
@@ -95,6 +206,7 @@ const cinChangeHandler = (event) => {
               onChange={nomChangeHandler}
               value={nom}
           />
+          {nomError && <div className="error">{nomError}</div>}
         </div>
         <div className="newUserItem">
           <label>Prenom</label>
@@ -105,6 +217,7 @@ const cinChangeHandler = (event) => {
               onChange={prenomChangeHandler}
               value={prenom}
           />
+          {prenomError && <div className="error">{prenomError}</div>}
         </div>
          <div className="newUserItem">
                   <label>Cin</label>
@@ -115,6 +228,7 @@ const cinChangeHandler = (event) => {
                       onChange={cinChangeHandler}
                       value={cin}
                   />
+                  {cinError && <div className="error">{cinError}</div>}
                   </div>
                    <div className="newUserItem">
                             <label>Telephone</label>
@@ -125,6 +239,7 @@ const cinChangeHandler = (event) => {
                                 onChange={telephoneChangeHandler}
                                 value={telephone}
                             />
+                            {telephoneError && <div className="error">{telephoneError}</div>}
                             </div>
         <div className="newUserItem">
           <label>Email</label>
@@ -135,6 +250,7 @@ const cinChangeHandler = (event) => {
               onChange={emailChangeHandler}
               value={email}
           />
+          {emailError && <div className="error">{emailError}</div>}
         </div>
         <div className="newUserItem">
           <label>Mot de passe</label>
@@ -145,11 +261,12 @@ const cinChangeHandler = (event) => {
               onChange={passwordChangeHandler}
               value={password}
           />
+          {passwordError && <div className="error">{passwordError}</div>}
           </div>
 
           <div className="newUserItem">
              <label>Photo de profil</label>
-             <input type="file" accept="image/*" onChange={imageChangeHandler} />
+             <input type="file" accept="image/*" onChange={imageChangeHandler} ref={fileInputRef}/>
           </div>
 
         <button type="submit" className="newUserButton">Enregistrer</button>

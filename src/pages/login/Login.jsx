@@ -116,17 +116,17 @@ const Login = () => {
           </Button>
         
             </form>
-        
+        <Typography
+                                        variant="subtitle2"
+                                        className="forgot-password-link"
+                                        onClick={handleForgotPasswordClick}
+                                      >
+                                        Mot de passe oublié ?
+                                      </Typography>
       </Paper>
 
     </Container>
-    <Typography
-                            variant="subtitle2"
-                            className="forgot-password-link"
-                            onClick={handleForgotPasswordClick}
-                          >
-                            Mot de passe oublié ?
-                          </Typography>
+
     </div>
   );
 };

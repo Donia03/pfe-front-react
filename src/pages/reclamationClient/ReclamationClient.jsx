@@ -12,25 +12,70 @@ export default function ReclamationClient() {
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
   const userId = localStorage.getItem('id');
+  const [referenceError, setReferenceError] = useState("");
+    const [objetError, setObjetError] = useState("");
+    const [autreObjetError, setAutreObjetError] = useState("");
+    const [preciserError, setPreciserError] = useState("");
+
+  const [successMessage, setSuccessMessage] = useState("");
+
+    const closeSuccessMessage = () => {
+      setSuccessMessage("");
+    };
+
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const clearErrorMessage = () => {
+      setErrorMessage("");
+    };
 
   const referenceChangeHandler = (event) => {
-    setReference(event.target.value);
-  };
+      setReference(event.target.value);
+      setReferenceError(""); // Clear the error when the input changes
+    };
 
-  const objetChangeHandler = (event) => {
-    setObjet(event.target.value);
-  };
+    const objetChangeHandler = (event) => {
+      setObjet(event.target.value);
+      setObjetError(""); // Clear the error when the input changes
+    };
 
-  const autreObjetChangeHandler = (event) => {
-    setAutreObjet(event.target.value);
-  };
+    const autreObjetChangeHandler = (event) => {
+      setAutreObjet(event.target.value);
+      setAutreObjetError(""); // Clear the error when the input changes
+    };
 
-  const preciserChangeHandler = (event) => {
-    setPreciser(event.target.value);
-  };
+    const preciserChangeHandler = (event) => {
+      setPreciser(event.target.value);
+      setPreciserError(""); // Clear the error when the input changes
+    };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let isValid = true;
+
+        if (reference.trim() === "") {
+          setReferenceError("Référence is required");
+          isValid = false;
+        }
+
+        if (objet.trim() === "") {
+          setObjetError("Objet de la réclamation is required");
+          isValid = false;
+        }
+
+        if (objet === "Autres" && autreObjet.trim() === "") {
+          setAutreObjetError("Précisez l'objet is required when Autres is selected");
+          isValid = false;
+        }
+
+        if (preciser.trim() === "") {
+          setPreciserError("Préciser is required");
+          isValid = false;
+        }
+
+        if (!isValid) {
+          return; // Don't proceed if validation fails
+        }
 
     // Retrieve the user's ID from localStorage
     const userId = localStorage.getItem('id');
@@ -62,7 +107,9 @@ export default function ReclamationClient() {
           setObjet("");
           setAutreObjet("");
           setPreciser("");
+          setSuccessMessage("New Reclamation has been saved");
     } catch (error) {
+    setErrorMessage("An unexpected error occurred");
       // Handle error, e.g., show error message
       console.error("Error submitting reclamation:", error);
     }
@@ -70,6 +117,22 @@ export default function ReclamationClient() {
 
   return (
     <div className="reclamation">
+    {successMessage && (
+                <div className="success-message">
+                  {successMessage}
+                  <span className="close-icon" onClick={closeSuccessMessage}>
+                    &#x2715;
+                  </span>
+                </div>
+              )}
+              {errorMessage && (
+                <div className="error-message">
+                  {errorMessage}
+                  <span className="close-icon" onClick={clearErrorMessage}>
+                    &#x2715;
+                  </span>
+                </div>
+              )}
       <div className="home">
         <h1 className="">Créer une réclamation</h1>
       </div>
@@ -85,6 +148,7 @@ export default function ReclamationClient() {
                 value={reference}
                 onChange={referenceChangeHandler}
               />
+               {referenceError && <div className="error">{referenceError}</div>}
               <br/>
               <label className='form-label'>Objet de la réclamation :</label>
               <div className="form-check">
@@ -134,7 +198,9 @@ export default function ReclamationClient() {
                     onChange={autreObjetChangeHandler}
                   />
                 )}
+                {autreObjetError && <div className="error">{autreObjetError}</div>}
               </div>
+              {objetError && <div className="error">{objetError}</div>}
               <br/>
               <div className="">
                 <label className='form-label'>Préciser :</label>
@@ -145,6 +211,7 @@ export default function ReclamationClient() {
                   value={preciser}
                   onChange={preciserChangeHandler}
                 />
+                {preciserError && <div className="error">{preciserError}</div>}
                 <br/>
                 <button type="submit" className="reclamationUpdateButton">
                   Envoyer

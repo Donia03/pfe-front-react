@@ -24,6 +24,17 @@ export default function User() {
   const[image, setImage] = useState('')
   const[imageUrl, setImageUrl] = useState('')
   const[telephone, setTelephone] = useState('')
+  const [successMessage, setSuccessMessage] = useState("");
+
+      const closeSuccessMessage = () => {
+        setSuccessMessage("");
+      };
+
+      const [errorMessage, setErrorMessage] = useState("");
+
+      const clearErrorMessage = () => {
+        setErrorMessage("");
+      };
 
    useEffect(() => {
       getUserById()
@@ -133,14 +144,33 @@ const userId = localStorage.getItem('id');
 
         // Handle the response, e.g., show success message, redirect, etc.
         console.log("User updated:", response.data);
+        setSuccessMessage(" User has been updated");
+
       } catch (error) {
         // Handle error, e.g., show error message
         console.error("Error updating user:", error);
+        setErrorMessage("An unexpected error occurred");
       }
   }
 
   return (
     <div className="user">
+    {successMessage && (
+          <div className="success-message">
+            {successMessage}
+            <span className="close-icon" onClick={closeSuccessMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+            <span className="close-icon" onClick={clearErrorMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
       <div className="userTitleContainer">
         <h1 className="userTitle">Edit User</h1>
         <Link to="/newUser">

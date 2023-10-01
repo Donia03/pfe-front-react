@@ -17,16 +17,16 @@ const { notifications,setNotifications,notifChange, addNotification, removeNotif
 const [showNotifications, setShowNotifications] = useState(false);
 const notificationsRef = useRef(null);
 
-  useEffect(() => {
-    loadUserNotifications();
+ // useEffect(() => {
+   // loadUserNotifications();
     // Set up a periodic interval to refresh notifications (e.g., every 5 minutes)
-        const intervalId = setInterval(loadUserNotifications, 5 * 60); // 5 minutes in milliseconds
+       // const intervalId = setInterval(loadUserNotifications, 5 * 60000); // 5 minutes in milliseconds
 
         // Clean up the interval when the component unmounts
-        return () => {
-          clearInterval(intervalId);
-        };
-  }, [notifChange,notifications]);
+       // return () => {
+        //  clearInterval(intervalId);
+       // };
+ // }, [notifChange,notifications]);
 
   const loadUserNotifications = async () => {
     const result = await axios.get(`http://localhost:8082/api/notifications/${userId}`, {
