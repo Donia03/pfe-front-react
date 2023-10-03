@@ -9,7 +9,7 @@ export default function DemandeClient() {
   const [titre, setTitre] = useState("");
   const [reference, setReference] = useState("");
   const [description, setDescription] = useState("");
-  const { notifChange, setNotifChange } = useNotification();
+  const { notifChange, setNotifChange,addNotification } = useNotification();
 
   const token = localStorage.getItem('token'); // Retrieve the token from local storage
   const userId = localStorage.getItem('id'); // Retrieve the token from local storage
@@ -87,6 +87,14 @@ export default function DemandeClient() {
 
       // Handle the response, e.g., show success message, redirect, etc.
       console.log("Demande created:", response.data);
+      const newNotification = {
+              id: response.data.id, // Use the appropriate field from the response
+              message: "New demande created", // Customize the message
+              link: "demandeList", // Customize the link
+            };
+
+            // Add the new notification
+            addNotification(newNotification);
       setNotifChange(true);
       console.log("notifChange set to true", notifChange);
 
