@@ -60,7 +60,7 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
       };
 
       try {
-        const response = await axios.post('http://localhost:8082/api/comment', newComment, {
+        const response = await axios.post(`http://localhost:8082/api/comment/${userId}`, newComment, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

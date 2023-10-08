@@ -102,7 +102,7 @@ export default function DemandeClient() {
       setTitre("");
       setReference("");
       setDescription("");
-      setSuccessMessage("New Profil has been saved");
+      setSuccessMessage("New Demande has been saved");
     } catch (error) {
       // Handle error, e.g., show error message
       console.error("Error creating demande:", error);

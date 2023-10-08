@@ -13,27 +13,23 @@ const token = localStorage.getItem('token');
 const userId = localStorage.getItem('id');
 const history = useHistory();
 const { authenticated, setAuthenticated } = useContext(AuthContext);
-const { notifications,setNotifications,notifChange, addNotification, removeNotification } = useNotification();
 const [showNotifications, setShowNotifications] = useState(false);
 const notificationsRef = useRef(null);
+    const [notifications, setNotifications] = useState([]);
 
-  useEffect(() => {
-    loadUserNotifications();
+    useEffect(() => {
+        const eventSource = new EventSource(`http://localhost:8082/api/notifications/${userId}`);
 
-  console.log("notifications:", notifications);
-    console.log("notifChange:", notifChange);
-    loadUserNotifications();
-  }, [notifChange, notifications]);
+        eventSource.addEventListener("notification", (event) => {
+            // Handle incoming messages here
+            const newNotifications = JSON.parse(event.data);
+            setNotifications(newNotifications);
+        });
 
-  const loadUserNotifications = async () => {
-    const result = await axios.get(`http://localhost:8082/api/notifications/${userId}`, {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      }
-    });
-    setNotifications(result.data);
-    console.log("Notifications",notifications)
-  }
+        return () => {
+            eventSource.close(); // Close the SSE connection when the component unmounts
+        };
+    }, []);
 useEffect(() => {
     getUserById()
   },[]);
@@ -102,8 +98,11 @@ const getUserImage = async () => {
           }, []);
 
           const handleNotificationClick = (notification) => {
-              // Redirect the user to the notification's link
-              history.replace(notification.link);
+              // Create a new URL using the notification.link
+                const newUrl = new URL(notification.link, window.location.origin);
+
+                // Replace the entire URL
+                window.location.replace(newUrl.toString());
 
               // Close the notifications dropdown
               setShowNotifications(false);
