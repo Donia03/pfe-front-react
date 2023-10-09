@@ -70,6 +70,10 @@ export default function DemandeClient() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validateInputs()) {
+          return; // Don't proceed if validation fails
+        }
+
     const newDemande = {
       titre: titre,
       reference: reference,

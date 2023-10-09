@@ -19,6 +19,7 @@ export default function ClientList() {
   const [suiviText, setSuiviText] = useState("");
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
+  const role = localStorage.getItem('role');
 
   useEffect( () => {
     loadUsers();
@@ -152,10 +153,14 @@ export default function ClientList() {
     <div className="userList">
       <div className="titreClient">
       <h1 className="titre">Liste Des Clients</h1>
-     <br/>
-       <Link to="/newClient">
-       <button className="clientButton"> <PersonAdd></PersonAdd> Ajouter Client </button> 
-       </Link>
+      <br/>
+      {role === "Admin" && (
+
+               <Link to="/newClient">
+               <button className="clientButton"> <PersonAdd></PersonAdd> Ajouter Client </button>
+               </Link>
+      )}
+
        </div>
        <br/>
       <DataGrid
