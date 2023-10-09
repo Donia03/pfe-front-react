@@ -1,51 +1,71 @@
 export const userData = [
+
     {
-      name: "Jan",
-      "Active User": 4000,
+
+       "Client": 30,
+       "Reclamation": 50, // Add reclamation data
+       "Demande": 6,
+       "name": "Feb"
     },
     {
-      name: "Feb",
-      "Active User": 3000,
-    },
-    {
-      name: "Mar",
-      "Active User": 5000,
+      "name": "Mar",
+       "Client": 10,
+            "Reclamation": 60, // Add reclamation data
+            "Demande": 18,
     },
     {
       name: "Apr",
-      "Active User": 4000,
+       "Client": 40,
+            "Reclamation": 10, // Add reclamation data
+            "Demande": 5,
     },
     {
       name: "May",
-      "Active User": 3000,
+      "Client": 12,
+                  "Reclamation": 150, // Add reclamation data
+                  "Demande": 50,
     },
     {
       name: "Jun",
-      "Active User": 2000,
+       "Client": 12,
+            "Reclamation": 20, // Add reclamation data
+            "Demande": 15,
     },
     {
       name: "Jul",
-      "Active User": 4000,
+       "Client": 50,
+            "Reclamation": 2, // Add reclamation data
+            "Demande": 55,
     },
     {
       name: "Agu",
-      "Active User": 3000,
+       "Client": 93,
+            "Reclamation": 6, // Add reclamation data
+            "Demande": 21,
     },
     {
       name: "Sep",
-      "Active User": 4000,
+       "Client": 15,
+            "Reclamation": 60, // Add reclamation data
+            "Demande": 56,
     },
     {
       name: "Oct",
-      "Active User": 1000,
+       "Client": 100,
+            "Reclamation": 10, // Add reclamation data
+            "Demande": 50,
     },
     {
       name: "Nov",
-      "Active User": 4000,
+       "Client": 60,
+            "Reclamation": 80, // Add reclamation data
+            "Demande": 53,
     },
     {
       name: "Dec",
-      "Active User": 3000,
+       "Client": 45,
+            "Reclamation": 1, // Add reclamation data
+            "Demande": 25,
     },
   ];
 
@@ -53,10 +73,16 @@ export const userData = [
     {
       name: "Jan",
       "Sales": 4000,
+      reclamation: 10, // Add reclamation data
+          demande: 5,
     },
     {
       name: "Feb",
       "Sales": 3000,
+      reclamation: 10, // Add reclamation data
+          demande: 5,
+          reclamation: 10, // Add reclamation data
+              demande: 5,
     },
     {
       name: "Mar",

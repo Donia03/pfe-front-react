@@ -31,7 +31,17 @@ const notificationsRef = useRef(null);
         };
     }, []);
 useEffect(() => {
-    getUserById()
+    const eventSource = new EventSource(`http://localhost:8082/api/userRealTimeChange/${userId}`);
+
+    eventSource.addEventListener("user", (event) => {
+        // Handle incoming messages here
+        const userData = JSON.parse(event.data);
+        setImage(userData.imagePath);
+    });
+
+    return () => {
+        eventSource.close(); // Close the SSE connection when the component unmounts
+    };
   },[]);
   useEffect(() => {
           if (image) {
@@ -39,16 +49,7 @@ useEffect(() => {
           }
         }, [image]);
 
-        const getUserById = async () => {
-            const result = await axios.get("http://localhost:8082/api/user/"+userId,
-            {
-                  headers: {
-                   "Authorization": `Bearer ${token}`,
-                  }
-            });
-            const data = result.data
-            setImage(data.imagePath)
-          }
+
 
 const getUserImage = async () => {
         const result = await axios.get("http://localhost:8082/api/images/" + image, {
