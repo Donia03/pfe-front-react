@@ -8,6 +8,7 @@
 .widgetLgTitle {
   font-size: 22px;
   font-weight: 600;
+  margin-bottom: 35px;
 }
 
 .widgetLgTable{
@@ -56,4 +57,7 @@
     background-color: #ebf1fe;
     color: #2a7ade;
 
+}
+.center{
+ text-align:center !important;
 }

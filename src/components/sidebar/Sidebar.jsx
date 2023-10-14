@@ -132,21 +132,16 @@ export default function Sidebar() {
                           Import
                            </li>
                 </Link>
+                 <Link to="/email" className="link">
+                                  <li className="sidebarListItem">
+                                    <MailOutline className="sidebarIcon" />
+                                    Mail
+                                  </li>
+                                </Link>
                               
               </ul>
             </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Notifications</h3>
-              <ul className="sidebarList">
-                <Link to="/email" className="link">
-                  <li className="sidebarListItem">
-                    <MailOutline className="sidebarIcon" />
-                    Mail
-                  </li>
-                </Link>
-              
-              </ul>
-            </div>
+
           
           </>
         )}

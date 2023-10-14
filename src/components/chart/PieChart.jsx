@@ -20,7 +20,8 @@ const PieChartComponent = () => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF8080'];
 
   return (
-    <div>
+  <div className="widgetSm">
+        <span className="widgetSmTitle">les 5 produits les mieux vendu</span>
       <PieChart width={400} height={400}>
         <Pie
           data={data}

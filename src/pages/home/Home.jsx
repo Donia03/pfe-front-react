@@ -50,9 +50,8 @@ const getStats = async () => {
         prospectKey="Prospect"
         commandeKey="Commande"
       />
-      <PieChart/>
       <div className="homeWidgets">
-        <WidgetSm/>
+        <PieChart/>
         <WidgetLg/>
       </div>
     </div>
