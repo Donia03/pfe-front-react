@@ -32,3 +32,29 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.error {
+  color: red; /* Set the text color to red */
+  font-size: 14px; /* Set the font size */
+  margin-top: 4px; /* Add some top margin for spacing */
+}
+.success-message {
+  background-color: lightgreen;
+  padding: 10px;
+  border: 1px solid green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+.error-message {
+  background-color: lightcoral;
+  padding: 10px;
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

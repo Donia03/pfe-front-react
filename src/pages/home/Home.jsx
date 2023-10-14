@@ -1,4 +1,5 @@
 import Chart from "../../components/chart/Chart";
+import PieChart from "../../components/chart/PieChart";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
 import { userData } from "../../dummyData";
@@ -47,7 +48,9 @@ const getStats = async () => {
         reclamationKey="Reclamation"
         demandeKey="Demande"
         prospectKey="Prospect"
+        commandeKey="Commande"
       />
+      <PieChart/>
       <div className="homeWidgets">
         <WidgetSm/>
         <WidgetLg/>

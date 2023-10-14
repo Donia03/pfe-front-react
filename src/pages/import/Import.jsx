@@ -7,6 +7,18 @@ const Import = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
 
+  const [successMessage, setSuccessMessage] = useState("");
+
+    const closeSuccessMessage = () => {
+      setSuccessMessage("");
+    };
+
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const clearErrorMessage = () => {
+      setErrorMessage("");
+    };
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -30,8 +42,11 @@ const Import = () => {
       });
 
       setResponse(response.data);
+      setFile(null);
+      setSuccessMessage("New file has been saved");
     } catch (error) {
       console.error('Error:', error);
+       setErrorMessage("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -39,6 +54,22 @@ const Import = () => {
 
   return (
     <div className="user">
+     {successMessage && (
+          <div className="success-message">
+            {successMessage}
+            <span className="close-icon" onClick={closeSuccessMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+            <span className="close-icon" onClick={clearErrorMessage}>
+              &#x2715;
+            </span>
+          </div>
+        )}
           <div className="userTitleContainer">
             <h1 className="userTitle">Import Data</h1>
           </div>
@@ -51,7 +82,6 @@ const Import = () => {
                     Save
                   </button>
                   {loading && <div className="loading">Loading...</div>}
-                  {response && <div>Response: {JSON.stringify(response)}</div>}
                 </div>
 
           </div>
