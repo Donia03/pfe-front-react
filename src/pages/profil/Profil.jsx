@@ -88,17 +88,6 @@ export default function Profil() {
         setNomError("");
       }
 
-      if (password.trim() === "") {
-        setPasswordError("Password is required");
-        isValid = false;
-      }else if (password.trim().length < 6) {
-             setPasswordError("Password should be at least 6 characters");
-             isValid = false;
-           }
-       else {
-        setPasswordError("");
-      }
-
       if (cin.trim() === "") {
         setCinError("Cin is required");
         isValid = false;
@@ -112,19 +101,6 @@ export default function Profil() {
       } else {
         setTelephoneError("");
       }
-      if (oldPassword.trim() === "") {
-              setOldPasswordError("Old password is required");
-              isValid = false;
-            } else {
-              setOldPasswordError("");
-            }
-      if (newPassword.trim() === "") {
-                    setNewPasswordError("New password is required");
-                    isValid = false;
-                  } else {
-                    setNewPasswordError("");
-                  }
-
       return isValid;
     };
 
