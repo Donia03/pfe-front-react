@@ -35,6 +35,8 @@ export default function Profil() {
     const [telephoneError, setTelephoneError] = useState("");
     const [roleError, setRoleError] = useState("");
     const [imageError, setImageError] = useState("");
+    const [oldPasswordError, setOldPasswordError] = useState("");
+    const [newPasswordError, setNewPasswordError] = useState("");
 
     const [successMessage, setSuccessMessage] = useState("");
 
@@ -110,9 +112,40 @@ export default function Profil() {
       } else {
         setTelephoneError("");
       }
+      if (oldPassword.trim() === "") {
+              setOldPasswordError("Old password is required");
+              isValid = false;
+            } else {
+              setOldPasswordError("");
+            }
+      if (newPassword.trim() === "") {
+                    setNewPasswordError("New password is required");
+                    isValid = false;
+                  } else {
+                    setNewPasswordError("");
+                  }
 
       return isValid;
     };
+
+    const validatePasswordInputs = () => {
+          let isValid = true;
+
+          if (oldPassword.trim() === "") {
+                  setOldPasswordError("Old password is required");
+                  isValid = false;
+                } else {
+                  setOldPasswordError("");
+                }
+          if (newPassword.trim() === "") {
+                        setNewPasswordError("New password is required");
+                        isValid = false;
+                      } else {
+                        setNewPasswordError("");
+                      }
+
+          return isValid;
+        };
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem('id');
 
@@ -195,7 +228,9 @@ export default function Profil() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!validateInputs()) {
+                      return; // Don't proceed if validation fails
+                    }
 
     const formData = new FormData();
     formData.append("nom", nom);
@@ -236,6 +271,9 @@ export default function Profil() {
   };
   const handleChangePassword = async (e) => {
     e.preventDefault();
+    if (!validatePasswordInputs()) {
+                          return; // Don't proceed if validation fails
+                        }
 
     // Create an object to send to the API
     const passwordData = {
@@ -258,9 +296,16 @@ export default function Profil() {
       console.log("Password changed:", response.data);
       setOldPassword('');
       setNewPassword('');
+      setSuccessMessage("Password has been changed")
     } catch (error) {
-      // Handle error, e.g., show error message
-      console.error("Error changing password:", error);
+     const errorMessage = error.response.data.msg;
+               if (errorMessage.includes("Incorect Password")) {
+                 // Handle email duplication
+                 setOldPasswordError(errorMessage);
+               } else {
+                 // Handle other errors
+                 setErrorMessage("An unexpected error occurred");
+    }
     }
   };
 
@@ -422,6 +467,7 @@ export default function Profil() {
               value={oldPassword}
               onChange={oldPasswordChangeHandler}
             />
+            {oldPasswordError && <div className="error">{oldPasswordError}</div>}
           </div>
           <div className="userUpdateItem">
             <label>Nouveau mot de passe</label>
@@ -432,6 +478,7 @@ export default function Profil() {
               value={newPassword}
               onChange={newPasswordChangeHandler}
             />
+            {newPasswordError && <div className="error">{newPasswordError}</div>}
           </div>
           <button type="submit" className="userUpdateButton">
             Enregistrer

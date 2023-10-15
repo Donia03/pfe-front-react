@@ -11,7 +11,7 @@ import { useState } from "react";
 import DeleteConfirmation from "../../userList/DeleteConfirmation";
 export default function ClientList() {
   const [data, setData] = useState([]);
-  const  userType = "Employe";
+  const  userType = "Employee";
   const token = localStorage.getItem('token')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);

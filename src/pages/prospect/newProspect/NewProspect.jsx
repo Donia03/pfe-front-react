@@ -78,6 +78,9 @@ export default function NewProspect() {
         if (cin.trim() === "") {
           setCinError("Cin is required");
           isValid = false;
+          }else if (!/^\d{8}$/.test(cin)) {
+                                      setCinError("Telephone must have 8 numeric characters");
+                                      isValid = false;
         } else {
           setCinError("");
         }
@@ -85,6 +88,9 @@ export default function NewProspect() {
         if (telephone.trim() === "") {
           setTelephoneError("Telephone is required");
           isValid = false;
+           }else if (!/^\d{8}$/.test(telephone)) {
+                          setTelephoneError("Telephone must have 8 numeric characters");
+                          isValid = false;
         } else {
           setTelephoneError("");
         }
@@ -171,9 +177,21 @@ const cinChangeHandler = (event) => {
                     }
                     setSuccessMessage("New Prospect has been saved");
           } catch (error) {
-              // Handle error, e.g., show error message
-              console.error("Error creating user:", error);
-              setErrorMessage("An unexpected error occurred");
+              if (error.response && error.response.status === 400 && error.response.data) {
+                         // Handle duplication error (status code 400)
+                         const errorMessage = error.response.data.msg;
+                         if (errorMessage.includes("Email duplication")) {
+                           // Handle email duplication
+                           setEmailError(errorMessage);
+                         } else if (errorMessage.includes("Cin duplication")) {
+                           // Handle Cin duplication
+                           setCinError(errorMessage);
+                         } else {
+                           // Handle other errors
+                           setErrorMessage("An unexpected error occurred");
+                           console.error("Error creating user:", error);
+                         }
+                     }
           }
       };
   return (
