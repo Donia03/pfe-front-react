@@ -19,7 +19,7 @@ export default function ClientList() {
   const token = localStorage.getItem('token')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
-
+  const role = localStorage.getItem('role');
   useEffect( () => {
     loadUsers(); 
   }, [])
@@ -88,73 +88,107 @@ export default function ClientList() {
       setShowSuiviPopup(false);
       setSuiviText("");
     };
-  const columns = [
-    {
-      field: "nom",
-      headerName: "Nom",
-      width: 140,
-    },
-    { field: "prenom", headerName: "Prenom", width: 140 },
-    {
-      field: "email",
-      headerName: "Email",
-      width: 230,
-    },
-      { field: "cin", headerName: "Cin", width: 140 },
-
-      { field: "telephone", headerName: "Numéro de Telephone", width: 200 },
-      {
-        field: "suivi",
-        headerName: "Fiche de suivie",
-        width: 190,
-        renderCell: (params) => {
-          return (
-            <>
-           
-             
-              <i className="material-icons"  onClick={() => handleSuiviClick(params.row.id,params.row.suivi)}>event</i>  
-              
-            </>
-          );
-        },
-      },
-
+      const columns = [
         {
-      field: "action",
-      headerName: "Action",
-      width: 120,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/prospect/" + params.row.id}>
-              <Edit className="prospectListEdit"/>
-            </Link>
-            <DeleteOutline
-              className="prospectListDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        );
-      },
-    },
-      
+          field: "nom",
+          headerName: "Nom",
+          width: 140,
+        },
+        { field: "prenom", headerName: "Prenom", width: 140 },
+        {
+          field: "email",
+          headerName: "Email",
+          width: 230,
+        },
+          { field: "cin", headerName: "Cin", width: 140 },
 
-  ];
+          { field: "telephone", headerName: "Numéro de Telephone", width: 200 },
+          {
+            field: "suivi",
+            headerName: "Fiche de suivie",
+            width: 190,
+            renderCell: (params) => {
+              return (
+                <>
+
+
+                  <i className="material-icons"  onClick={() => handleSuiviClick(params.row.id,params.row.suivi)}>event</i>
+
+                </>
+              );
+            },
+          },
+
+            {
+          field: "action",
+          headerName: "Action",
+          width: 120,
+          renderCell: (params) => {
+            return (
+              <>
+                <Link to={"/prospect/" + params.row.id}>
+                  <Edit className="prospectListEdit"/>
+                </Link>
+                <DeleteOutline
+                  className="prospectListDelete"
+                  onClick={() => handleDelete(params.row.id)}
+                />
+              </>
+            );
+          },
+        },
+
+
+      ];
+
+      const columnsForEmployee = [
+              {
+                field: "nom",
+                headerName: "Nom",
+                width: 140,
+              },
+              { field: "prenom", headerName: "Prenom", width: 140 },
+              {
+                field: "email",
+                headerName: "Email",
+                width: 230,
+              },
+                { field: "cin", headerName: "Cin", width: 140 },
+
+                { field: "telephone", headerName: "Numéro de Telephone", width: 200 },
+                {
+                  field: "suivi",
+                  headerName: "Fiche de suivie",
+                  width: 190,
+                  renderCell: (params) => {
+                    return (
+                      <>
+
+
+                        <i className="material-icons"  onClick={() => handleSuiviClick(params.row.id,params.row.suivi)}>event</i>
+
+                      </>
+                    );
+                  },
+                },
+            ];
 
   return (
     <div className="userList">
       <div className="titreProspect">
       <h1 className="titre">Liste Des Prospect</h1>
      <br/>
+     {role === "Admin" && (
       <Link to="newProspect">
      <button className="employeButton"> <PersonAdd></PersonAdd> Ajouter Prospect </button> 
      </Link>
+     )}
      </div>
       <br></br>
       <DataGrid
         rows={data}
         disableSelectionOnClick
-        columns={columns}  
+        columns={role === "Employee"? columnsForEmployee:columns}
         pageSize={8}
         /*checkboxSelection*/
       />

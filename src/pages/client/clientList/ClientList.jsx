@@ -134,18 +134,24 @@ export default function ClientList() {
       renderCell: (params) => {
         return (
           <>
+           {role === "Admin" && (
             <Link to={"/client/" + params.row.id}>
               <Edit className="clientListEdit"></Edit>
             </Link>
+            )}
             <DeleteOutline
+
               className="clientListDelete"
               onClick={() => handleDelete(params.row.id)}
+
             />
+
           </>
         );
       },
+
     },
-     
+
   
   ];
 
