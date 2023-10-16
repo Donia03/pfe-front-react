@@ -34,7 +34,7 @@ export default function UserList() {
       setShowDeleteConfirmation(true);
     };
     const confirmDelete = () => {
-        axios.delete("http://localhost:8082/api/user/" + userToDelete)
+        axios.post("http://localhost:8082/api/desactiver/" + userToDelete)
           .then(() => {
             console.log("User deleted:", userToDelete);
             setShowDeleteConfirmation(false);

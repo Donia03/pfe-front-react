@@ -15,15 +15,15 @@ const DeleteConfirmation = ({
     <div className="deleteConfirmationPopup">
       <div className="deleteConfirmationPopupContent">
         <p className="deleteConfirmationSentence">
-        Êtes-vous sûr de vouloir supprimer 
+        Êtes-vous sûr de vouloir désactiver
           <span className="userToDelete">
-            {userToDeleteData ? `${userToDeleteData.prenom} ${userToDeleteData.nom}` : " "}
+            {userToDeleteData ? ` ${userToDeleteData.prenom} ${userToDeleteData.nom}` : " "}
           </span>
           ?
         </p>
         <div className="deleteConfirmationButtons">
           <button className="btn btn-primary" onClick={confirmDelete}>
-            Supprimer
+            Désactiver
           </button>
           <button className="btn btn-secondary" onClick={handleCancelDelete}>
             Annuler
