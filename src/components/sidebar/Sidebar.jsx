@@ -58,11 +58,6 @@ export default function Sidebar() {
                     Home
                   </li>
                 </Link>
-                <li className="sidebarListItem">
-                  <Timeline className="sidebarIcon" />
-                  Analyse
-                </li>
-                
               </ul>
             </div>
             <div className="sidebarMenu">
@@ -80,19 +75,25 @@ export default function Sidebar() {
                                   <Timeline className="sidebarIcon" />
                                   Historiques
                                 </li>
+
                               </Link>
+                              {role === "Admin" && (
                 <Link to="/users" className="link">
+
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
                     Users
                   </li>
                 </Link>
+                )}
+                {role === "Admin" && (
                 <Link to="/employes" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
                     Employes
                   </li>
                 </Link>
+                )}
                 <Link to="/clients" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
