@@ -10,7 +10,7 @@ import DeleteConfirmation from "./DeleteConfirmation"; // Correct the import pat
 export default function UserList() {
   const [data, setData] = useState([]);
   const [showSuiviPopup, setShowSuiviPopup] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState("null");
   const [suiviText, setSuiviText] = useState("");
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
@@ -26,7 +26,11 @@ export default function UserList() {
         "Authorization": `Bearer ${token}`,
       }
     });
-    setData(result.data);
+    const users = result.data.map(user => ({
+        ...user,
+        suivi: user.suivi || "",
+      }));
+    setData(users);
   }
 
    const handleDelete = (id) => {
@@ -54,20 +58,22 @@ export default function UserList() {
 
   const handleSuiviClick = (id, suivi) => {
     setSelectedUserId(id);
-    setSuiviText(suivi); // Set the initial suivi text
+
+    const sanitizedSuivi = decodeURIComponent(suivi);
+
+    setSuiviText(sanitizedSuivi); // Set the initial suivi text
     setShowSuiviPopup(true);
   };
 
 
-  const handleSaveSuivi = () => {
-    axios.post(`http://localhost:8082/api/userSuivi/${selectedUserId}`,
-
-       suiviText,
+  const handleSaveSuivi = async () => {
+    axios.post(`http://localhost:8082/api/userSuivi/${selectedUserId}`, { suiviText }, // Send suiviText as an object
     {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      }
-    })
+       headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+       }
+     })
     .then(response => {
       console.log("Suivi text saved:", response.data);
       setShowSuiviPopup(false);
