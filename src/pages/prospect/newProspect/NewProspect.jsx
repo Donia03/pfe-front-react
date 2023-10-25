@@ -1,7 +1,17 @@
 import "./NewProspect.css";
 import {useEffect, useState,useRef} from "react";
 import axios from "axios"
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LockIcon from '@material-ui/icons/Lock';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import {
+  CalendarToday,
+  LocationSearching,
+  MailOutline,
+  PermIdentity,
+  PhoneAndroid,
+  Publish,
+} from "@material-ui/icons";
 export default function NewProspect() {
   const [email, setEmail] = useState("")
   const [prenom, setPrenom] = useState("")
@@ -213,9 +223,10 @@ const cinChangeHandler = (event) => {
           </div>
         )}
       <h1 className="newProspectTitle">Nouveau Prospect</h1>
+      <br/>
       <form onSubmit={handleSubmit} className="newProspectForm">
         <div className="newUserItem">
-          <label>Nom</label>
+          <label> <PermIdentity  />Nom :</label>
           <input
               type="text"
               placeholder="Nom..."
@@ -226,7 +237,7 @@ const cinChangeHandler = (event) => {
           {nomError && <div className="error">{nomError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Prenom</label>
+           <label> <PermIdentity />Prenom :</label>
           <input
               type="text"
               placeholder="Prenom..."
@@ -237,7 +248,7 @@ const cinChangeHandler = (event) => {
           {prenomError && <div className="error">{prenomError}</div>}
         </div>
          <div className="newUserItem">
-                  <label>Cin</label>
+                 <label>  <CreditCardIcon />Cin :</label>
                   <input
                       type="text"
                       placeholder="Cin"
@@ -248,7 +259,7 @@ const cinChangeHandler = (event) => {
                   {cinError && <div className="error">{cinError}</div>}
                   </div>
                    <div className="newUserItem">
-                            <label>Telephone</label>
+                             <label> <PhoneAndroid  />Numero de télephone :</label>
                             <input
                                 type="text"
                                 placeholder="Telephone"
@@ -259,7 +270,7 @@ const cinChangeHandler = (event) => {
                             {telephoneError && <div className="error">{telephoneError}</div>}
                             </div>
         <div className="newUserItem">
-          <label>Email</label>
+          <label><MailOutline />Email :</label>
           <input
               type="email"
               placeholder="john@gmail.com"
@@ -270,10 +281,10 @@ const cinChangeHandler = (event) => {
           {emailError && <div className="error">{emailError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Password</label>
+         <label><LockIcon />Mot de passe :</label>
           <input
               type="password"
-              placeholder="password"
+              placeholder="********"
               name="password"
               onChange={passwordChangeHandler}
               value={password}
@@ -282,7 +293,7 @@ const cinChangeHandler = (event) => {
           </div>
 
           <div className="newUserItem">
-             <label>Image</label>
+            <label><AccountCircleIcon/>Choisir photo :</label>
              <input type="file" accept="image/*" onChange={imageChangeHandler} ref={fileInputRef} />
           </div>
 

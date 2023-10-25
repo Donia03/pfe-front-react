@@ -70,18 +70,27 @@ const Import = () => {
             </span>
           </div>
         )}
-          <div className="userTitleContainer">
-            <h1 className="userTitle">Import Data</h1>
+          <div className="userList">
+          <div className="titreClient">
+            <h1 className="titre">Importer les Données</h1>
           </div>
-          <div className="passwordChange">
+            </div>
+              <br/>    <br/>    <br/>    <br/>
+          <div className="userUpdate">
 
-            <div className="import-component">
+            <div className="userUpdate">
+                   <br/>    <br/>
+                   <center>
+                   <strong>Importer un fichier Excel dans le système pour analyser les données :</strong><br/><br/>
+                   </center>
+                   <center>
 
-                  <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
-                  <button className="import-button" onClick={handleUpload} disabled={loading}>
-                    Save
+                  <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} /><br/>    <br/>    <br/>
+                  <button className="btn btn-primary" onClick={handleUpload} disabled={loading}>
+                    Importer
                   </button>
                   {loading && <div className="loading">Loading...</div>}
+                  </center>
                 </div>
 
           </div>

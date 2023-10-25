@@ -3,6 +3,7 @@ import axios from "axios";
 import "./reclamationList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
+import { Forum  } from "@material-ui/icons";
 import { Edit } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import DeleteReclamation from "./DeleteReclamation";
@@ -112,67 +113,65 @@ export default function ReclamationList() {
   const columns = [
     {
       field: "nom",
-      headerName: "Nom de client",
-      width: 180,
+      headerAlign: 'center',
+      headerName: <strong>Client</strong>,
+      width: 150,
     },
     {
       field: "ref",
-      headerName: "Référence",
+      headerAlign: 'center',
+      headerName: <strong>Référence</strong>,
       width: 180,
     },
     {
       field: "objet",
-      headerName: "Objet de réclamation",
-      width: 180,
+      headerAlign: 'center',
+      headerName:<strong> Objet de réclamation</strong>,
+      width: 220,
     },
-    {
+  /*  {
       field: "preciser",
-      headerName: "Précision",
+      headerName:<strong> Précision</strong>,
       width: 240,
-    },
-    {
-      field: "status",
-      headerName: "Statut",
-      width: 140,
-      renderCell: (params) => {
-        let statusText = "";
-        if (params.value === 0) {
-          statusText = "En Cours";
-        } else if (params.value === 1) {
-          statusText = "Validé";
-        } else if (params.value === 2) {
-          statusText = "Refusé";
-        }
-        return (
-          <span className={getStatusClassName(params.value)}>
-            {statusText}
-          </span>
-        );
-      },
-    },
+    },*/
+
     {
       field: "traiter status",
-      headerName: "Traiter status",
-      width: 160,
+      headerAlign: 'center',
+      headerName: <strong>Traiter reclamation</strong>,
+      width: 200,
       renderCell: (params) => {
         return (
+
           <>
-            <Link to={`/detail/${params.row.id}`}>
+            <Link to={`/detail/${params.row.id}`} >
               <Edit className="ListreclaEdit" />
             </Link>
-            <button
-              className="CommentsButton"
-              onClick={() => handleToggleComments(params.row.id)}
-            >
-              Comments
-            </button>
+
           </>
+
         );
       },
     },
+     {
+          field: "commentaire",
+          headerAlign: 'center',
+          headerName: <strong>Commentaire</strong>,
+          width: 170,
+          renderCell: (params) => {
+                  return (
+                      <Forum
+                                  className="ListreclaEdit"
+                                  onClick={() => handleToggleComments(params.row.id)}
+                                />
+
+                            );
+                          },
+          },
     {
       field: "action",
-      headerName: "Action",
+      headerAlign: 'center',
+      headerName: <strong>Action</strong>,
       width: 120,
       renderCell: (params) => {
         return (
@@ -185,32 +184,57 @@ export default function ReclamationList() {
         );
       },
     },
+     {
+          field: "status",
+          headerAlign: 'center',
+          headerName: <strong>Statut</strong>,
+          width: 160,
+          renderCell: (params) => {
+            let statusText = "";
+            if (params.value === 0) {
+              statusText = "En Cours";
+            } else if (params.value === 1) {
+              statusText = "Validé";
+            } else if (params.value === 2) {
+              statusText = "Refusé";
+            }
+            return (
+              <span className={getStatusClassName(params.value)}>
+                {statusText}
+              </span>
+            );
+          },
+        },
   ];
 
   const clientColumns = [
-    {
+   /* {
       field: "nom",
       headerName: "Nom de Client",
       width: 180,
-    },
+    },*/
     {
       field: "ref",
-      headerName: "Référence",
+       headerAlign: 'center',
+      headerName: <strong>Référence</strong>,
       width: 200,
     },
     {
       field: "objet",
-      headerName: "Objet de réclamation",
+       headerAlign: 'center',
+      headerName: <strong>Objet de réclamation</strong>,
       width: 230,
     },
     {
       field: "preciser",
-      headerName: "Précision",
+       headerAlign: 'center',
+      headerName: <strong>Précision</strong>,
       width: 230,
     },
     {
       field: "status",
-      headerName: "Statut",
+       headerAlign: 'center',
+      headerName: <strong>Statut</strong>,
       width: 150,
       renderCell: (params) => {
         let statusText = "";
@@ -230,18 +254,19 @@ export default function ReclamationList() {
     },
     {
           field: "actions",
-          headerName: "Traiter status",
-          width: 160,
+           headerAlign: "center",
+          headerName: <strong>Commentaire</strong>,
+          width: 200,
           renderCell: (params) => {
             return (
               <>
 
-                <button
-                  className="CommentsButton"
+                <Forum
+                  className="ListreclaEdit"
                   onClick={() => handleToggleComments(params.row.id)}
-                >
-                  Comments
-                </button>
+
+
+                />
               </>
             );
           },
@@ -249,10 +274,10 @@ export default function ReclamationList() {
     {
       field: (
         <Link to="/reclamationClient">
-          <button className="reclatButton">Créer réclamation</button>
+          <button className="btn btn-primary">Créer réclamation</button>
         </Link>
       ),
-      width: 210,
+      width: 220,
     },
   ];
 

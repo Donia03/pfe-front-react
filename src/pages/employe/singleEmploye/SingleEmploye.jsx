@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios"
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 import {
   CalendarToday,
   LocationSearching,
@@ -12,7 +13,7 @@ import { Link, useParams} from "react-router-dom";
 import "./SingleEmploye.css";
 
 export default function SingleEmploye() {
- 
+
   const params = useParams();
   console.log(params.userId)
   useEffect(() => {
@@ -166,9 +167,10 @@ export default function SingleEmploye() {
           </div>
         )}
       <div className="userTitleContainer">
-        <h1 className="userTitle">Modifier Employe</h1>
-       
+        <h1 className="userTitle">Modifier Employé</h1>
+
       </div>
+
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">  
@@ -179,31 +181,31 @@ export default function SingleEmploye() {
             />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{nom +' '+ prenom}</span>
-              <span className="userShowUserTitle">Employe </span>
+              <span className="userShowUserTitle">Employé </span>
             </div>
           </div>
           <div className="userShowBottom">
-            <span className="userShowTitle">compte détaille</span>
+            <span className="userShowTitle"><strong>Détails compte </strong></span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{prenom}</span>
+              <span className="userShowInfoTitle"><strong>{prenom}</strong></span>
             </div>
              <div className="userShowInfo">
-                          <PermIdentity className="userShowIcon" />
-                          <span className="userShowInfoTitle">{nom}</span>
-                        </div>
-                        <div className="userShowInfo">
-                          <PermIdentity className="userShowIcon" />
-                          <span className="userShowInfoTitle">{cin}</span>
-                        </div>
-            <span className="userShowTitle">Contact </span>
+               <PermIdentity className="userShowIcon" />
+               <span className="userShowInfoTitle"><strong>{nom}</strong></span>
+                </div>
+                <div className="userShowInfo">
+                 <CreditCardIcon className="userShowIcon" />
+                 <span className="userShowInfoTitle"><strong>{cin}</strong></span>
+               </div>
+            <span className="userShowTitle"><strong>Contact </strong> </span>
             <div className="userShowInfo">
               <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">{telephone}</span>
+              <span className="userShowInfoTitle"><strong>{telephone}</strong></span>
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">{email}</span>
+              <span className="userShowInfoTitle"><strong>{email}</strong></span>
             </div>
 
           </div>
@@ -213,7 +215,7 @@ export default function SingleEmploye() {
           <form onSubmit={handleSubmit} className="userUpdateForm">
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
-                <label>Nom</label>
+                <label> <strong>Nom :</strong></label>
                 <input
                   name={"nom"}
                   type="text"
@@ -224,7 +226,7 @@ export default function SingleEmploye() {
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Prénom</label>
+                <label><strong>Prénom : </strong></label>
                 <input
                   type="text"
                   placeholder=""
@@ -235,7 +237,7 @@ export default function SingleEmploye() {
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Email</label>
+                <label><strong>Email : </strong></label>
                 <input
                   type="text"
                   placeholder=""
@@ -246,27 +248,27 @@ export default function SingleEmploye() {
                 />
               </div>
                <div className="userUpdateItem">
-                              <label>Cin</label>
-                              <input
-                                type="text"
-                                placeholder=""
-                                className="userUpdateInput"
-                                name={"cin"}
-                                value={cin}
-                                onChange={cinChangeHandler}
-                              />
-                            </div>
+                <label><strong>Cin : </strong></label>
+                <input
+                type="text"
+                  placeholder=""
+                   className="userUpdateInput"
+                 name={"cin"}
+                    value={cin}
+                   onChange={cinChangeHandler}
+                        />
+                </div>
             <div className="userUpdateItem">
-                                                       <label>Telephone</label>
-                                                       <input
-                                                         type="text"
-                                                         placeholder=""
-                                                         className="userUpdateInput"
-                                                         name={"telephone"}
-                                                         value={telephone}
-                                                         onChange={telephoneChangeHandler}
-                                                       />
-                                                     </div>
+                   <label><strong>Telephone : </strong></label>
+                   <input
+                      type="text"
+                      placeholder=""
+                      className="userUpdateInput"
+                      name={"telephone"}
+                      value={telephone}
+                       onChange={telephoneChangeHandler}
+                              />
+                      </div>
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
@@ -280,7 +282,7 @@ export default function SingleEmploye() {
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} onChange={(e) => handleImageChange(e.target.files[0])} />
               </div>
-              <button type="submit" className="userUpdateButton">Modifier</button>
+              <button type="submit" className="userUpdateButton">Enregistrer</button>
             </div>
           </form>
         </div>

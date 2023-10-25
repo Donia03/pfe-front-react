@@ -100,22 +100,25 @@ export default function ClientList() {
 
     {
       field: "nom",
-      headerName: "Nom",
+      headerAlign: 'center',
+      headerName: <strong >Nom</strong>,
       width: 140,
     },
-    { field: "prenom", headerName: "Prenom", width: 140 },
+    { field: "prenom", headerAlign: 'center',  headerName:<strong >Prénom </strong>, width: 140 },
     {
       field: "email",
-      headerName: "Email",
+      headerAlign: 'center',
+      headerName: <strong >Email</strong>,
       width: 230,
     },
-      { field: "cin", headerName: "Identity", width: 140 },
+      { field: "cin",headerAlign: 'center',  headerName: <strong >Cin</strong>, width: 140 },
 
-      { field: "telephone", headerName: "Tel", width: 140 },
+      { field: "telephone",headerAlign: 'center',  headerName: <strong >Télephone</strong>, width: 200 },
    {
       field: "suivi",
-      headerName: "Fiche de suivie",
-      width: 190,
+      headerAlign: 'center',
+      headerName: <strong >Fiche de suivie</strong>,
+      width: 180,
       renderCell: (params) => {
         return (
           <>
@@ -129,7 +132,8 @@ export default function ClientList() {
     },
         {
       field: "action",
-      headerName: "Action",
+      headerAlign: 'center',
+      headerName: <strong >Action</strong>,
       width: 120,
       renderCell: (params) => {
         return (

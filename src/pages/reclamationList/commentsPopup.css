@@ -21,3 +21,17 @@
 .close-icon {
   cursor: pointer;
 }
+.custominput {
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 11px;
+  color: #333;
+  background-color: #fff;
+   margin-right: 10px;
+}
+
+.custominput::placeholder {
+  color: #999;
+}

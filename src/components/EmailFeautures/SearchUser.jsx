@@ -60,11 +60,11 @@ const SearchUser = () => {
 
   return (
     <div className="search-user">
-      <h1>Rechercher utilisateur</h1>
+      <h1><strong>Rechercher un utilisateur :</strong></h1>
       <form>
         <input
           type="text"
-          placeholder="Search by name"
+          placeholder="rechercher avec le nom ..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

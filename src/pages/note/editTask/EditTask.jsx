@@ -57,11 +57,11 @@ const EditTask = ({ modal, toggle, updateTask, taskObj }) => {
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Update Task</ModalHeader>
+      <ModalHeader toggle={toggle}><strong>Modifier tâche</strong></ModalHeader>
       <ModalBody>
         <form>
           <div className="form">
-            <label>Name :</label>
+            <label><strong>Titre de la tâche  :</strong></label>
             <input
               type="text"
               className="custom-input"
@@ -73,7 +73,7 @@ const EditTask = ({ modal, toggle, updateTask, taskObj }) => {
           </div>
 
           <div className="form">
-            <label>Description :</label>
+            <label><strong>Description :</strong></label>
             <textarea
               rows="4"
               className="custom-textarea"
@@ -85,7 +85,7 @@ const EditTask = ({ modal, toggle, updateTask, taskObj }) => {
           </div>
 
           <div className="form">
-            <label>Start Date :</label>
+            <label><strong>Date initiale  :</strong></label>
             <input
               type="datetime-local"
               className="custom-input"
@@ -96,7 +96,7 @@ const EditTask = ({ modal, toggle, updateTask, taskObj }) => {
           </div>
 
           <div className="form">
-            <label>End Date :</label>
+            <label><strong>Date finale :</strong></label>
             <input
               type="datetime-local"
               className="custom-input"
@@ -109,10 +109,10 @@ const EditTask = ({ modal, toggle, updateTask, taskObj }) => {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleUpdate}>
-          Update
+          Enregistrer
         </Button>{' '}
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          Annuler
         </Button>
       </ModalFooter>
     </Modal>

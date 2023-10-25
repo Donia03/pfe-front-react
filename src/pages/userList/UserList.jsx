@@ -87,26 +87,26 @@ export default function UserList() {
   const columns = [
     {
       field: "role",
-      headerName: "Role",
+      headerName: <strong>Role</strong>,
       width: 125,
     },
     {
       field: "nom",
-      headerName: "Nom",
-      width: 125,
+      headerName:<strong> Nom</strong>,
+      width: 140,
     },
-    { field: "prenom", headerName: "Prenom", width: 135 },
+    { field: "prenom", headerName: <strong>Prenom</strong>, width: 140 },
     {
       field: "email",
-      headerName: "Email",
-      width: 190,
+      headerName: <strong>Email</strong>,
+      width: 210,
     },
-    { field: "cin", headerName: "Identity", width: 85 },
-    { field: "telephone", headerName: "Tel", width: 85 },
+    { field: "cin", headerName: <strong>Cin</strong>, width: 120 },
+    { field: "telephone", headerName: <strong>Télephone</strong>, width:160},
     {
       field: "action",
-      headerName: "Action",
-      width: 120,
+      headerName: <strong>Actions</strong>,
+      width: 140,
       renderCell: (params) => {
         return (
           <>
@@ -123,8 +123,8 @@ export default function UserList() {
     },
     {
       field: "suivi",
-      headerName: "Suivi",
-      width: 95,
+      headerName:<strong >Suivi </strong>,
+      width: 110,
       renderCell: (params) => {
         return (
           <>
@@ -135,7 +135,7 @@ export default function UserList() {
         );
       },
     },
-    { field: <Link to="/newUser"> <button className="userAdButton">Create User</button> </Link>, width: 170, },
+   /* { field: <Link to="/newUser"> <button className="userAdButton">Create User</button> </Link>, width: 170, },*/
   ];
 
   return (
@@ -145,7 +145,7 @@ export default function UserList() {
         disableSelectionOnClick
         columns={columns} 
         pageSize={8}
-        checkboxSelection
+       /* checkboxSelection*/
       />  
 
       {showSuiviPopup && (

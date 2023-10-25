@@ -23,11 +23,11 @@
 
 .task-container{
   height: 600px;
-  width:110%;
+  width:106%;
   display: flex;
   flex-wrap: wrap;
  /* background-color: #F6F7F8;*/
-  padding : 40px 40px;
+  padding : 60px 60px;
   text-align: left;
   justify-content: space-evenly;
 }

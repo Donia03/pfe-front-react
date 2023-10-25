@@ -46,16 +46,18 @@ export default function HistoriqueList() {
         
         {
               field: "nom",
-              headerName: "Nom",
+                headerAlign: 'center',
+              headerName:  <strong>Nom</strong>,
               width: 180,
         },
-        { field: "prenom", headerName: "Prenom", width: 180 },
+        { field: "prenom",  headerAlign: 'center', headerName: <strong>Prenom</strong>, width: 180 },
         {
           field: "action",
-          headerName: "Action",
+            headerAlign: 'center',
+          headerName: <strong>Action</strong>,
           width: 450,
         },
-        { field: "date", headerName: "Date", width: 190 },
+        { field: "date",   headerAlign: 'center',headerName:  <strong>Date</strong>, width: 190 },
 
 
 

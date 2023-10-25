@@ -3,15 +3,19 @@ import axios from "axios";
 import "./demandeList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
+import { Forum  } from "@material-ui/icons";
 import { Edit } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import DeleteDemande from "./DeleteDemande";
+import CommentsPopup from "../../reclamationList/CommentsPopup";
 
 export default function DemandeList() {
   const [data, setData] = useState([]);
   const [clientData, setClientData] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [reclamationToDelete, setReclamationToDelete] = useState(null);
+   const [showCommentsPopup, setShowCommentsPopup] = useState(false);
+    const [commentsPopupData, setCommentsPopupData] = useState(null);
   const userType = "Client";
 
   useEffect(() => {
@@ -42,18 +46,30 @@ export default function DemandeList() {
     });
     setData(result.data);
   }
+  const handleToggleComments = (rowId) => {
+    openCommentsPopup(rowId);
+  };
 
-  /*const handleDelete = (id) => {
-    axios.delete("http://localhost:8082/api/demande/" + id, {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      }
-    }).then(r => {
-      console.log("element deleted");
-      setData(data.filter(item => item.id !== id));
-    });
-  };*/
+  const openCommentsPopup = async (rowId) => {
+    try {
+      const response = await axios.get(`http://localhost:8082/api/demande/${rowId}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
 
+      const rowData = response.data;
+      console.log('demande',rowData)
+      setCommentsPopupData(rowData);
+      setShowCommentsPopup(true);
+    } catch (error) {
+      console.error('Error fetching demande data:', error);
+    }
+  };
+
+  const handleCloseCommentsPopup = () => {
+    setShowCommentsPopup(false);
+  };
   const handleDelete = (id) => {
     setReclamationToDelete(id);
     setShowDeleteConfirmation(true);
@@ -91,23 +107,75 @@ export default function DemandeList() {
   const columns = [
     {
       field: "nom",
-      headerName: "Nom de Client",
-      width: 180,
+       headerAlign: "center",
+      headerName: <strong>Client</strong>,
+      width: 160,
     },
     {
       field: "titre",
-      headerName: "Titre",
-      width: 180,
+       headerAlign: "center",
+      headerName: <strong>Titre</strong>,
+      width: 210,
     },
-    { field: "reference", headerName: "Reference", width: 140 },
-    {
+    { field: "reference",
+     headerAlign: 'center',
+    headerName: <strong>Réference</strong>, width: 180 },
+   /* {
       field: "description",
       headerName: "Description",
       width: 240,
-    },
+    },*/
+     {
+          field: " Statu",
+          headerName: <strong>Traiter demande</strong>,
+           headerAlign: 'center',
+          width: 200,
+          renderCell: (params) => {
+            return (
+              <>
+                <Link to={"/demande/" + params.row.id}>
+                  <Edit className="ListreclaEdit"/>
+                </Link>
+
+              </>
+            );
+          },
+        },
+           {
+                  field: "commentaire",
+                  headerAlign: 'center',
+                  headerName: <strong>Commentaire</strong>,
+                  width: 170,
+                    renderCell: (params) => {
+                      return (
+                      <Forum
+                        className="ListreclaEdit"
+                        onClick={() => handleToggleComments(params.row.id)}
+                              />
+
+                           );
+                      },
+                  },
+                     {
+                        field: "action",
+                         headerAlign: 'center',
+                        headerName: <strong>Action</strong>,
+                        width: 120,
+                        renderCell: (params) => {
+                          return (
+                            <>
+                              <DeleteOutline
+                                className="ListreclaDelet"
+                                onClick={() => handleDelete(params.row.id)}
+                              />
+                            </>
+                          );
+                        },
+                      },
     {
       field: "status",
-      headerName: "Status",
+       headerAlign: 'center',
+      headerName: <strong>Status</strong>,
       width: 160,
       renderCell: (params) => {
         let statusText = "";
@@ -125,36 +193,8 @@ export default function DemandeList() {
                 );
       },
     },
-    {
-      field: " Statu",
-      headerName: "Traiter Status",
-      width: 160,
-      renderCell: (params) => { 
-        return (
-          <>
-            <Link to={"/demande/" + params.row.id}>
-              <Edit className="ListdemandEdit"/>
-            </Link>
-         
-          </>
-        );
-      },
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 120,
-      renderCell: (params) => { 
-        return (
-          <>
-            <DeleteOutline
-              className="ListdemandDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        );
-      },
-    },
+
+
   /* {
       field: (
         <Link to="/demandeClient">
@@ -165,26 +205,29 @@ export default function DemandeList() {
     },*/
   ];
   const clientColumns = [
-    {
+   /* {
       field: "nom",
       headerName: "Nom",
       width: 180,
-    },
+    },*/
       {
         field: "titre",
-        headerName: "Titre",
+           headerAlign: 'center',
+        headerName: <strong>Titre</strong>,
         width: 200,
       },
-      { field: "reference", headerName: "Reference", width: 200 },
+      { field: "reference",  headerAlign: 'center',headerName: <strong>Reference</strong>, width: 230 },
       {
         field: "description",
-        headerName: "Description",
+         headerAlign: 'center',
+        headerName: <strong>Description</strong>,
         width: 230,
       },
       {
         field: "status",
-        headerName: "Status",  
-        width: 150,
+         headerAlign: 'center',
+        headerName: <strong>Status</strong>,
+        width: 160,
         renderCell: (params) => {
           let statusText = "";
           if (params.value === 0) {
@@ -201,7 +244,12 @@ export default function DemandeList() {
                   );
         },
       },
-
+ {
+        field: "Commentaire",
+         headerAlign: 'center',
+        headerName: <strong>Commentaire</strong>,
+        width: 200,
+      },
       {
         field: (
           <Link to="/demandeClient">
@@ -223,6 +271,7 @@ export default function DemandeList() {
         disableSelectionOnClick
         columns={role === "Client" ? clientColumns:columns}
         pageSize={8}
+          onRowClick={(params) => handleToggleComments(params.row.id)}
        /* checkboxSelection*/
       />
           {showDeleteConfirmation && (
@@ -233,6 +282,17 @@ export default function DemandeList() {
          reclamationToDeleteData={data.find(user => user.id === reclamationToDelete)} // Assuming each user has an 'id' field
        />
      )}
+       {showCommentsPopup && (
+             <CommentsPopup
+               open={showCommentsPopup}
+               onClose={() => setShowCommentsPopup(false)}
+               id={commentsPopupData ? commentsPopupData.id : null}
+               onCancel={() => {
+                 setCommentsPopupData(null);
+                 setShowCommentsPopup(false); // Close the popup and clear the data
+               }}
+                />
+                     )}
     </div>
   );
 }

@@ -58,15 +58,15 @@ const Task = ({ modal, toggle, updateTaskList }) => {
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Task</ModalHeader>
+      <ModalHeader toggle={toggle}><strong>Tâche</strong></ModalHeader>
       <ModalBody>
         <form>
           <div className="form">
-            <label>Name :</label>
+            <label><strong>Titre de la tâche  :</strong></label>
             <input
               type="text"
               className="custom-input"
-              placeholder="Task Name"
+              placeholder="Enter le titre ... "
               value={taskName}
               onChange={handleNameChange}
               name="taskName"
@@ -74,11 +74,11 @@ const Task = ({ modal, toggle, updateTaskList }) => {
           </div>
 
           <div className="form">
-            <label>Description :</label>
+            <label><strong>Description  :</strong></label>
             <textarea
               rows="4"
               className="custom-textarea"
-              placeholder="Task Description"
+              placeholder="Ecrire une description ..."
               value={description}
               onChange={handleDescriptionChange}
               name="description"
@@ -86,7 +86,7 @@ const Task = ({ modal, toggle, updateTaskList }) => {
           </div>
 
           <div className="form">
-            <label>Start Date :</label>
+            <label><strong>Date initiale :</strong></label>
             <input
               type="datetime-local"
               className="custom-input"
@@ -97,7 +97,7 @@ const Task = ({ modal, toggle, updateTaskList }) => {
           </div>
 
           <div className="form">
-            <label>End Date :</label>
+            <label><strong>Date finale :</strong></label>
             <input
               type="datetime-local"
               className="custom-input"
@@ -110,10 +110,10 @@ const Task = ({ modal, toggle, updateTaskList }) => {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleSave}>
-          Save
+          Enregistrer
         </Button>{' '}
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          Annuler
         </Button>
       </ModalFooter>
     </Modal>

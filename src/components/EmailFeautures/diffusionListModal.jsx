@@ -29,7 +29,7 @@ const DiffusionListModal = ({ user, diffusionLists, onClose }) => {
 
   return (
     <div className="modalDiffusionList">
-      <h2>Select a Diffusion List</h2>
+      <h2>Sélectionnez une liste de diffusion</h2>
       <ul>
         {diffusionLists.map((list) => (
           <li key={list.id}>
@@ -38,7 +38,7 @@ const DiffusionListModal = ({ user, diffusionLists, onClose }) => {
           </li>
         ))}
       </ul>
-      <button onClick={onClose}>Close</button>
+      <button onClick={onClose}>Annuler</button>
     </div>
   );
 };

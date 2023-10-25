@@ -3,7 +3,7 @@ import axios from "axios";
 import { Close } from "@material-ui/icons";
 import "./commentsPopup.css"; // Add CSS for styling
 import Comment from './Comment'; // Import the Comment component
-
+import { Edit } from "@material-ui/icons";
 const CommentsPopup = ({ open, onClose,id, onCancel }) => {
   const [comments, setComments] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
@@ -96,7 +96,7 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
   return (
     <div className="comments-popup">
       <div className="comments-popup-header">
-        <h2>Comments</h2>
+        <h2>Commentaires</h2>
         <Close className="close-icon" onClick={onCancel} />
       </div>
       <div>
@@ -115,13 +115,13 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
         ))}
       </div>
       <div>
-        <input
+        <input className="custominput "
           type="text"
-          placeholder="Write a comment..."
+          placeholder="Ecrire un commentaire..."
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
         />
-        <button onClick={handleAddComment}>Add</button>
+<button className="btn btn-primary" onClick={handleAddComment}>Commenter</button>
       </div>
     </div>
   );

@@ -90,8 +90,8 @@ const Note = () => {
 
         <div className="home ">
     <div className = "header text-center">
-                <h1 className= "titree">Mes Activites</h1>
-               <button className= "btncenter" onClick = {() => setModal(true)} >Ajouter Activiter </button>
+                <h1 className= "titree">Mes Tâches</h1>
+               <button className= "btncenter" onClick = {() => setModal(true)} >Ajouter tâche </button>
 
                </div>
                <div className="task-container ">

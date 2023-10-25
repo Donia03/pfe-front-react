@@ -93,14 +93,14 @@ const UserList = () => {
 
     return (
         <div>
-            <h2>User Select</h2>
+            <h3><strong>Sélectionner une nouvelle liste de diffusion:</strong></h3>
             <select
                 className="userSelect"
                 multiple
                 value={selectedUsers.map((user) => user.id)}
                 onChange={handleUserSelect}
             >
-                <option value="">Select users</option>
+                <option value="">Sélectionner :</option>
                 {users.map((user) => (
                     <option
                         key={user.id}
@@ -112,10 +112,10 @@ const UserList = () => {
             </select>
             {selectedUsers.length > 0 && (
                 <div>
-                    <p>Selected users:</p>
+
                     <div className="tagList">
                         {selectedUsers.map((user, index) => (
-                            <div className="tag" key={index}>
+                            <div className="tag1" key={index}>
                                 {user.prenom} {user.nom}
                                 <DeleteIcon
                                     className="deleteIcon"
@@ -125,20 +125,21 @@ const UserList = () => {
                         ))}
                     </div>
                     {!saveListVisible && (
-                        <button className="saveButton" onClick={handleSaveList}>
-                            Save this list
+                        <button className="save1" onClick={handleSaveList}>
+                            Enregistrer
                         </button>
                     )}
                     {saveListVisible && (
                         <div>
-                            <label>Choose a name for your list:</label>
+                            <label> <strong>Nommez cette liste:  </strong></label>
                             <input
                                 type="text"
                                 value={listName}
                                 onChange={handleListNameChange}
                             />
-                            <button className="save" onClick={saveDiffusionList}>
-                                Save
+                            <br/> <br/>
+                            <button className="save1" onClick={saveDiffusionList}>
+                                Enregister
                             </button>
                         </div>
                     )}

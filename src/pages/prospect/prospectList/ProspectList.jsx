@@ -91,22 +91,25 @@ export default function ClientList() {
       const columns = [
         {
           field: "nom",
-          headerName: "Nom",
+          headerAlign: 'center',
+          headerName: <strong>Nom</strong>,
           width: 140,
         },
-        { field: "prenom", headerName: "Prenom", width: 140 },
+        { field: "prenom", headerAlign: 'center',  headerName: <strong>Prénom</strong>, width: 140 },
         {
           field: "email",
-          headerName: "Email",
+          headerAlign: 'center',
+          headerName: <strong>Email</strong>,
           width: 230,
         },
-          { field: "cin", headerName: "Cin", width: 140 },
+          { field: "cin", headerAlign: 'center',  headerName: <strong>Cin</strong>, width: 140 },
 
-          { field: "telephone", headerName: "Numéro de Telephone", width: 200 },
+          { field: "telephone", headerAlign: 'center',  headerName: <strong>Télephone</strong>, width: 200 },
           {
             field: "suivi",
-            headerName: "Fiche de suivie",
-            width: 190,
+            headerAlign: 'center',
+            headerName:<strong> Fiche de suivie</strong>,
+            width: 180,
             renderCell: (params) => {
               return (
                 <>
@@ -121,7 +124,8 @@ export default function ClientList() {
 
             {
           field: "action",
-          headerName: "Action",
+          headerAlign: 'center',
+          headerName: <strong>Action</strong>,
           width: 120,
           renderCell: (params) => {
             return (
@@ -144,21 +148,25 @@ export default function ClientList() {
       const columnsForEmployee = [
               {
                 field: "nom",
-                headerName: "Nom",
+                headerAlign: 'center',
+                headerName: <strong >Nom</strong>,
                 width: 140,
               },
-              { field: "prenom", headerName: "Prenom", width: 140 },
+              { field: "prenom", headerAlign: 'center',  headerName: <strong >Prénom</strong>, width: 140 },
               {
                 field: "email",
-                headerName: "Email",
-                width: 230,
+                headerAlign: 'center',
+                headerName: <strong >Email</strong>,
+                width: 210,
               },
-                { field: "cin", headerName: "Cin", width: 140 },
+                { field: "cin",
+                 headerAlign: 'center', headerName: <strong >Cin</strong>, width: 140 },
 
-                { field: "telephone", headerName: "Numéro de Telephone", width: 200 },
+                { field: "telephone",headerAlign: 'center',  headerName: <strong>Télephone</strong>, width: 200 },
                 {
                   field: "suivi",
-                  headerName: "Fiche de suivie",
+                  headerAlign: 'center',
+                  headerName: <strong>Fiche de suivie</strong>,
                   width: 190,
                   renderCell: (params) => {
                     return (

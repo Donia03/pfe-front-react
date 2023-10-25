@@ -145,7 +145,7 @@ const SelectedUserList = () => {
 
     return (
         <div>
-            <h2>Liste diffusion</h2>
+            <h3><strong>Les Listes De Diffusion :</strong></h3>
             <ul className="radioList">
               {diffusionLists.map((user) => (
                 <li key={user.id} className="userItem">
@@ -160,7 +160,8 @@ const SelectedUserList = () => {
                   </div>
                   {selectedDiffusionList && (
                     <DeleteIcon
-                      className="deleteIcon"
+                      className="tag3"
+
                       onClick={() => handleDeleteIconClick(user.id)}
                     />
                   )}
@@ -169,8 +170,8 @@ const SelectedUserList = () => {
             </ul>
             {selectedUser && (
                 <div className="emailDetails">
-                    <h3>Email detailles :</h3>
-                    <label htmlFor="labelInput">Sujet:</label>
+                    <h4><strong>Email detaillés :</strong></h4>
+                    <label htmlFor="labelInput"><strong>Sujet:</strong></label>
                     <input
                         type="text"
                         id="labelInput"
@@ -179,7 +180,7 @@ const SelectedUserList = () => {
                         onChange={handleLabelChange}
                     />
                     <br />
-                    <label htmlFor="bodyTextarea">Objet:</label>
+                    <label htmlFor="bodyTextarea"><strong>Objet:</strong></label>
                     <textarea
                         id="bodyTextarea"
                         className="emailTextarea"
@@ -188,11 +189,11 @@ const SelectedUserList = () => {
                     />
                 </div>
             )}
-            {selectedUser && <p> liste Selectionnée : {selectedUser}</p>}
+           <strong> {selectedUser && <p> liste Selectionnée : {selectedUser}</p>}</strong>
             {selectedDiffusionList && (
                 <div className="tagList">
                     {selectedDiffusionList.map((user, index) => (
-                        <div className="tag" key={index}>
+                        <div className="tag2" key={index}>
                             {user.prenom + ' ' + user.nom}
                             <DeleteIcon
                                 className="deleteIcon"
@@ -202,8 +203,8 @@ const SelectedUserList = () => {
                     ))}
                 </div>
             )}
-            <button className="sendButton" onClick={handleSendEmail}>
-                envoye  Email
+            <button className="save2" onClick={handleSendEmail}>
+                Envoye  Email
             </button>
         </div>
     );

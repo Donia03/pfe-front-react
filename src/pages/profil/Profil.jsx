@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 import {
   CalendarToday,
   LocationSearching,
@@ -317,28 +318,28 @@ export default function Profil() {
             </div>
           </div>
           <div className="userShowBottom">
-            <span className="userShowTitle">details compte</span>
+            <span className="userShowTitle"><strong>Détails compte </strong></span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{prenom}</span>
+              <span className="userShowInfoTitle"><strong>{prenom}</strong></span>
             </div>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{nom}</span>
+              <span className="userShowInfoTitle"><strong>{nom}</strong></span>
             </div>
             <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{cin}</span>
+              <CreditCardIcon className="userShowIcon" />
+              <span className="userShowInfoTitle"><strong>{cin}</strong></span>
             </div>
 
-            <span className="userShowTitle">Contact </span>
+            <span className="userShowTitle"><strong>Contact</strong></span>
             <div className="userShowInfo">
               <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">{telephone}</span>
+              <span className="userShowInfoTitle"><strong>{telephone}</strong></span>
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">{email}</span>
+              <span className="userShowInfoTitle"><strong>{email}</strong></span>
             </div>
           </div>
         </div>
@@ -347,7 +348,7 @@ export default function Profil() {
           <form onSubmit={handleSubmit} className="userUpdateForm">
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
-                <label>Nom</label>
+                <label><strong>Nom :</strong></label>
                 <input
                   name={"nom"}
                   type="text"
@@ -359,7 +360,7 @@ export default function Profil() {
                 {nomError && <div className="error">{nomError}</div>}
               </div>
               <div className="userUpdateItem">
-                <label>Prénom</label>
+                <label><strong>Prénom :</strong></label>
                 <input
                   type="text"
                   placeholder=""
@@ -371,7 +372,7 @@ export default function Profil() {
                 {prenomError && <div className="error">{prenomError}</div>}
               </div>
               <div className="userUpdateItem">
-                <label>Email</label>
+                <label><strong>Email :</strong></label>
                 <input
                   type="text"
                   placeholder=""
@@ -383,7 +384,7 @@ export default function Profil() {
                 {emailError && <div className="error">{emailError}</div>}
               </div>
               <div className="userUpdateItem">
-                <label>Cin</label>
+                <label><strong>Cin :</strong></label>
                 <input
                   type="text"
                   placeholder=""
@@ -395,7 +396,7 @@ export default function Profil() {
                 {cinError && <div className="error">{cinError}</div>}
               </div>
               <div className="userUpdateItem">
-                <label>Telephone</label>
+                <label><strong>Télephone :</strong></label>
                 <input
                   type="text"
                   placeholder=""

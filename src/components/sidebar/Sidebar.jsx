@@ -77,15 +77,9 @@ export default function Sidebar() {
                                 </li>
 
                               </Link>
-                              {role === "Admin" && (
-                <Link to="/users" className="link">
 
-                  <li className="sidebarListItem">
-                    <PermIdentity className="sidebarIcon" />
-                    Users
-                  </li>
-                </Link>
-                )}
+
+
                 {role === "Admin" && (
                 <Link to="/employes" className="link">
                   <li className="sidebarListItem">

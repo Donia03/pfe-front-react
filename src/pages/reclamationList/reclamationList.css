@@ -28,12 +28,14 @@
   .ListreclaEdit{
     color: rgb(47, 7, 157); 
       cursor: pointer;
-  
+  margin-left: 50px;
   }
   
   .ListreclaDelet{
       color: rgb(47, 7, 157); 
       cursor: pointer;
+       margin-left: 30px;
+
   }
   
   .statusCell {
@@ -43,6 +45,7 @@
         width: 80%;
         text-align: center;
         height: 30px;
+         margin-left: 16px;
   }
   
   .statusPending {

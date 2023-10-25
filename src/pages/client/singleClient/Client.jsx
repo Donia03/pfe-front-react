@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios"
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 import {
   CalendarToday,
   LocationSearching,
@@ -177,38 +178,42 @@ export default function User() {
             />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{nom +' '+ prenom}</span>
-              <span className="userShowUserTitle">Software Engineer</span>
+              <span className="userShowUserTitle">Client</span>
             </div>
           </div>
           <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
+            <span className="userShowTitle"><strong>Détails compte </strong></span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{prenom}</span>
+              <span className="userShowInfoTitle"><strong>{nom}</strong></span>
             </div>
              <div className="userShowInfo">
                           <PermIdentity className="userShowIcon" />
-                          <span className="userShowInfoTitle">{cin}</span>
+                          <span className="userShowInfoTitle"><strong>{prenom}</strong></span>
+                        </div>
+             <div className="userShowInfo">
+                          <CreditCardIcon className="userShowIcon" />
+                          <span className="userShowInfoTitle"><strong>{cin}</strong></span>
                         </div>
 
-            <span className="userShowTitle">Contact Details</span>
+            <span className="userShowTitle"><strong>Contact</strong></span>
             <div className="userShowInfo">
               <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">{telephone}</span>
+              <span className="userShowInfoTitle"><strong>{telephone}</strong></span>
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">{email}</span>
+              <span className="userShowInfoTitle"><strong>{email}</strong></span>
             </div>
 
           </div>
         </div>
         <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
+          <span className="userUpdateTitle">Modifier</span>
           <form onSubmit={handleSubmit} className="userUpdateForm">
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
-                <label>Username</label>
+                <label><strong>Nom :</strong></label>
                 <input
                   name={"nom"}
                   type="text"
@@ -219,7 +224,7 @@ export default function User() {
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Prénom</label>
+                <label><strong>Prénom :</strong></label>
                 <input
                   type="text"
                   placeholder=""
@@ -230,7 +235,7 @@ export default function User() {
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Email</label>
+                <label><strong>Email :</strong></label>
                 <input
                   type="text"
                   placeholder=""
@@ -241,7 +246,7 @@ export default function User() {
                 />
               </div>
                <div className="userUpdateItem">
-                              <label>Cin</label>
+                              <label><strong>Cin :</strong></label>
                               <input
                                 type="text"
                                 placeholder=""
@@ -252,16 +257,16 @@ export default function User() {
                               />
                             </div>
                <div className="userUpdateItem">
-                                                          <label>Telephone</label>
-                                                          <input
-                                                            type="text"
-                                                            placeholder=""
-                                                            className="userUpdateInput"
-                                                            name={"telephone"}
-                                                            value={telephone}
-                                                            onChange={telephoneChangeHandler}
-                                                          />
-                                                        </div>
+                <label><strong>Télephone :</strong></label>
+                 <input
+             type="text"
+            placeholder=""
+         className="userUpdateInput"
+             name={"telephone"}
+             value={telephone}
+           onChange={telephoneChangeHandler}
+           />
+           </div>
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
@@ -275,7 +280,7 @@ export default function User() {
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} onChange={(e) => handleImageChange(e.target.files[0])} />
               </div>
-              <button type="submit" className="userUpdateButton">Update</button>
+              <button type="submit" className="userUpdateButton">Enregistrer</button>
             </div>
           </form>
         </div>

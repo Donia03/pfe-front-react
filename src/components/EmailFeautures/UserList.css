@@ -12,7 +12,7 @@
     margin-bottom: 10px;
 }
 
-.tag {
+/*.tag {
     display: flex;
     align-items: center;
     padding: 6px 10px;
@@ -20,7 +20,31 @@
     color: #fffefe;
     border-radius: 4px;
     font-size: 14px;
+}*/
+.tag1 {
+    display: block;
+    width: 45%;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+   background: rgb(238,174,202);
+   background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.3s ease;
 }
+
+.tag1:hover {
+    background: #ffffff;
+    color: #743ad5;
+    border: 2px solid #743ad5;
+}
+
 
 .deleteIcon {
     cursor: pointer;
@@ -28,18 +52,18 @@
     color: #888;
 }
 svg.MuiSvgIcon-root.deleteIcon {
-    color: white;
+    color: #743ad5;
 }
 
-.saveButton {
+/*.saveButton {
     width: 100%;
     padding: 7px;
     border-radius: 11px;
     font-size: 16px;
     color: darkblue;
     border: 3px solid darkblue;
-}
-.saveButton:hover {
+}*/
+/*.saveButton:hover {
     width: 100%;
     padding: 7px;
     border-radius: 11px;
@@ -47,8 +71,8 @@ svg.MuiSvgIcon-root.deleteIcon {
     color: white;
     border: 3px solid white;
     background-color: darkblue;
-}
-.save{
+}*/
+/*.save{
     background-color: white;
     color: darkblue;
     padding: 6px;
@@ -63,5 +87,19 @@ svg.MuiSvgIcon-root.deleteIcon {
     width: 30%;
     border: 2px solid darkblue;
     border-radius: 7px;
-}
+}*/
 
+.save1{
+    background-color:rgb(63,94,251);
+    background: #743ad5;
+    color: white;
+    padding: 6px;
+    width: 30%;
+    border: none;
+    border-radius: 5px;
+}
+.save1:hover{
+    background: #ffffff;
+    color: #743ad5;
+    border: 2px solid #743ad5;
+}

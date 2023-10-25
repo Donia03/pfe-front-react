@@ -1,7 +1,17 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./newClient.css";
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LockIcon from '@material-ui/icons/Lock';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import {
+  CalendarToday,
+  LocationSearching,
+  MailOutline,
+  PermIdentity,
+  PhoneAndroid,
+  Publish,
+} from "@material-ui/icons";
 export default function NewUser() {
   const [email, setEmail] = useState("");
   const [prenom, setPrenom] = useState("");
@@ -224,10 +234,11 @@ export default function NewUser() {
     )}
 
 
-      <h1 className="newUserTitle">New Client</h1>
-      <form onSubmit={handleSubmit} className="newUserForm">
+      <h1 className="newemployeTitle">Nouveau Client</h1>
+      <br/>
+      <form onSubmit={handleSubmit} className="newEmployeForm">
         <div className="newUserItem">
-          <label>Nom</label>
+            <label> <PermIdentity  />Nom :</label>
           <input
             type="text"
             placeholder="Nom..."
@@ -238,7 +249,7 @@ export default function NewUser() {
           {nomError && <div className="error">{nomError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Prenom</label>
+          <label> <PermIdentity />Prenom :</label>
           <input
             type="text"
             placeholder="Prenom..."
@@ -249,7 +260,7 @@ export default function NewUser() {
           {prenomError && <div className="error">{prenomError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Cin</label>
+         <label>  <CreditCardIcon />Cin :</label>
           <input
             type="text"
             placeholder="Cin"
@@ -260,7 +271,7 @@ export default function NewUser() {
           {cinError && <div className="error">{cinError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Telephone</label>
+      <label> <PhoneAndroid  />Numero de télephone :</label>
           <input
             type="text"
             placeholder="Telephone"
@@ -271,7 +282,7 @@ export default function NewUser() {
           {telephoneError && <div className="error">{telephoneError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Email</label>
+          <label><MailOutline />Email :</label>
           <input
             type="email"
             placeholder="john@gmail.com"
@@ -282,10 +293,10 @@ export default function NewUser() {
           {emailError && <div className="error">{emailError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Password</label>
+          <label><LockIcon />Mot de passe :</label>
           <input
             type="password"
-            placeholder="password"
+            placeholder="********"
             name="password"
             onChange={passwordChangeHandler}
             value={password}
@@ -293,11 +304,11 @@ export default function NewUser() {
           {passwordError && <div className="error">{passwordError}</div>}
         </div>
         <div className="newUserItem">
-          <label>Image</label>
+         <label><AccountCircleIcon/>Choisir photo :</label>
           <input type="file" accept="image/*" onChange={imageChangeHandler} ref={fileInputRef} />
         </div>
         <button type="submit" className="newUserButton">
-          Create
+          Enregistrer
         </button>
       </form>
     </div>

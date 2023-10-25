@@ -16,6 +16,8 @@ export default function ClientList() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
 
+
+
   useEffect( () => {
     loadUsers();
   }, []) 
@@ -56,26 +58,31 @@ export default function ClientList() {
   const columns = [
     {
       field: "nom",
-      headerName: "Nom",
-      width: 140,
+      headerAlign: 'center',
+      headerName:  <strong >Nom</strong>,
+      width: 160,
       
     },
-    { field: "prenom", headerName: "Prenom", width: 140 },
+    { field: "prenom",headerAlign: 'center',  headerName: <strong>Prénom</strong>, width: 140 },
     {
       field: "email",
-      headerName: "Email",
+      headerAlign: 'center',
+      headerName: <strong>Email</strong>,
       width: 230,
     },
-      { field: "cin", headerName: "Cin", width: 140 },
+      { field: "cin",
+      headerAlign: 'center',
+       headerName: <strong>Cin</strong>, width: 170 },
 
-      { field: "telephone", headerName: "Tel", width: 140 },
+      { field: "telephone", headerAlign: 'center', headerName: <strong>Teléphone</strong>, width: 180 },
 
   
    
         {
       field: "action",
-      headerName: "Action",
-      width: 120,
+      headerAlign: 'center',
+      headerName: <strong>Action</strong>,
+      width: 160,
 
 
       renderCell: (params) => {
@@ -91,7 +98,9 @@ export default function ClientList() {
           </>
         );
       },
-    }, 
+
+    },
+
   ];
  
   return (
@@ -105,13 +114,16 @@ export default function ClientList() {
      </Link>
      </div>
       <br></br>
+
       <DataGrid
+
         rows={data}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}
         /*checkboxSelection*/
       />
+
        <DeleteConfirmation 
          showDeleteConfirmation={showDeleteConfirmation}
          confirmDelete={confirmDelete}
