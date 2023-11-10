@@ -250,14 +250,14 @@ export default function DemandeList() {
         headerName: <strong>Commentaire</strong>,
         width: 200,
       },
-      {
+     /* {
         field: (
           <Link to="/demandeClient">
             <button className="ClientAddButton">Créer Demande</button>
           </Link>
         ),
         width: 210,
-      },
+      },*/
     ];
 
   return (
@@ -283,16 +283,17 @@ export default function DemandeList() {
        />
      )}
        {showCommentsPopup && (
-             <CommentsPopup
-               open={showCommentsPopup}
-               onClose={() => setShowCommentsPopup(false)}
-               id={commentsPopupData ? commentsPopupData.id : null}
-               onCancel={() => {
-                 setCommentsPopupData(null);
-                 setShowCommentsPopup(false); // Close the popup and clear the data
-               }}
-                />
-                     )}
+               <CommentsPopup
+                 open={showCommentsPopup}
+                 onClose={() => setShowCommentsPopup(false)}
+                 id={commentsPopupData ? commentsPopupData.id : null}
+                 type={"Demande"}
+                 onCancel={() => {
+                   setCommentsPopupData(null);
+                   setShowCommentsPopup(false); // Close the popup and clear the data
+                 }}
+               />
+             )}
     </div>
   );
 }

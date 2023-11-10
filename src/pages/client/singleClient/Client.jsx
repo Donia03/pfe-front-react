@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios"
 import CreditCardIcon from '@material-ui/icons/CreditCard';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+
 import {
   CalendarToday,
   LocationSearching,
@@ -8,6 +10,7 @@ import {
   PermIdentity,
   PhoneAndroid,
   Publish,
+
 } from "@material-ui/icons";
 import { Link, useParams} from "react-router-dom";
 import "./client.css";
@@ -139,7 +142,7 @@ export default function User() {
 
             // Handle the response, e.g., show success message, redirect, etc.
             console.log("User updated:", response.data);
-            setSuccessMessage(" Client has been updated");
+            setSuccessMessage(" Le client a été modifié avec succès");
           } catch (error) {
             // Handle error, e.g., show error message
             console.error("Error updating user:", error);
@@ -151,7 +154,7 @@ export default function User() {
     <div className="user">
     {successMessage && (
           <div className="success-message">
-            {successMessage}
+           <CheckCircleIcon /> {successMessage}
             <span className="close-icon" onClick={closeSuccessMessage}>
               &#x2715;
             </span>
@@ -159,7 +162,7 @@ export default function User() {
         )}
         {errorMessage && (
           <div className="error-message">
-            {errorMessage}
+         {errorMessage}
             <span className="close-icon" onClick={clearErrorMessage}>
               &#x2715;
             </span>

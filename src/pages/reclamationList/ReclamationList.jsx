@@ -271,14 +271,14 @@ export default function ReclamationList() {
             );
           },
         },
-    {
+  /*  {
       field: (
         <Link to="/reclamationClient">
           <button className="btn btn-primary">Créer réclamation</button>
         </Link>
       ),
       width: 220,
-    },
+    },*/
   ];
 
   return (
@@ -307,6 +307,7 @@ export default function ReclamationList() {
           open={showCommentsPopup}
           onClose={() => setShowCommentsPopup(false)}
           id={commentsPopupData ? commentsPopupData.id : null}
+          type={"Reclamation"}
           onCancel={() => {
             setCommentsPopupData(null);
             setShowCommentsPopup(false); // Close the popup and clear the data

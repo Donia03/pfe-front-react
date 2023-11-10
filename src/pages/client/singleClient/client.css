@@ -166,28 +166,48 @@
   padding-bottom: 2px;
 }
 error {
-  color: red; /* Set the text color to red */
-  font-size: 14px; /* Set the font size */
-  margin-top: 4px; /* Add some top margin for spacing */
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
 }
-.success-message {
+/*.success-message {
   background-color: lightgreen;
   padding: 10px;
   border: 1px solid green;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+}*/
 
 .close-icon {
   cursor: pointer;
   font-size: 20px;
 }
-.error-message {
+/*.error-message {
   background-color: lightcoral;
   padding: 10px;
   border: 1px solid red;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}*/
+.error-message {
+  background-color: #FF5733; /* Couleur de fond rouge pour les messages d'erreur */
+  color:#333C48;/* Texte blanc */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px; /* Coins arrondis */
+  position: relative;
 }
+
+
+.success-message {
+  background-color: #4CAF50; /* Couleur de fond verte pour les messages de succès */
+ color:#333C48;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px; /* Coins arrondis */
+  position: relative;
+}
+
+

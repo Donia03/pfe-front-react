@@ -305,9 +305,11 @@ export default function Profil() {
             </span>
           </div>
         )}
-      <div className="userTitleContainer">
-        <h1 className="userTitle">Mon Compte</h1>
+      <div className="userList">
+     <div className="titreClient">
+        <h1 className="titre">Mon Compte</h1>
       </div>
+       </div>
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">
@@ -425,7 +427,7 @@ export default function Profil() {
                   onChange={(e) => handleImageChange(e.target.files[0])}
                 />
               </div>
-              <button type="submit" className="userUpdateButton">
+              <button type="submit" className="userUpdateButton1">
                 Enregistrer
               </button>
             </div>
@@ -436,10 +438,10 @@ export default function Profil() {
         <span className="userUpdateTitle">Changer mot de passe</span>
         <form onSubmit={handleChangePassword} className="userUpdateForm">
           <div className="userUpdateItem">
-            <label>Ancien mot de passe</label>
+            <label><strong>Ancien mot de passe :</strong></label>
             <input
               type="password"
-              placeholder=""
+              placeholder="*********"
               className="userUpdateInput"
               value={oldPassword}
               onChange={oldPasswordChangeHandler}
@@ -447,17 +449,17 @@ export default function Profil() {
             {oldPasswordError && <div className="error">{oldPasswordError}</div>}
           </div>
           <div className="userUpdateItem">
-            <label>Nouveau mot de passe</label>
+            <label><strong>Nouveau mot de passe : </strong></label>
             <input
               type="password"
-              placeholder=""
+              placeholder="*********"
               className="userUpdateInput"
               value={newPassword}
               onChange={newPasswordChangeHandler}
             />
             {newPasswordError && <div className="error">{newPasswordError}</div>}
           </div>
-          <button type="submit" className="userUpdateButton">
+          <button type="submit" className="userUpdateButton2">
             Enregistrer
           </button>
         </form>

@@ -26,25 +26,31 @@ export default function Sidebar() {
                 Historiques
             </li>
             </Link> 
-            
+              <Link to="/reclamationClient" className="link">
+                            <li className="sidebarListItem">
+                              <Report className="sidebarIcon" />
+                             Crée Reclamation
+                            </li>
+                          </Link>
+                            <Link to="/demandeClient" className="link">
+                                          <li className="sidebarListItem">
+                                            <Report className="sidebarIcon" />
+                                            Crée Demande
+                                          </li>
+                                        </Link>
               <Link to="/reclamations" className="link">
                 <li className="sidebarListItem">
                   <Report className="sidebarIcon" />
-                  Reclamations
+               Liste Des Reclamations
                 </li>
               </Link>
               <Link to="/demandeList" className="link">
                                                 <li className="sidebarListItem">
                                                   <Report className="sidebarIcon" />
-                                                 demandes
+                                               Liste Des demandes
                                                 </li>
                                               </Link>
-          <Link to="/contactSociete" className="link">
-             <li className="sidebarListItem">
-            <MailOutline className="sidebarIcon" />
-                Contacter Societe
-              </li>
-             </Link>
+
             </ul>
           </div>
         ) : (
@@ -55,7 +61,7 @@ export default function Sidebar() {
                 <Link to="/" className="link">
                   <li className="sidebarListItem active">
                     <LineStyle className="sidebarIcon" />
-                    Home
+                    Dashboard
                   </li>
                 </Link>
               </ul>
@@ -81,23 +87,24 @@ export default function Sidebar() {
 
 
                 {role === "Admin" && (
+
                 <Link to="/employes" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
-                    Employes
+                   Liste des employés
                   </li>
                 </Link>
                 )}
                 <Link to="/clients" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
-                    Clients
+                   Liste des clients
                   </li>
                 </Link>
                 <Link to="/prospects" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
-                    Prospect
+                   Liste des Prospects
                   </li>
                 </Link>
                 <Link to="/reclamations" className="link">
@@ -118,19 +125,19 @@ export default function Sidebar() {
                 <Link to="/note" className="link">
                                   <li className="sidebarListItem">
                                     <Storefront className="sidebarIcon" />
-                                    Notes
+                                   Mes tâches
                                   </li>
                                 </Link>
                 <Link to="/import" className="link">
                     <li className="sidebarListItem">
                         <BarChart className="sidebarIcon" />
-                          Import
+                          Importer
                            </li>
                 </Link>
                  <Link to="/email" className="link">
                                   <li className="sidebarListItem">
                                     <MailOutline className="sidebarIcon" />
-                                    Mail
+                                    Envoyer Email
                                   </li>
                                 </Link>
                               

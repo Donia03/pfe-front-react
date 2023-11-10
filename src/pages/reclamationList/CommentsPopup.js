@@ -4,7 +4,7 @@ import { Close } from "@material-ui/icons";
 import "./commentsPopup.css"; // Add CSS for styling
 import Comment from './Comment'; // Import the Comment component
 import { Edit } from "@material-ui/icons";
-const CommentsPopup = ({ open, onClose,id, onCancel }) => {
+const CommentsPopup = ({ open, onClose,id,type, onCancel }) => {
   const [comments, setComments] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
   const [newCommentText, setNewCommentText] = useState('');
@@ -17,7 +17,7 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
 
   const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:8082/api/comments/${id}`, {
+        const response = await axios.get(`http://localhost:8082/api/comments/${id}/{type}`, {
           headers: {
             "Authorization": `Bearer ${token}`,
           },
@@ -53,10 +53,11 @@ const CommentsPopup = ({ open, onClose,id, onCancel }) => {
       const newComment = {
         comment: newCommentText,
         userId: userId, // Get the user's ID from localStorage
-        reclamationId: id,
+        typeId: id,
         rating: 0,
         image: image,
-        nom:nom
+        nom:nom,
+        type:type
       };
 
       try {
