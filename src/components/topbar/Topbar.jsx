@@ -29,7 +29,7 @@ const notificationsRef = useRef(null);
         return () => {
             eventSource.close(); // Close the SSE connection when the component unmounts
         };
-    }, []);
+    }, [authenticated]);
 useEffect(() => {
     const eventSource = new EventSource(`http://localhost:8082/api/userRealTimeChange/${userId}`);
 
@@ -42,12 +42,12 @@ useEffect(() => {
     return () => {
         eventSource.close(); // Close the SSE connection when the component unmounts
     };
-  },[]);
+  },[authenticated]);
   useEffect(() => {
           if (image) {
             getUserImage();
           }
-        }, [image]);
+        }, [image,authenticated]);
 
 
 
@@ -74,6 +74,9 @@ const getUserImage = async () => {
           localStorage.removeItem('token');
           localStorage.removeItem('id');
           localStorage.removeItem('role');
+          localStorage.removeItem('image');
+          localStorage.removeItem('nom');
+          localStorage.removeItem('userData');
 
           // Set authenticated to false
               setAuthenticated(false);
