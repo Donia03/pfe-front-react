@@ -28,6 +28,33 @@ const ForgotPassword = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const closeSuccessMessage = () => {
+          setSuccessMessage("");
+        };
+
+        const [errorMessage, setErrorMessage] = useState("");
+
+        const clearErrorMessage = () => {
+          setErrorMessage("");
+        };
+
+  const validateInputs = () => {
+            let isValid = true;
+
+            if (email.trim() === "") {
+              setEmailError("Email is required");
+              isValid = false;
+            } else if (!email.includes("@")) {
+                   setEmailError("Invalid email format");
+                   isValid = false;
+            }else {
+              setEmailError("");
+            }
+            return isValid;
+          };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -35,6 +62,9 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!validateInputs()) {
+                          return; // Don't proceed if validation fails
+                        }
     const formData = new FormData();
           formData.append("email", email);
 
@@ -50,8 +80,10 @@ const ForgotPassword = () => {
 
       // Handle the response message
       setMessage(response.data.message);
+      setSuccessMessage("check your email");
     } catch (error) {
       console.error("Error:", error);
+      setErrorMessage("An unexpected error occurred");
     }
   };
 
@@ -59,6 +91,22 @@ const ForgotPassword = () => {
 
 
       <div className="container">
+      {successMessage && (
+                <div className="success-message">
+                  {successMessage}
+                  <span className="close-icon" onClick={closeSuccessMessage}>
+                    &#x2715;
+                  </span>
+                </div>
+              )}
+              {errorMessage && (
+                <div className="error-message">
+                  {errorMessage}
+                  <span className="close-icon" onClick={clearErrorMessage}>
+                    &#x2715;
+                  </span>
+                </div>
+              )}
        <div className="chart">
               <img
                 className="imagefor"
@@ -81,12 +129,15 @@ const ForgotPassword = () => {
             value={email}
             onChange={handleEmailChange}
           />
+
      <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Button  type="submit" variant="contained" color="primary" style={{ width: '250px' }} >
             Réinitialiser le mot de passe
           </Button>
           </div>
+
         </form>
+        {emailError && <div className="error">{emailError}</div>}
       </Paper>
 
     </Container>

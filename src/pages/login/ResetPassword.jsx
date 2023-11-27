@@ -3,6 +3,9 @@ import { Container, Paper, TextField, Button, Typography } from "@material-ui/co
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link, useParams} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
+const history = useHistory();
 
 const useStyles = makeStyles((theme) => ({
   root: {
