@@ -5,7 +5,7 @@ import { SelectedDiffusionListContext } from '../../context/SelectedDiffusionLis
 
 const DiffusionListModal = ({ user, diffusionLists, onClose }) => {
   const [selectedList, setSelectedList] = useState(null);
-  const { selectedDiffusionList, setSelectedDiffusionList } = useContext(SelectedDiffusionListContext);
+  const { selectedDiffusionList, setSelectedDiffusionList } = useContext(SelectedDiffusionListContext);/*context tasna3 state globale ay component yekhu menha*/
 
   const handleListSelection = async (list) => {
     const objectToSave = {
@@ -14,7 +14,7 @@ const DiffusionListModal = ({ user, diffusionLists, onClose }) => {
     };
 
     try {
-      const response = await axios.post('http://localhost:8082/api/diffusionList/saveUser', objectToSave);
+      const response = await axios.post('http://localhost:8082/api/diffusionList/saveUser', objectToSave);/*besh nabaathu l'objet ll back*/
 
       // Assuming the response indicates success
       if (response.status === 200) {
@@ -26,7 +26,7 @@ const DiffusionListModal = ({ user, diffusionLists, onClose }) => {
       console.error('Error updating diffusion list:', error);
     }
   };
-
+/*besh yaaml boucle aal deffusionlist */
   return (
     <div className="modalDiffusionList">
       <h2>Sélectionnez une liste de diffusion</h2>
@@ -34,11 +34,11 @@ const DiffusionListModal = ({ user, diffusionLists, onClose }) => {
         {diffusionLists.map((list) => (
           <li key={list.id}>
             {list.nom}{' '}
-            <button onClick={() => handleListSelection(list)}>Select</button>
+            <button className="save5" onClick={() => handleListSelection(list)}>Select</button>
           </li>
         ))}
       </ul>
-      <button onClick={onClose}>Annuler</button>
+      <button className="save5" onClick={onClose}>Annuler</button>
     </div>
   );
 };

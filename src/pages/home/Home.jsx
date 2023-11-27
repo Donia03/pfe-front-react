@@ -42,8 +42,7 @@ const getStats = async () => {
     <div className="home">
       <FeaturedInfo />
       <Chart data={stats}
-        title="User Analytics"
-        grid
+        title="Évolution mensuelle "
         clientKey="Client"
         reclamationKey="Reclamation"
         demandeKey="Demande"

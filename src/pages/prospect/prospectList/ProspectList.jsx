@@ -93,16 +93,16 @@ export default function ClientList() {
           field: "nom",
           headerAlign: 'center',
           headerName: <strong>Nom</strong>,
-          width: 140,
+          width: 160,
         },
-        { field: "prenom", headerAlign: 'center',  headerName: <strong>Prénom</strong>, width: 140 },
+        { field: "prenom", headerAlign: 'center',  headerName: <strong>Prénom</strong>, width: 160 },
         {
           field: "email",
           headerAlign: 'center',
           headerName: <strong>Email</strong>,
           width: 230,
         },
-          { field: "cin", headerAlign: 'center',  headerName: <strong>Cin</strong>, width: 140 },
+          { field: "cin", headerAlign: 'center',  headerName: <strong>Cin</strong>, width: 160 },
 
           { field: "telephone", headerAlign: 'center',  headerName: <strong>Télephone</strong>, width: 200 },
           {
@@ -126,7 +126,7 @@ export default function ClientList() {
           field: "action",
           headerAlign: 'center',
           headerName: <strong>Action</strong>,
-          width: 120,
+          width: 190,
           renderCell: (params) => {
             return (
               <>

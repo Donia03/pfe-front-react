@@ -16,9 +16,9 @@ const EmailTemplates = () => {
     const [selectedUsers, setSelectedUsers] = useState([]);
 
     const emailStyles = [
-        { id: 1, label: 'Happy Birthday', body: 'Happy Birthday [user]' },
-        { id: 2, label: 'Welcome', body: 'Welcome to our platform [user]' },
-        { id: 3, label: 'Product Advertisement', body: 'Check out our latest products' },
+        { id: 1, label: 'Joyeux Anniversaire', body: 'Joyeux Anniversaire [user]' },
+        { id: 2, label: 'Bienvunue', body: 'Bienvunue dans notre platforme [user]' },
+        { id: 3, label: 'Publicité de produit', body: 'Découvrez nos derniers produits' },
     ];
 
     return (

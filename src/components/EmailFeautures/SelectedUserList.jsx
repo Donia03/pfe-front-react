@@ -160,7 +160,7 @@ const SelectedUserList = () => {
                   </div>
                   {selectedDiffusionList && (
                     <DeleteIcon
-                      className="tag3"
+                      className="tag4"
 
                       onClick={() => handleDeleteIconClick(user.id)}
                     />

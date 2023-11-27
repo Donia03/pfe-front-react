@@ -17,10 +17,10 @@ export default function SuiviPopup({ suiviText, setSuiviText, onSave, onCancel }
       />
       <div className="suiviButtons">
         <button className="btn btn-primary" onClick={onSave}>
-          Save
+          Enregistrer
         </button>
         <button className="btn btn-secondary" onClick={onCancel}>
-          Cancel
+          Annuler
         </button>
       </div>
     </div>

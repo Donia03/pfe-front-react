@@ -19,5 +19,18 @@
   font-size: 20px;
   margin-bottom: 10px;
 }
-
+.save5{
+    background-color:rgb(63,94,251);
+    background: #743ad5;
+    color: white;
+    padding: 4px;
+    width: 10%;
+    border: none;
+    border-radius: 5px;
+}
+.save5:hover{
+    background: #ffffff;
+    color: #743ad5;
+    border: 2px solid #743ad5;
+}
 /* Add more CSS styling for buttons, lists, etc. */

@@ -94,7 +94,7 @@ const Login = () => {
     <Container className={classes.root}>
       <Paper className={`${classes.paper} login-paper`} elevation={3}>
         <Typography variant="h5" gutterBottom>
-          Login
+          S'identifier
         </Typography>
         {error && <Typography color="error">{error}</Typography>}
         <form className={classes.form} onSubmit={handleSubmit}>
@@ -105,14 +105,14 @@ const Login = () => {
             onChange={handleEmailChange}
           />
           <TextField
-            label="Password"
+            label="Mot de passe"
             type="password"
             variant="outlined"
             value={password}
             onChange={handlePasswordChange}
           />
           <Button type="submit" variant="contained" color="primary">
-            Login
+            Connexion
           </Button>
         
             </form>

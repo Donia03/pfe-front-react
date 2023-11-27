@@ -214,20 +214,39 @@ export default function DemandeList() {
         field: "titre",
            headerAlign: 'center',
         headerName: <strong>Titre</strong>,
-        width: 200,
+        width: 270,
       },
-      { field: "reference",  headerAlign: 'center',headerName: <strong>Reference</strong>, width: 230 },
+      { field: "reference",  headerAlign: 'center',headerName: <strong>Réference</strong>, width: 250 },
       {
         field: "description",
          headerAlign: 'center',
         headerName: <strong>Description</strong>,
-        width: 230,
+        width: 360,
       },
+       {
+              field: "Commentaire",
+               headerAlign: 'center',
+              headerName: <strong>Commentaire</strong>,
+              width: 200,
+                renderCell: (params) => {
+                          return (
+                            <>
+
+                              <Forum
+                                className="ListreclaEdit"
+                                onClick={() => handleToggleComments(params.row.id)}
+
+
+                          />
+                                      </>
+                                    );
+                                  },
+            },
       {
         field: "status",
          headerAlign: 'center',
         headerName: <strong>Status</strong>,
-        width: 160,
+        width: 200,
         renderCell: (params) => {
           let statusText = "";
           if (params.value === 0) {
@@ -244,12 +263,7 @@ export default function DemandeList() {
                   );
         },
       },
- {
-        field: "Commentaire",
-         headerAlign: 'center',
-        headerName: <strong>Commentaire</strong>,
-        width: 200,
-      },
+
      /* {
         field: (
           <Link to="/demandeClient">

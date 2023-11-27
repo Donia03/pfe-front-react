@@ -33,17 +33,17 @@ export default function WidgetLg() {
     };
   return (
     <div className="widgetLg">
-      <h3 className="widgetLgTitle">Latest transactions</h3>
+      <h3 className="widgetLgTitle">Dernières transactions</h3>
       <table className="widgetLgTable">
         <tr className="widgetLgTr">
-          <th className="widgetLgTh">Customer</th>
+          <th className="widgetLgTh">Produit</th>
           <th className="widgetLgTh center" >Date</th>
-          <th className="widgetLgTh center">Amount</th>
+          <th className="widgetLgTh center">Prix</th>
         </tr>
         {commandes.map((commande, index) => (
                   <tr key={index} className="widgetLgTr">
                     <td className="widgetLgUser">
-                      <span className="widgetLgName">{commande.user}</span>
+                      <span className="widgetLgName">{commande.product}</span>
                     </td>
                     <td className="widgetLgDate">{commande.date}</td>
                     <td className="widgetLgAmount">{commande.price}</td>

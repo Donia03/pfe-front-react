@@ -121,8 +121,10 @@ const CommentsPopup = ({ open, onClose,id,type, onCancel }) => {
           placeholder="Ecrire un commentaire..."
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
+
         />
-<button className="btn btn-primary" onClick={handleAddComment}>Commenter</button>
+
+<center><button className="btn btn-primary" onClick={handleAddComment}>Commenter</button></center>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { PermIdentity, LineStyle, Timeline, TrendingUp, Storefront, AttachMoney, BarChart, MailOutline, DynamicFeed, ChatBubbleOutline, WorkOutline, Report } from "@material-ui/icons";
+import {  PostAdd,  ListAlt, PermIdentity, LineStyle, Timeline, TrendingUp, Storefront, AttachMoney, BarChart, MailOutline, DynamicFeed, ChatBubbleOutline, WorkOutline, Report } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import "./sidebar.css"; // Import the CSS file
 
@@ -25,31 +25,32 @@ export default function Sidebar() {
                <Timeline className="sidebarIcon" />
                 Historiques
             </li>
-            </Link> 
+            </Link>
+              <Link to="/demandeClient" className="link">
+                                                      <li className="sidebarListItem">
+                                                        <PostAdd className="sidebarIcon" />
+                                                        Crée Demande
+                                                      </li>
+                                                    </Link>
               <Link to="/reclamationClient" className="link">
                             <li className="sidebarListItem">
                               <Report className="sidebarIcon" />
-                             Crée Reclamation
+                             Crée Réclamation
                             </li>
                           </Link>
-                            <Link to="/demandeClient" className="link">
-                                          <li className="sidebarListItem">
-                                            <Report className="sidebarIcon" />
-                                            Crée Demande
-                                          </li>
-                                        </Link>
+                          <Link to="/demandeList" className="link">
+                                                                         <li className="sidebarListItem">
+                                                                           <ListAlt className="sidebarIcon" />
+                                                                        Liste Des demandes
+                                                                         </li>
+                                                                       </Link>
               <Link to="/reclamations" className="link">
                 <li className="sidebarListItem">
-                  <Report className="sidebarIcon" />
-               Liste Des Reclamations
+                  <ListAlt className="sidebarIcon" />
+               Liste Des Réclamations
                 </li>
               </Link>
-              <Link to="/demandeList" className="link">
-                                                <li className="sidebarListItem">
-                                                  <Report className="sidebarIcon" />
-                                               Liste Des demandes
-                                                </li>
-                                              </Link>
+
 
             </ul>
           </div>

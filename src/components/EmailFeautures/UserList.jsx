@@ -44,7 +44,7 @@ const UserList = () => {
             (option) => users.find((user) => user.id === parseInt(option.value))
         );
         setSelectedUsers(selectedOptions);
-    };
+    };/*handelselect besh yetzed kol mara ll liste setselecteduser*/
 
     const handleTagDelete = (user) => {
         const updatedUsers = selectedUsers.filter(
@@ -72,7 +72,7 @@ const UserList = () => {
         }
 
          axios
-           .post('http://localhost:8082/api/diffusionList',difusionList)
+           .post('http://localhost:8082/api/diffusionList',difusionList)/*envoyer objet fih nom o list lldto fl back en tant que parametre*/
            .then((response) => {
              console.log(response.data);
              if (response.status === 200) {
@@ -98,14 +98,11 @@ const UserList = () => {
                 className="userSelect"
                 multiple
                 value={selectedUsers.map((user) => user.id)}
-                onChange={handleUserSelect}
+                onChange={handleUserSelect} /*kol option besh nenzel aalih onChange besh declanchi methode handleUserSelect */
             >
                 <option value="">Sélectionner :</option>
                 {users.map((user) => (
-                    <option
-                        key={user.id}
-                        value={user.id}
-                    >
+                    <option key={user.id} value={user.id} >
                         {user.prenom + ' ' + user.nom}
                     </option>
                 ))}
@@ -123,8 +120,9 @@ const UserList = () => {
                                 />
                             </div>
                         ))}
+
                     </div>
-                    {!saveListVisible && (
+                    {!saveListVisible && ( /* ! # l'etat  */
                         <button className="save1" onClick={handleSaveList}>
                             Enregistrer
                         </button>

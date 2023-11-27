@@ -5,7 +5,6 @@ import './import.css'; // Import the CSS file
 const Import = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState(null);
 
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -21,7 +20,7 @@ const Import = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-  };
+  };/*prend 1 files men element target dans navigateur*/
 
   const handleUpload = async () => {
     if (!file) {
@@ -33,7 +32,7 @@ const Import = () => {
       setLoading(true);
 
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', file);/*objet en forme fomulaire utilise formedata*/
 
       const response = await axios.post('http://localhost:8082/api/import', formData, {
         headers: {
@@ -41,7 +40,7 @@ const Import = () => {
         },
       });
 
-      setResponse(response.data);
+
       setFile(null);
       setSuccessMessage("New file has been saved");
     } catch (error) {
@@ -86,7 +85,7 @@ const Import = () => {
                    <center>
 
                   <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} /><br/>    <br/>    <br/>
-                  <button className="btn btn-primary" onClick={handleUpload} disabled={loading}>
+                  <button className="tag3" onClick={handleUpload} disabled={loading}>
                     Importer
                   </button>
                   {loading && <div className="loading">Loading...</div>}

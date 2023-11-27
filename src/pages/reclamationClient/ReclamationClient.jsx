@@ -213,7 +213,7 @@ export default function ReclamationClient() {
                 />
                 {preciserError && <div className="error">{preciserError}</div>}
                 <br/>
-                <button type="submit" className="reclamationUpdateButton">
+                <button type="submit" className="RecUpdateButton1">
                   Envoyer
                 </button>
               </div>

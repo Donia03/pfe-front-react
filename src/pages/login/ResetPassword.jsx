@@ -66,26 +66,26 @@ const ResetPassword = () => {
     <Container className={classes.root}>
       <Paper className={`${classes.paper} reset-password-paper`} elevation={3}>
         <Typography variant="h5" gutterBottom>
-          Reset Password
+           Réinitialiser le mot de passe
         </Typography>
         {message && <Typography>{message}</Typography>}
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
-            label="Password"
+            label="Nouveau mot de passe"
             type="password"
             variant="outlined"
             value={password}
             onChange={handlePasswordChange}
           />
           <TextField
-            label="Re-enter Password"
+            label="Confirmer  mot de passe"
             type="password"
             variant="outlined"
             value={rePassword}
             onChange={handleRePasswordChange}
           />
           <Button type="submit" variant="contained" color="primary">
-            Reset Password
+            Connexion
           </Button>
         </form>
       </Paper>

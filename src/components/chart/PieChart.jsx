@@ -21,7 +21,7 @@ const PieChartComponent = () => {
 
   return (
   <div className="widgetSm">
-        <span className="widgetSmTitle">les 5 produits les mieux vendu</span>
+        <span className="widgetSmTitle">Nos produits les plus vendus</span>
       <PieChart width={400} height={400}>
         <Pie
           data={data}

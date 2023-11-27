@@ -16,7 +16,7 @@ const SearchUser = () => {
     // Implement your search logic here
     const fetchSearchResults = async () => {
       try {
-        const response = await axios.post(
+        const response = await axios.post(/*besh nabaathu ll api */
           'http://localhost:8082/api/search',
           { elementOfSearch: searchQuery },
           {
@@ -26,14 +26,14 @@ const SearchUser = () => {
           }
         );
 
-        setSearchResults(response.data);
+        setSearchResults(response.data);/*o resulta nhotu fi tableau */
       } catch (error) {
         console.error('Error fetching search results:', error);
       }
     };
 
     if (searchQuery) {
-      fetchSearchResults();
+      fetchSearchResults();/*ken maabya besh envoyer ll methode fetchSearchResults*/
     } else {
       // Clear the search results if the search query is empty
       setSearchResults([]);
@@ -66,11 +66,11 @@ const SearchUser = () => {
           type="text"
           placeholder="rechercher avec le nom ..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}/*ken searchQuery maabia declanchi methode fetchSearchResults ken fergha aateha tabl feragh*/
         />
       </form>
       <ul>
-        {searchResults.map((user) => (
+        {searchResults.map((user) => ( /*resultat eli rajatna mel back */
           <li key={user.id}>
             {user.prenom + " " + user.nom + " " + "("+ user.email+")"}
             <button className="plus-icon-button" onClick={() => handleUserClick(user)}>
@@ -81,7 +81,7 @@ const SearchUser = () => {
       </ul>
       {showModal && (
         <Modal
-          user={selectedUser}
+          user={selectedUser}/*baathna parametre user fi selecteduser*/
           diffusionLists={diffusionLists}
           onClose={() => setShowModal(false)}
         />

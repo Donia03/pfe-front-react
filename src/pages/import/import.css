@@ -58,3 +58,26 @@
   justify-content: space-between;
   align-items: center;
 }
+.tag3 {
+    display: block;
+    width: 14%;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+   background: rgb(238,174,202);
+   background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.3s ease;
+}
+
+.tag3:hover {
+    background: #ffffff;
+    color: #743ad5;
+    border: 2px solid #743ad5;
+}

@@ -316,7 +316,7 @@ export default function Profil() {
             <img src={imageUrl} alt="" className="userShowImg" />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{nom + " " + prenom}</span>
-              <span className="userShowUserTitle">Welcome</span>
+              <span className="userShowUserTitle">Bienvenue</span>
             </div>
           </div>
           <div className="userShowBottom">
