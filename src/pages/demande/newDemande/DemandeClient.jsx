@@ -106,7 +106,7 @@ export default function DemandeClient() {
       setTitre("");
       setReference("");
       setDescription("");
-      setSuccessMessage("New Demande has been saved");
+      setSuccessMessage("Nouvelle demande a été enregistrée");
     } catch (error) {
       // Handle error, e.g., show error message
       console.error("Error creating demande:", error);

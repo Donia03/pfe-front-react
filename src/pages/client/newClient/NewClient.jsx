@@ -194,7 +194,7 @@ export default function NewUser() {
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
-      setSuccessMessage("New Client has been saved");
+      setSuccessMessage("Nouveau client a été enregistré");
     } catch (error) {
        if (error.response && error.response.status === 400 && error.response.data) {
            // Handle duplication error (status code 400)

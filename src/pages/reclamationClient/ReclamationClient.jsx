@@ -107,7 +107,7 @@ export default function ReclamationClient() {
           setObjet("");
           setAutreObjet("");
           setPreciser("");
-          setSuccessMessage("New Reclamation has been saved");
+          setSuccessMessage("Nouvelle réclamation a été enregistrée");
     } catch (error) {
     setErrorMessage("An unexpected error occurred");
       // Handle error, e.g., show error message

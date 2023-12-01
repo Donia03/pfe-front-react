@@ -45,7 +45,7 @@ const ForgotPassword = () => {
             let isValid = true;
 
             if (email.trim() === "") {
-              setEmailError("Email is required");
+              setEmailError("Entre votre email");
               isValid = false;
             } else if (!email.includes("@")) {
                    setEmailError("Invalid email format");
@@ -80,7 +80,7 @@ const ForgotPassword = () => {
 
       // Handle the response message
       setMessage(response.data.message);
-      setSuccessMessage("check your email");
+      setSuccessMessage("Veuillez vérifier le lien que nous avons envoyé à votre adresse e-mail.");
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("An unexpected error occurred");
@@ -90,7 +90,7 @@ const ForgotPassword = () => {
   return (
 
 
-      <div className="container">
+      <div className="home">
       {successMessage && (
                 <div className="success-message">
                   {successMessage}
@@ -107,6 +107,7 @@ const ForgotPassword = () => {
                   </span>
                 </div>
               )}
+              <div className="container">
        <div className="chart">
               <img
                 className="imagefor"
@@ -123,7 +124,8 @@ const ForgotPassword = () => {
         </Typography>
         {message && <Typography>{message}</Typography>}
         <form className={classes.form} onSubmit={handleSubmit}>
-          <TextField style={{ margin: '10px' }}
+         {emailError && <div className="error">{emailError}</div>}
+          <TextField style={{ margin: '4px' }}
             label="Entrer votre Email"
             variant="outlined"
             value={email}
@@ -131,18 +133,20 @@ const ForgotPassword = () => {
           />
 
      <div style={{ display: 'flex', justifyContent: 'center' }}>
+
           <Button  type="submit" variant="contained" color="primary" style={{ width: '250px' }} >
             Réinitialiser le mot de passe
           </Button>
           </div>
 
         </form>
-        {emailError && <div className="error">{emailError}</div>}
+
       </Paper>
 
     </Container>
      </div>
       </div>
+       </div>
   );
 };
 

@@ -1,7 +1,7 @@
 .userList {
     flex: 4;
   }
-  
+
   .userListUser {
     display: flex;
     align-items: center;
@@ -24,20 +24,20 @@
     object-fit: cover;
     margin-right: 10px;
   }*/
-  
+
   .ListreclaEdit{
-    color: rgb(47, 7, 157); 
-      cursor: pointer;
+    color: rgb(47, 7, 157);
+
   margin-left: 50px;
   }
-  
+
   .ListreclaDelet{
-      color: rgb(47, 7, 157); 
+      color: rgb(47, 7, 157);
       cursor: pointer;
        margin-left: 30px;
 
   }
-  
+
   .statusCell {
     padding: 1px 5px;
         border-radius: 100px;
@@ -47,21 +47,21 @@
         height: 30px;
          margin-left: 16px;
   }
-  
+
   .statusPending {
     background-color: #f0ad4e; /* Orange pour en cours */
     color: white;
     line-height: 30px;
     text-align: center;
   }
-  
+
   .statusApproved {
     background-color: green;
     color: white; /* To make the text readable on a green background */
     line-height: 30px;
     text-align: center;
   }
-  
+
   .statusRejected {
     background-color: red;
     color: white; /* To make the text readable on a red background */
@@ -71,7 +71,7 @@
   .titreReclamation{
     text-align: center;
   }
-  
+
   .titre {
   font-size: 35px;
   font-weight: bold;
@@ -79,4 +79,3 @@
   border-bottom: 2px solid #007bff;
   padding-bottom: 3px;
   }
-  

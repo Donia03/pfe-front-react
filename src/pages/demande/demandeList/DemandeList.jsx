@@ -221,13 +221,13 @@ export default function DemandeList() {
         field: "description",
          headerAlign: 'center',
         headerName: <strong>Description</strong>,
-        width: 360,
+        width: 330,
       },
        {
               field: "Commentaire",
                headerAlign: 'center',
               headerName: <strong>Commentaire</strong>,
-              width: 200,
+              width: 180,
                 renderCell: (params) => {
                           return (
                             <>
@@ -246,7 +246,7 @@ export default function DemandeList() {
         field: "status",
          headerAlign: 'center',
         headerName: <strong>Status</strong>,
-        width: 200,
+        width: 180,
         renderCell: (params) => {
           let statusText = "";
           if (params.value === 0) {

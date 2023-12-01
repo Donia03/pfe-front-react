@@ -217,25 +217,25 @@ export default function ReclamationList() {
       field: "ref",
        headerAlign: 'center',
       headerName: <strong>Référence</strong>,
-      width: 200,
+      width: 270,
     },
     {
       field: "objet",
        headerAlign: 'center',
       headerName: <strong>Objet de réclamation</strong>,
-      width: 230,
+      width: 250,
     },
     {
       field: "preciser",
        headerAlign: 'center',
       headerName: <strong>Précision</strong>,
-      width: 230,
+      width: 330,
     },
     {
       field: "status",
        headerAlign: 'center',
       headerName: <strong>Statut</strong>,
-      width: 150,
+      width: 180,
       renderCell: (params) => {
         let statusText = "";
         if (params.value === 0) {
@@ -256,7 +256,7 @@ export default function ReclamationList() {
           field: "actions",
            headerAlign: "center",
           headerName: <strong>Commentaire</strong>,
-          width: 200,
+          width: 180,
           renderCell: (params) => {
             return (
               <>

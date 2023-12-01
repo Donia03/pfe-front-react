@@ -17,7 +17,7 @@ const CommentsPopup = ({ open, onClose,id,type, onCancel }) => {
 
   const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:8082/api/comments/${id}/{type}`, {
+        const response = await axios.get(`http://localhost:8082/api/comments/${id}/${type}`, {
           headers: {
             "Authorization": `Bearer ${token}`,
           },

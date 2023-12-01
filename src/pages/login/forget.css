@@ -1,22 +1,22 @@
 .chart{
   display: flex;
   align-items: center;
-  margin: 110px 100px;
+  margin: 100px 70px;
   color: #444;
-  font-size: 700px !important;
+  font-size: 720px !important;
 
 
 }
 .imagefor {
-    width: 700px; /* nouvelle largeur */
-    height: 550px; /* nouvelle hauteur */
+    width: 530px; /* nouvelle largeur */
+    height: 380px; /* nouvelle hauteur */
 }
 .forgetpaper {
   /* Customize the styling for the login form */
-  padding: 30px;
- width: 850px;
- height: 250px;
-  font-size: 900px !important;
+  padding: 0px;
+ width: 800px;
+ height: 260px;
+  font-size: 780px !important;
  align-items: center;
 }
 .submit{
@@ -28,12 +28,7 @@ error {
   margin-top: 4px; /* Add some top margin for spacing */
 }
 
-error {
-      color: red; /* Set the text color to red */
-      font-size: 14px; /* Set the font size */
-      margin-top: 4px; /* Add some top margin for spacing */
-    }
-    .success-message {
+  /*  .success-message {
       background-color: lightgreen;
       padding: 10px;
       border: 1px solid green;
@@ -45,7 +40,7 @@ error {
     .close-icon {
       cursor: pointer;
       font-size: 20px;
-    }
+    }*/
     .error-message {
       background-color: lightcoral;
       padding: 10px;
@@ -53,4 +48,27 @@ error {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+    /* CSS pour l'alerte de succès */
+    .success-message {
+     background-color: #2196F3; /* Couleur de fond verte */
+      color: white; /* Texte blanc */
+      padding: 15px 18px; /* Espacement intérieur */
+      border-radius: 4px; /* Coins arrondis */
+      margin: 10px auto; /* Marge supérieure et inférieure, centrée horizontalement */
+      position: relative; /* Position relative pour le bouton de fermeture */
+      max-width: 380px; /* Largeur maximale de l'alerte */
+      text-align: center; /* Alignement du texte au centre */
+    }
+
+    .success-message .close-icon {
+      position: absolute; /* Position absolue pour le bouton de fermeture */
+      top: 0;
+      right: 0;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .success-message .close-icon:hover {
+      background-color: #45a049; /* Couleur de fond plus foncée au survol */
     }

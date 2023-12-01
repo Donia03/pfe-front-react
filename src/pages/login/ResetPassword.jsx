@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Container, Paper, TextField, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import "./resetPassword.css";
 import { Link, useParams} from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import forgetImage from '../images/forget.jpg'
 
-const history = useHistory();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,15 +24,22 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing(2),
+     color: "red",
   },
+   errorMessage: {
+      color: "red", // Vous pouvez choisir n'importe quelle teinte de rouge ici
+    },
 }));
 
 const ResetPassword = () => {
   const classes = useStyles();
+
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [message, setMessage] = useState("");
   const { token } = useParams();
+
+const history = useHistory();
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -43,9 +51,12 @@ const ResetPassword = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (password !== rePassword) {
-      setMessage("Passwords should match.");
+if (!password || !rePassword) {
+      setMessage("Les champs de mot de passe ne peuvent pas être vides.");
+     return;
+    }
+    else if (password !== rePassword) {
+      setMessage("vérifier mot de passe.");
       return;
     }
     const resetPasswordRequest = {
@@ -60,18 +71,29 @@ const ResetPassword = () => {
 
       // Handle the response message
       setMessage(response.data);
+       history.push("/login");
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   return (
-    <Container className={classes.root}>
+
+
+    <div className="container">
+     <div className="chart">
+                    <img
+                      className="imagefor"
+                      src={forgetImage}
+                      alt="forget"
+                    />
+                </div>
+         <Container className={classes.root}>
       <Paper className={`${classes.paper} reset-password-paper`} elevation={3}>
         <Typography variant="h5" gutterBottom>
            Réinitialiser le mot de passe
         </Typography>
-        {message && <Typography>{message}</Typography>}
+        {message && <Typography className={classes.errorMessage}>{message}</Typography>}
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             label="Nouveau mot de passe"
@@ -93,6 +115,7 @@ const ResetPassword = () => {
         </form>
       </Paper>
     </Container>
+    </div>
   );
 };
 
