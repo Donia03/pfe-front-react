@@ -1,7 +1,9 @@
 .userList {
     flex: 4;
   }
-
+svg.MuiSvgIcon-root.ListreclaEdit {
+    cursor: pointer;
+}
   .userListUser {
     display: flex;
     align-items: center;

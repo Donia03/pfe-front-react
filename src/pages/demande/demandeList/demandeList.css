@@ -1,6 +1,9 @@
 .userList {
   flex: 4;
 }
+svg.MuiSvgIcon-root.ListreclaEdit {
+    cursor: pointer;
+}
 
 .userListUser {
   display: flex;
@@ -26,13 +29,13 @@
 }*/
 
 .ListdemandEdit{
-  color: rgb(47, 7, 157); 
+  color: rgb(47, 7, 157);
     cursor: pointer;
 
 }
 
 .ListdemandDelete{
-    color: rgb(47, 7, 157); 
+    color: rgb(47, 7, 157);
     cursor: pointer;
 }
 

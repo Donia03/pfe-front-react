@@ -292,7 +292,6 @@ export default function ReclamationList() {
         disableSelectionOnClick
         columns={role === "Client" ? clientColumns : columns}
         pageSize={8}
-        onRowClick={(params) => handleToggleComments(params.row.id)}
       />
       {showDeleteConfirmation && (
         <DeleteReclamation

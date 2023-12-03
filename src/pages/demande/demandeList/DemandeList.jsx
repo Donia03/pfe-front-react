@@ -142,16 +142,18 @@ export default function DemandeList() {
           },
         },
            {
-                  field: "commentaire",
+                  field: "com",
                   headerAlign: 'center',
                   headerName: <strong>Commentaire</strong>,
                   width: 170,
                     renderCell: (params) => {
                       return (
+                      <>
                       <Forum
                         className="ListreclaEdit"
                         onClick={() => handleToggleComments(params.row.id)}
                               />
+                      </>
 
                            );
                       },
@@ -285,8 +287,6 @@ export default function DemandeList() {
         disableSelectionOnClick
         columns={role === "Client" ? clientColumns:columns}
         pageSize={8}
-          onRowClick={(params) => handleToggleComments(params.row.id)}
-       /* checkboxSelection*/
       />
           {showDeleteConfirmation && (
        <DeleteDemande

@@ -72,10 +72,11 @@ export default function ClientList() {
     const handleSaveSuivi = () => {
       axios.post(`http://localhost:8082/api/userSuivi/${selectedUserId}`,
   
-         suiviText,
+         {suiviText},
       {
         headers: {
           "Authorization": `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       })
       .then(response => {
